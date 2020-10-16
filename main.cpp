@@ -1,7 +1,7 @@
 #include <iostream>
-#include "fun.cpp"
+#include "fun.h"
 #include <dirent.h>
-#include <sys/types.h>
+#include<sys/types.h>
 
 using namespace std;
 
