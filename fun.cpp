@@ -6,20 +6,24 @@ class stringNode{
     stringNode* next;
     std::string val;
 };
-
+#pragma region Add()
 void Add(stringNode * & H, std::string x){
     stringNode *p = new stringNode;
     p->val=x;
     p->next=H;
     H=p;
 }
+#pragma endregion 
 
-void Show(stringNode * H){
-cout<<"H->";
-stringNode *p=H;
-while(p!=NULL){
-    cout<<p->val<<"->";
-    p=p->next;
+#pragma region Show()
+    void Show(stringNode * H){
+    cout<<"H->";
+    stringNode *p=H;
+    while(p!=NULL){
+        cout<<p->val<<"->";
+        p=p->next;
+    }
+    cout<<"NULL"<<endl;
 }
-cout<<"NULL"<<endl;
-}
+
+#pragma endregion
