@@ -6,16 +6,6 @@
 
 using namespace std;
 
-void Connections(string FileName){
-ifstream File(FileName);
-while(!File.eof()){
-    string Line;
-    getline(File,Line);
-    Contains(Line);
-}
- 
-}
-
 void Contains(string Line){
     string LookFor="#include";
     size_t Where=Line.find(LookFor);
@@ -26,3 +16,14 @@ void Contains(string Line){
     }
 
 }
+
+void Connections(string FileName){
+ifstream File(FileName);
+while(!File.eof()){
+    string Line;
+    getline(File,Line);
+    Contains(Line);
+}
+ 
+}
+
