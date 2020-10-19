@@ -8,12 +8,16 @@
 using namespace std;
 
 bool IsAny=0;
+ofstream Data("Data.txt");
+
 void Contains(string Line,vector<string> Ours);
 void Connections(string FileName,vector <string> NotSystem);
 
 void Connections(string FileName,vector <string> NotSystem){
 ifstream File(FileName);
+
 cout<<FileName<<endl;
+Data<<FileName<<"-\n";
 IsAny=0;
 while(!File.eof()){
     string Line;
@@ -40,6 +44,7 @@ void Contains(string Line,vector<string> Ours){
         }
         for(int i =0;i<Ours.size();i++){
             if(Ours[i]==Contain){
+                Data<<"\t"<<Contain<<"\n";
                 cout<<"\t"<<Contain<<endl;
                 IsAny=1;
                 break;
