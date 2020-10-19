@@ -1,5 +1,5 @@
-#include "header.h"
 #include "InFileIncludes.h"
+
 using namespace std;
 
 #pragma region stringNode class
@@ -33,13 +33,14 @@ void Show(stringNode * H){
 
 #pragma endregion
 
+
 #pragma region IsSourceFile()
-void IsSourceFile(stringNode * H){
+void IsSourceFile(stringNode * H, vector<string>  NotSystem){
     stringNode *p=H;
     while(p!=NULL){
 
         if((p->val[p->val.size()-1]=='h' && p->val[p->val.size()-2]=='.')||(p->val[p->val.size()-1]=='p'&&p->val[p->val.size()-2]=='p'&&p->val[p->val.size()-3]=='c'&&p->val[p->val.size()-4]=='.'))
-        Connections(p->val);
+        Connections(p->val,NotSystem);
         p=p->next;
     }
 }
