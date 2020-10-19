@@ -10,5 +10,5 @@ void Show(stringNode * H);
 
 #pragma endregion
 
-void NazwijToJakos(stringNode * H);
+void IsSourceFile(stringNode * H);
 

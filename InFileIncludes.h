@@ -8,7 +8,7 @@ using namespace std;
 
 bool IsAny=0;
 void Contains(string Line);
-void Connections(string FileName);
+void Connections(string FileName);  
 
 void Connections(string FileName){
 ifstream File(FileName);
