@@ -21,7 +21,7 @@ int main(void) {
         closedir(dr); //close all directory
    }
 
-   NazwijToJakos(files);
+   IsSourceFile(files);
 
 
 
