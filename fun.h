@@ -35,6 +35,7 @@ void Show(stringNode * H){
 #pragma endregion
 
 
+#pragma region IsSourceFile()
 void IsSourceFile(stringNode * H, vector<string>  NotSystem){
     stringNode *p=H;
     while(p!=NULL){
@@ -44,3 +45,4 @@ void IsSourceFile(stringNode * H, vector<string>  NotSystem){
         p=p->next;
     }
 }
+#pragma endregion

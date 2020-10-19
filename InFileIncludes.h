@@ -8,6 +8,7 @@
 using namespace std;
 
 bool IsAny=0;
+<<<<<<< HEAD
 ofstream Data("Data.txt");
 
 void Contains(string Line,vector<string> Ours);
@@ -29,6 +30,8 @@ if(!IsAny){
 }
  
 }
+=======
+>>>>>>> c5a11edb73f65e7cc9b984e0b5f2828a903e9ae5
 
 void Contains(string Line,vector<string> Ours){
     string LookFor="#include";
@@ -54,3 +57,19 @@ void Contains(string Line,vector<string> Ours){
     }
     
 }
+
+void Connections(string FileName,vector <string> NotSystem){
+ifstream File(FileName);
+cout<<FileName<<endl;
+IsAny=0;
+while(!File.eof()){
+    string Line;
+    getline(File,Line);
+    Contains(Line,NotSystem);
+}
+if(!IsAny){
+    cout<<"None"<<endl;
+}
+ 
+}
+
