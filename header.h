@@ -11,9 +11,6 @@ void IsSourceFile(stringNode * H, vector<string>  NotSystem);
 
 #pragma endregion
 
-<<<<<<< HEAD
-void IsSourceFile(stringNode * H);
-=======
 
->>>>>>> b0b42fe133eeef910fd8e60e4b092fb0d3226a81
+void IsSourceFile(stringNode * H, vector<string>  NotSystem);
 
