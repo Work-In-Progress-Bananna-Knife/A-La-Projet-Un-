@@ -1,7 +1,7 @@
 #include <iostream>
 #include "InFileIncludes.h"
 #include <dirent.h>
-#include<sys/types.h>
+#include <sys/types.h>
 #include <vector>
 
 
@@ -36,8 +36,17 @@ int main(void) {
         IsSourceFile(files,Ours);
 
     }
+    else if(historyjka ==2){
+
+        stringNode * fun = NULL;
+        GetFunNode(fun);
+        Show(fun);
+        FunConnections("InFileIncludes.h", fun);
+
+    }
     else{
         std::cout<<"UPS cos poszlo nie tak :/\n";
+        
     }
 
    

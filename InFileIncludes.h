@@ -5,7 +5,7 @@
 bool IsAny=0;
 ofstream Data("Data.txt");
 
-#pragma region Contains
+#pragma region Contains()
 void Contains(string Line,vector<string> Ours){
     string LookFor="#include";
     size_t Where=Line.find(LookFor);
@@ -32,7 +32,7 @@ void Contains(string Line,vector<string> Ours){
 }
 #pragma endregion
 
-#pragma region Connections
+#pragma region Connections()
 void Connections(string FileName,vector <string> NotSystem){
     ifstream File(FileName);
 
@@ -81,6 +81,23 @@ void Show(stringNode * H){
 
 #pragma endregion
 
+#pragma region GetX()
+string GetX(stringNode * & H, int x){
+
+    int a=0;
+    stringNode *p = H;
+    while(p!=NULL){
+        if(a == x){
+            return p->val;
+        }
+            p = p->next;
+            a++;
+    }
+
+}
+#pragma endregion
+
+
 #pragma region IsSourceFile()
 void IsSourceFile(stringNode * H, vector<string>  NotSystem){
     stringNode *p=H;
@@ -92,4 +109,111 @@ void IsSourceFile(stringNode * H, vector<string>  NotSystem){
     }
 }
 #pragma endregion
+
+#pragma region GetFunNode()
+
+void GetFunNode(stringNode * & H){
+    ifstream File("header.h");
+    string word;
+    string funName;
+    while(!File.eof()){
+        funName = "";
+        File>>word;
+        for(int i=0;i<word.size();i++){
+            if(word[i]=='('){
+                for(int j=0;j<i;j++){
+                    funName+=word[j];
+                }
+                Add(H, funName);
+                break;
+            }
+        }
+
+    }
+
+}
+
+#pragma endregion
+
+#pragma region CheckIfInNode()
+int CheckIfInNode(string word, stringNode * H){
+    
+    string fun ="";
+    int a=0;
+    int ret=-1;
+    stringNode *p=H;
+    while(p!=NULL){
+        if((word.find(p->val)) != string::npos){
+            
+            if(p->val.size()>fun.size()){
+                fun = p->val;
+                ret = a;
+            }
+        }
+        p=p->next;
+        a++;
+    }
+
+    return ret;
+}
+#pragma endregion
+
+#pragma region FindCharInString()
+bool FindCharInString(string a, char b){
+
+    for(int i = 0;i<a.size();i++){
+        if(a[i]==b){
+            return true;
+        }
+    }
+    return false;
+}
+#pragma endregion
+
+#pragma region FunConnections()
+
+void FunConnections(string FileName, stringNode * & functions){
+
+    ifstream File(FileName);
+
+    cout<<FileName<<endl;
+    int a; //{
+    int b; //}
+    string word;
+    string wordguard;
+    while (!File.eof()){
+        a=0;
+        b=0;
+        File>>word;
+        int where = CheckIfInNode(word, functions);
+        if(where>-1){
+            
+            wordguard = GetX(functions, where);
+            std::cout<<wordguard<<endl;
+            while((a!=b)||(a == 0)){
+                File>>word;
+                where = CheckIfInNode(word, functions);
+                if(where>-1){
+                    if(wordguard != GetX(functions, where)){
+                        cout<<" - "<<GetX(functions, where)<<endl;
+                    }
+                    
+                }
+                if(FindCharInString(word,'{')){
+                    a++;
+                }
+                if(FindCharInString(word,'}')){
+                    b++;
+                }
+
+            }
+        }
+    }
+
+}
+
+
+#pragma endregion
+
+
 
