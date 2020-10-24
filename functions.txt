@@ -1,0 +1,21 @@
+Contains
+Connections
+	Contains
+Add
+Show
+GetX
+IsSourceFile
+	Connections
+GetFunNode
+	Add
+CheckIfInNode
+FindCharInString
+FunConnections
+	CheckIfInNode
+	GetX
+	CheckIfInNode
+	GetX
+	GetX
+	GetX
+	FindCharInString
+	FindCharInString

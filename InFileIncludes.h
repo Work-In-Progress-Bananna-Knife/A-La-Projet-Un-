@@ -175,6 +175,7 @@ bool FindCharInString(string a, char b){
 void FunConnections(string FileName, stringNode * & functions){
 
     ifstream File(FileName);
+    ofstream outFile("functions.txt");
 
     cout<<FileName<<endl;
     int a; //{
@@ -190,12 +191,15 @@ void FunConnections(string FileName, stringNode * & functions){
             
             wordguard = GetX(functions, where);
             std::cout<<wordguard<<endl;
+            outFile<<wordguard<<"\n";
+
             while((a!=b)||(a == 0)){
                 File>>word;
                 where = CheckIfInNode(word, functions);
                 if(where>-1){
                     if(wordguard != GetX(functions, where)){
                         cout<<" - "<<GetX(functions, where)<<endl;
+                        outFile<<"\t"<<GetX(functions, where)<<"\n";
                     }
                     
                 }
