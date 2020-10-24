@@ -9,12 +9,20 @@ using namespace std;
 
 #pragma region main()
 int main(void) {
-   DIR *dr;
-   vector <string> Ours;
-   struct dirent *en;
-   stringNode * files = NULL;
-   dr = opendir("."); //open all directory
-   if (dr) {
+
+
+    std::cout<<"Wybierz historyjke\n";
+    int historyjka;
+    std::cin>>historyjka;
+
+    if(historyjka == 1){
+
+        DIR *dr;
+        vector <string> Ours;
+        struct dirent *en;
+        stringNode * files = NULL;
+        dr = opendir("."); //open all directory
+        if (dr) {
         while ((en = readdir(dr)) != NULL) {
             
             Add(files, en->d_name);
@@ -23,9 +31,16 @@ int main(void) {
         }
         Show(files);
         closedir(dr); //close all directory
-   }
+        }
 
-   IsSourceFile(files,Ours);
+        IsSourceFile(files,Ours);
+
+    }
+    else{
+        std::cout<<"UPS cos poszlo nie tak :/\n";
+    }
+
+   
 
 
 
