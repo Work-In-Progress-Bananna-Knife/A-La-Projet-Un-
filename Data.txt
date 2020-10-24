@@ -1,7 +1,7 @@
-main.cpp-
-	fun.h
-InFileIncludes.h-
-header.h-
 fun.h-
 	InFileIncludes.h
+main.cpp-
+	InFileIncludes.h
+InFileIncludes.h-
 	header.h
+header.h-

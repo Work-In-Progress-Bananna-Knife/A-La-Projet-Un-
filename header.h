@@ -1,7 +1,10 @@
 #pragma once
 
 #include<iostream>
-
+#include<string>
+#include<fstream>
+#include<vector>
+using namespace std;
 
 #pragma region Node
 class stringNode;
@@ -11,6 +14,5 @@ void IsSourceFile(stringNode * H, vector<string>  NotSystem);
 
 #pragma endregion
 
-
-void IsSourceFile(stringNode * H, vector<string>  NotSystem);
-
+void Contains(string Line,vector<string> Ours);
+void Connections(string FileName,vector <string> NotSystem);
