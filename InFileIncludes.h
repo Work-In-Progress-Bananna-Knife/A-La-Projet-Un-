@@ -93,7 +93,7 @@ string GetX(stringNode * & H, int x){
             p = p->next;
             a++;
     }
-
+    return "ERROR";
 }
 #pragma endregion
 
