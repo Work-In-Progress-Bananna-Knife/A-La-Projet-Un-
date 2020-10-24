@@ -1,20 +1,11 @@
 #pragma once
-
-#include <iostream>
-#include <string>
-#include <fstream>
-#include <vector>
 #include "header.h"
 
-using namespace std;
 
 bool IsAny=0;
 ofstream Data("Data.txt");
 
-
-
-
-
+#pragma region Contains
 void Contains(string Line,vector<string> Ours){
     string LookFor="#include";
     size_t Where=Line.find(LookFor);
@@ -39,25 +30,25 @@ void Contains(string Line,vector<string> Ours){
     }
     
 }
+#pragma endregion
 
+#pragma region
 void Connections(string FileName,vector <string> NotSystem){
-ifstream File(FileName);
+    ifstream File(FileName);
 
-cout<<FileName<<endl;
-Data<<FileName<<"-\n";
-IsAny=0;
-while(!File.eof()){
-    string Line;
-    getline(File,Line);
-    Contains(Line,NotSystem);
+    cout<<FileName<<endl;
+    Data<<FileName<<"-\n";
+    IsAny=0;
+    while(!File.eof()){
+        string Line;
+        getline(File,Line);
+        Contains(Line,NotSystem);
+    }
+    if(!IsAny){
+        cout<<"None"<<endl;
+    }
 }
-if(!IsAny){
-    cout<<"None"<<endl;
-}
- 
-}
-
-
+#pragma endregion
 
 #pragma region stringNode class
 class stringNode{
@@ -89,7 +80,6 @@ void Show(stringNode * H){
 }
 
 #pragma endregion
-
 
 #pragma region IsSourceFile()
 void IsSourceFile(stringNode * H, vector<string>  NotSystem){

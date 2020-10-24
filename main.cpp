@@ -7,6 +7,7 @@
 
 using namespace std;
 
+#pragma region main()
 int main(void) {
    DIR *dr;
    vector <string> Ours;
@@ -30,3 +31,4 @@ int main(void) {
 
    return(0);
 }
+#pragma endregion
