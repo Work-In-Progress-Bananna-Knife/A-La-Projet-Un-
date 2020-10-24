@@ -32,7 +32,7 @@ void Contains(string Line,vector<string> Ours){
 }
 #pragma endregion
 
-#pragma region
+#pragma region Connections
 void Connections(string FileName,vector <string> NotSystem){
     ifstream File(FileName);
 
