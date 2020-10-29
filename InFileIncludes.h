@@ -6,13 +6,6 @@ bool IsAny=0;
 ofstream Data("Data.txt");
 
 #pragma region Node
-class stringNode{
-
-    public:
-    stringNode* next;
-    std::string val;
-};
-
 
 void Add(stringNode * & H, std::string x){
     stringNode *p = new stringNode;
