@@ -1,20 +1,20 @@
-Contains
-Connections
-	Contains
 Add
 Show
 GetX
+FindCharInString
+Contains
+Connections
+	Contains
 IsSourceFile
 	Connections
 GetFunNode
 	Add
 CheckIfInNode
-FindCharInString
 FunConnections
+	FunConnections
 	CheckIfInNode
 	GetX
 	CheckIfInNode
-	GetX
 	GetX
 	GetX
 	FindCharInString

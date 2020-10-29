@@ -1,11 +1,65 @@
 #pragma once
-#include "header.h"
+#include "header.h"     
 
 
 bool IsAny=0;
 ofstream Data("Data.txt");
 
-#pragma region Contains()
+#pragma region Node
+class stringNode{
+
+    public:
+    stringNode* next;
+    std::string val;
+};
+
+
+void Add(stringNode * & H, std::string x){
+    stringNode *p = new stringNode;
+    p->val=x;
+    p->next=H;
+    H=p;
+}
+
+
+void Show(stringNode * H){
+    cout<<"H->";
+    stringNode *p=H;
+    while(p!=NULL){
+        cout<<p->val<<"->";
+        p=p->next;
+    }
+    cout<<"NULL"<<endl;
+}
+
+
+string GetX(stringNode * & H, int x){
+
+    int a=0;
+    stringNode *p = H;
+    while(p!=NULL){
+        if(a == x){
+            return p->val;
+        }
+            p = p->next;
+            a++;
+    }
+    return "ERROR";
+}
+
+
+bool FindCharInString(string a, char b){
+
+    for(int i = 0;i<a.size();i++){
+        if(a[i]==b){
+            return true;
+        }
+    }
+    return false;
+}
+#pragma endregion
+
+
 void Contains(string Line,vector<string> Ours){
     string LookFor="#include";
     size_t Where=Line.find(LookFor);
@@ -30,9 +84,8 @@ void Contains(string Line,vector<string> Ours){
     }
     
 }
-#pragma endregion
 
-#pragma region Connections()
+
 void Connections(string FileName,vector <string> NotSystem){
     ifstream File(FileName);
 
@@ -48,57 +101,8 @@ void Connections(string FileName,vector <string> NotSystem){
         cout<<"None"<<endl;
     }
 }
-#pragma endregion
-
-#pragma region stringNode class
-class stringNode{
-
-    public:
-    stringNode* next;
-    std::string val;
-};
-#pragma endregion
-
-#pragma region Add()
-void Add(stringNode * & H, std::string x){
-    stringNode *p = new stringNode;
-    p->val=x;
-    p->next=H;
-    H=p;
-}
-#pragma endregion 
-
-#pragma region Show()
-void Show(stringNode * H){
-    cout<<"H->";
-    stringNode *p=H;
-    while(p!=NULL){
-        cout<<p->val<<"->";
-        p=p->next;
-    }
-    cout<<"NULL"<<endl;
-}
-
-#pragma endregion
-
-#pragma region GetX()
-string GetX(stringNode * & H, int x){
-
-    int a=0;
-    stringNode *p = H;
-    while(p!=NULL){
-        if(a == x){
-            return p->val;
-        }
-            p = p->next;
-            a++;
-    }
-    return "ERROR";
-}
-#pragma endregion
 
 
-#pragma region IsSourceFile()
 void IsSourceFile(stringNode * H, vector<string>  NotSystem){
     stringNode *p=H;
     while(p!=NULL){
@@ -108,9 +112,7 @@ void IsSourceFile(stringNode * H, vector<string>  NotSystem){
         p=p->next;
     }
 }
-#pragma endregion
 
-#pragma region GetFunNode()
 
 void GetFunNode(stringNode * & H){
     ifstream File("header.h");
@@ -133,9 +135,7 @@ void GetFunNode(stringNode * & H){
 
 }
 
-#pragma endregion
 
-#pragma region CheckIfInNode()
 int CheckIfInNode(string word, stringNode * H){
     
     string fun ="";
@@ -156,27 +156,11 @@ int CheckIfInNode(string word, stringNode * H){
 
     return ret;
 }
-#pragma endregion
 
-#pragma region FindCharInString()
-bool FindCharInString(string a, char b){
-
-    for(int i = 0;i<a.size();i++){
-        if(a[i]==b){
-            return true;
-        }
-    }
-    return false;
-}
-#pragma endregion
-
-#pragma region FunConnections()
 
 void FunConnections(string FileName, stringNode * & functions){
-
     ifstream File(FileName);
     ofstream outFile("functions.txt");
-
     cout<<FileName<<endl;
     int a; //{
     int b; //}
@@ -197,10 +181,9 @@ void FunConnections(string FileName, stringNode * & functions){
                 File>>word;
                 where = CheckIfInNode(word, functions);
                 if(where>-1){
-                    if(wordguard != GetX(functions, where)){
-                        cout<<" - "<<GetX(functions, where)<<endl;
-                        outFile<<"\t"<<GetX(functions, where)<<"\n";
-                    }
+                
+                    cout<<" - "<<GetX(functions, where)<<endl;
+                    outFile<<"\t"<<GetX(functions, where)<<"\n";
                     
                 }
                 if(FindCharInString(word,'{')){
@@ -217,7 +200,6 @@ void FunConnections(string FileName, stringNode * & functions){
 }
 
 
-#pragma endregion
 
 
 

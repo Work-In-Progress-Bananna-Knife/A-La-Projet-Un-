@@ -13,6 +13,7 @@ void Add(stringNode * & H, std::string x);
 void Show(stringNode * H);
 string GetX(stringNode * & H, int x);
 int CheckIfInNode(string word, stringNode * H);
+bool FindCharInString(string a, char b);
 #pragma endregion
 
 #pragma region File dependencys
@@ -26,5 +27,5 @@ void GetFunNode(stringNode * & H);
 
 
 #pragma endregion
-bool FindCharInString(string a, char b);
+
 void FunConnections(string FileName, stringNode * & functions);
