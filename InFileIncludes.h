@@ -1,9 +1,10 @@
 #pragma once
-#include "header.h"     
+#include "header.h"   
+#include <string>  
 
 
 bool IsAny=0;
-ofstream Data("Data.txt");
+ofstream Data("Data.gv");
 
 #pragma region Node
 
@@ -53,7 +54,7 @@ bool FindCharInString(string a, char b){
 #pragma endregion
 
 
-void Contains(string Line,vector<string> Ours){
+void Contains(string Line,vector<string> Ours,string file){
     string LookFor="#include";
     size_t Where=Line.find(LookFor);
     if(Line.find(LookFor)!=string::npos){
@@ -67,7 +68,7 @@ void Contains(string Line,vector<string> Ours){
         }
         for(int i =0;i<Ours.size();i++){
             if(Ours[i]==Contain){
-                Data<<"\t"<<Contain<<"\n";
+                Data<<"\""<<file<<"\""<<"->"<<"\""<<Contain<<"\""<<";\n";
                 cout<<"\t"<<Contain<<endl;
                 IsAny=1;
                 break;
@@ -81,30 +82,47 @@ void Contains(string Line,vector<string> Ours){
 
 void Connections(string FileName,vector <string> NotSystem){
     ifstream File(FileName);
-
     cout<<FileName<<endl;
-    Data<<FileName<<"-\n";
     IsAny=0;
     while(!File.eof()){
         string Line;
         getline(File,Line);
-        Contains(Line,NotSystem);
+        Contains(Line,NotSystem,FileName);
     }
     if(!IsAny){
         cout<<"None"<<endl;
     }
+    
 }
 
 
 void IsSourceFile(stringNode * H, vector<string>  NotSystem){
     stringNode *p=H;
+    Data<<"digraph foo{\n";
     while(p!=NULL){
 
         if((p->val[p->val.size()-1]=='h' && p->val[p->val.size()-2]=='.')||(p->val[p->val.size()-1]=='p'&&p->val[p->val.size()-2]=='p'&&p->val[p->val.size()-3]=='c'&&p->val[p->val.size()-4]=='.'))
         Connections(p->val,NotSystem);
         p=p->next;
     }
+    Data<<"}";
+    WriteRunBashFile("GraphStoryOne");
 }
+
+void WriteRunBashFile(string name){
+    string run=name+".sh";
+    string scriptname=run;
+    ofstream script(run);
+    string grr=run.substr(0,run.size()-2);
+    grr=grr+"png";
+    
+    script<<"#/bin/bash\ndot -Tpng Data.gv -o "<<grr<<"\ndisplay "<<grr;
+    const char* c=scriptname.c_str();
+    script.close();
+    system(c);
+    c=grr.c_str();
+    system(c);
+    }
 
 
 void GetFunNode(stringNode * & H){

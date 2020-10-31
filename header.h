@@ -25,7 +25,8 @@ bool FindCharInString(string a, char b);
 #pragma region File dependencys
 void IsSourceFile(stringNode * H, vector<string>  NotSystem);
 void Contains(string Line,vector<string> Ours);
-void Connections(string FileName,vector <string> NotSystem);
+void Connections(string FileName,vector <string> NotSystem, string file);
+void WriteRunBashFile(string name);
 #pragma endregion
 
 
