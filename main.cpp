@@ -10,7 +10,7 @@ using namespace std;
 #pragma region main()
 int main(void) {
 
-
+    std::cout<<"grafy tworzone przy uzyciu Graphviz\n";
     std::cout<<"Wybierz historyjke\n";
     int historyjka;
     //std::cin>>historyjka;
