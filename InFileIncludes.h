@@ -69,7 +69,7 @@ void Contains(string Line,vector<string> Ours,string file){
         for(int i =0;i<Ours.size();i++){
             if(Ours[i]==Contain){
                 Data<<"\""<<file<<"\""<<"->"<<"\""<<Contain<<"\""<<";\n";
-                cout<<"\t"<<Contain<<endl;
+                //cout<<"\t"<<Contain<<endl;
                 IsAny=1;
                 break;
             }
@@ -82,7 +82,7 @@ void Contains(string Line,vector<string> Ours,string file){
 
 void Connections(string FileName,vector <string> NotSystem){
     ifstream File(FileName);
-    cout<<FileName<<endl;
+    //cout<<FileName<<endl;
     IsAny=0;
     while(!File.eof()){
         string Line;
@@ -172,8 +172,11 @@ int CheckIfInNode(string word, stringNode * H){
 void FunConnections(string FileName, stringNode * & functions){
     ifstream File(FileName);
     ofstream outFile("functions.txt");
+    /*Data.open();
+    Data.clear();
+    Data<<"digraph foo{\n";*/
     cout<<FileName<<endl;
-    int a; //{
+    int a; //{ //Diego co to kurna jest?
     int b; //}
     string word;
     string wordguard;
