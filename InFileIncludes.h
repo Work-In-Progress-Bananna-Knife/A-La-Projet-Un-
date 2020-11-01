@@ -131,34 +131,39 @@ int CheckIfInNode(string word, stringNode * H){
 
 
 void FunConnections(string FileName, stringNode * & functions){
+    
     ifstream File(FileName);
     ofstream outFile("functions.txt");
-    Data.open();
-    Data.clear();
-<<<<<<< HEAD
-    Data<<"digraph foo{\n";*/
     int a; // ilość: { 
     int b; //ilość: }
-=======
-    Data<<"digraph weighted{\n";
-    cout<<FileName<<endl;
-    int a; //{ //Diego co to kurna jest?
-    int b; //}
-    //no dosłownie a odpowiada ilości "{" a b ilości "}"
->>>>>>> 3a71cb637999e713fa82ae99cb23553f9279cc53
-    string word;
-    string wordguard;
-    while (!File.eof()){
+    int tabsize=0;
+    std::string word;
+    std::string wordguard;
+    stringNode * p = NULL;
+
+    p = functions;
+    while(p != NULL){
+
+        tabsize++;    
+        p = p->next;
+    }
+    int tab[tabsize];
+
+    
+    while(!File.eof()){
         a=0;
         b=0;
         File>>word;
         int where = CheckIfInNode(word, functions);
         if(where>-1){
-            
+
+            for(int i=0;i<tabsize;i++){
+                tab[i]=0;
+            }
             wordguard = GetX(functions, where);
             std::cout<<wordguard<<endl;
             outFile<<wordguard<<"\n";
-
+            
             while((a!=b)||(a == 0)){
                 File>>word;
                 where = CheckIfInNode(word, functions);
@@ -166,6 +171,7 @@ void FunConnections(string FileName, stringNode * & functions){
                 
                     cout<<" - "<<GetX(functions, where)<<endl;
                     outFile<<"\t"<<GetX(functions, where)<<"\n";
+                    tab[where]++;
                     
                 }
                 if(FindCharInString(word,'{')){
@@ -176,17 +182,23 @@ void FunConnections(string FileName, stringNode * & functions){
                 }
 
             }
+            for(int i=0;i<tabsize;i++){
+                
+                if(tab[i] != 0){
+                    
+                    Data<<"\""<<GetX(functions,i)<<"\""<<" -> \""<<wordguard<<"\""<<"(label =  \""<<tab[i]<<"\")\n";
+                }
+            }
         }
     }
-    Data<<"}";
-    WriteRunBashFile("GraphStoryTwo");
-    
-
 }
 
 
 void funckja(stringNode * & H, stringNode * & fun){
-
+    Data.open("Data.gv");
+    Data.clear();
+    Data.open("Data.gv");
+    Data<<"digraph foo{\n";
     stringNode *p = H;
     stringNode *dec = NULL;
     stringNode *def = NULL;
@@ -214,12 +226,15 @@ void funckja(stringNode * & H, stringNode * & fun){
         dec = dec->next;
 
     }
-    
+     
     while (def != NULL)
     {
         FunConnections(def->val,fun);
         def = def->next;
     }
+
+    Data<<"}";
+    WriteRunBashFile("GraphStoryTwo");
 }
 
 
