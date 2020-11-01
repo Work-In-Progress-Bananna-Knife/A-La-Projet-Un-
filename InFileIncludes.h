@@ -1,4 +1,5 @@
 #pragma once
+
 #include "header.h"   
 #include "stringNode.h"
 //ContainDefinitions
@@ -135,9 +136,6 @@ int CheckIfInNode(string word, stringNode * H){
 void FunConnections(string FileName, stringNode * & functions){
     ifstream File(FileName);
     ofstream outFile("functions.txt");
-    Data.open();
-    Data.clear();
-    Data<<"digraph weighted{\n";
     cout<<FileName<<endl;
     int a; //{ //Diego co to kurna jest?
     int b; //}
@@ -174,14 +172,14 @@ void FunConnections(string FileName, stringNode * & functions){
             }
         }
     }
-    Data<<"}";
+   
     WriteRunBashFile("GraphStoryTwo");
-    
+
 
 }
 
 void funckja(stringNode * & H, stringNode * & fun){
-
+    Data.open("Data.gv");
     stringNode *p = H;
     stringNode *dec = NULL;
     stringNode *def = NULL;
