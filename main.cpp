@@ -14,7 +14,7 @@ int main(void) {
     std::cout<<"Wybierz historyjke\n";
     int historyjka;
     //std::cin>>historyjka;
-    historyjka=1;
+    historyjka=2;
     if(historyjka == 1){
 
         DIR *dr;
@@ -36,12 +36,34 @@ int main(void) {
         IsSourceFile(files,Ours);
 
     }
-    else if(historyjka ==2){
+    else if(historyjka == 2){
+
+        
+        DIR *dr;
+        vector <string> Ours;
+        struct dirent *en;
+        stringNode * files = NULL;
+        dr = opendir("."); //open all directory
+        if (dr) {
+            while ((en = readdir(dr)) != NULL) {
+
+                std::string p =en->d_name;
+                if(p[p.size()-1]=='h' && p[p.size()-2]=='.'){
+                   Add(files, p); 
+                }
+                Ours.push_back(en->d_name);
+            }
+        //Show(files);
+        closedir(dr); //close all directory
+        }
+
 
         stringNode * fun = NULL;
-        GetFunNode(fun);
-        Show(fun);
-        FunConnections("InFileIncludes.h", fun);
+
+        funckja(files,fun);
+        //GetFunNode(fun);
+        //Show(fun);
+        //FunConnections("InFileIncludes.h", fun);
 
     }
     else{

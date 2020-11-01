@@ -1,12 +1,10 @@
-Add
-Show
-GetX
-FindCharInString
 Contains
 Connections
 	Contains
 IsSourceFile
 	Connections
+	WriteRunBashFile
+WriteRunBashFile
 GetFunNode
 	Add
 CheckIfInNode
@@ -18,3 +16,8 @@ FunConnections
 	GetX
 	FindCharInString
 	FindCharInString
+funckja
+	Add
+	Add
+	GetFunNode
+	FunConnections

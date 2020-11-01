@@ -1,57 +1,12 @@
 #pragma once
 #include "header.h"   
-#include <string>  
-
+#include "stringNode.h"
+//ContainDefinitions
 
 bool IsAny=0;
 ofstream Data("Data.gv");
 
-#pragma region Node
 
-void Add(stringNode * & H, std::string x){
-    stringNode *p = new stringNode;
-    p->val=x;
-    p->next=H;
-    H=p;
-}
-
-
-void Show(stringNode * H){
-    cout<<"H->";
-    stringNode *p=H;
-    while(p!=NULL){
-        cout<<p->val<<"->";
-        p=p->next;
-    }
-    cout<<"NULL"<<endl;
-}
-
-
-string GetX(stringNode * & H, int x){
-
-    int a=0;
-    stringNode *p = H;
-    while(p!=NULL){
-        if(a == x){
-            return p->val;
-        }
-            p = p->next;
-            a++;
-    }
-    return "ERROR";
-}
-
-
-bool FindCharInString(string a, char b){
-
-    for(int i = 0;i<a.size();i++){
-        if(a[i]==b){
-            return true;
-        }
-    }
-    return false;
-}
-#pragma endregion
 
 
 void Contains(string Line,vector<string> Ours,string file){
@@ -110,6 +65,7 @@ void IsSourceFile(stringNode * H, vector<string>  NotSystem){
     WriteRunBashFile("GraphStoryOne");
 }
 
+
 void WriteRunBashFile(string name){
     Data.close();
     string run=name+".sh";
@@ -133,8 +89,8 @@ void WriteRunBashFile(string name){
     }
 
 
-void GetFunNode(stringNode * & H){
-    ifstream File("header.h");
+void GetFunNode(stringNode * & H, string a){
+    ifstream File(a);
     string word;
     string funName;
     while(!File.eof()){
@@ -186,6 +142,7 @@ void FunConnections(string FileName, stringNode * & functions){
     cout<<FileName<<endl;
     int a; //{ //Diego co to kurna jest?
     int b; //}
+    //no dosłownie a odpowiada ilości "{" a b ilości "}"
     string word;
     string wordguard;
     while (!File.eof()){
@@ -221,7 +178,42 @@ void FunConnections(string FileName, stringNode * & functions){
 
 }
 
+void funckja(stringNode * & H, stringNode * & fun){
 
+    stringNode *p = H;
+    stringNode *dec = NULL;
+    stringNode *def = NULL;
+    string word="";
+    string wordHolder="";
+    while(p != NULL){
+        ifstream File(p->val);
+        while(!File.eof()){
+            File>>word;
+            if(word == "//ContainDeclarations"){
+                Add(dec,p->val);
+                break;
+            }
+            else if( word == "//ContainDefinitions"){
+                Add(def,p->val);
+                break;
+            }
+        }
+        p=p->next;
+    }
+
+    while (dec != NULL)
+    {
+        GetFunNode(fun, dec->val);
+        dec = dec->next;
+
+    }
+    
+    while (def != NULL)
+    {
+        FunConnections(def->val,fun);
+        def = def->next;
+    }
+}
 
 
 

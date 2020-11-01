@@ -5,7 +5,7 @@
 #include<fstream>
 #include<vector>
 using namespace std;
-
+//ContainDeclarations
 
 #pragma region Node
 class stringNode{
@@ -32,9 +32,10 @@ void WriteRunBashFile(string name);
 
 #pragma region functions dependencys
 
-void GetFunNode(stringNode * & H);
-
+void GetFunNode(stringNode * & H, string a);
+void funckja(stringNode * & H, stringNode * &fun);
 #pragma endregion
 
 
 void FunConnections(string FileName, stringNode * & functions);
+
