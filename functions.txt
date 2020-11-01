@@ -1,4 +1,5 @@
 digraph weighted{
+label = "Relacje między funkcjami"
 "Add"
 "Show"
 "GetX"
