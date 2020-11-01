@@ -1,6 +1,0 @@
-digraph weighted{
-"stringNode.h"->"header.h" [label = "1"];
-"main.cpp"->"InFileIncludes.h" [label = "1"];
-"InFileIncludes.h"->"header.h" [label = "1"];
-"InFileIncludes.h"->"stringNode.h" [label = "1"];
-}
