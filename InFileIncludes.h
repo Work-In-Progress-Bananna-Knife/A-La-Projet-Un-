@@ -111,6 +111,7 @@ void IsSourceFile(stringNode * H, vector<string>  NotSystem){
 }
 
 void WriteRunBashFile(string name){
+    Data.close();
     string run=name+".sh";
     string scriptname=run;
     ofstream script(run);
