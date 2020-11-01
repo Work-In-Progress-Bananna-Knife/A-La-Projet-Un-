@@ -186,7 +186,7 @@ void FunConnections(string FileName, stringNode * & functions){
                 
                 if(tab[i] != 0){
                     
-                    Data<<"\""<<GetX(functions,i)<<"\""<<" -> \""<<wordguard<<"\""<<"(label =  \""<<tab[i]<<"\")\n";
+                    Data<<"\""<<wordguard<<"\""<<" -> \""<<GetX(functions,i)<<"\""<<"(label =  \""<<tab[i]<<"\")\n";
                 }
             }
         }
@@ -195,7 +195,6 @@ void FunConnections(string FileName, stringNode * & functions){
 void funckja(stringNode * & H, stringNode * & fun){
     Data.open("Data.gv");
     Data.clear();
-    Data.open("Data.gv");
     Data<<"digraph foo{\n";
 
     stringNode *p = H;
