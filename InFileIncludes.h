@@ -186,7 +186,7 @@ void FunConnections(string FileName, stringNode * & functions){
                 
                 if(tab[i] != 0){
                     
-                    Data<<"\""<<wordguard<<"\""<<" -> \""<<GetX(functions,i)<<"\""<<"(label =  \""<<tab[i]<<"\")\n";
+                    Data<<"\""<<wordguard<<"\""<<" -> \""<<GetX(functions,i)<<"\""<<"[label =  \""<<tab[i]<<"\"]\n";
                 }
             }
         }

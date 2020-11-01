@@ -1,13 +1,13 @@
 digraph foo{
-"Connections" -> "Contains"(label =  "1")
-"IsSourceFile" -> "WriteRunBashFile"(label =  "1")
-"IsSourceFile" -> "Connections"(label =  "1")
-"GetFunNode" -> "Add"(label =  "1")
-"FunConnections" -> "FindCharInString"(label =  "2")
-"FunConnections" -> "CheckIfInNode"(label =  "2")
-"FunConnections" -> "GetX"(label =  "4")
-"funckja" -> "FunConnections"(label =  "1")
-"funckja" -> "GetFunNode"(label =  "1")
-"funckja" -> "WriteRunBashFile"(label =  "1")
-"funckja" -> "Add"(label =  "2")
+"Connections" -> "Contains"[label =  "1"]
+"IsSourceFile" -> "WriteRunBashFile"[label =  "1"]
+"IsSourceFile" -> "Connections"[label =  "1"]
+"GetFunNode" -> "Add"[label =  "1"]
+"FunConnections" -> "FindCharInString"[label =  "2"]
+"FunConnections" -> "CheckIfInNode"[label =  "2"]
+"FunConnections" -> "GetX"[label =  "4"]
+"funckja" -> "FunConnections"[label =  "1"]
+"funckja" -> "GetFunNode"[label =  "1"]
+"funckja" -> "WriteRunBashFile"[label =  "1"]
+"funckja" -> "Add"[label =  "2"]
 }
