@@ -1,4 +1,5 @@
 #pragma once
+
 #include "header.h"   
 #include "stringNode.h"
 //ContainDefinitions
@@ -134,6 +135,7 @@ void FunConnections(string FileName, stringNode * & functions){
     
     ifstream File(FileName);
     ofstream outFile("functions.txt");
+<<<<<<< HEAD
     int a; // ilość: { 
     int b; //ilość: }
     int tabsize=0;
@@ -151,6 +153,15 @@ void FunConnections(string FileName, stringNode * & functions){
 
     
     while(!File.eof()){
+=======
+    cout<<FileName<<endl;
+    int a; //{ //Diego co to kurna jest?
+    int b; //}
+    //no dosłownie a odpowiada ilości "{" a b ilości "}"
+    string word;
+    string wordguard;
+    while (!File.eof()){
+>>>>>>> dbd1ff905ccf12d2c8620bda6aeb6bdd9e1065a1
         a=0;
         b=0;
         File>>word;
@@ -191,6 +202,7 @@ void FunConnections(string FileName, stringNode * & functions){
             }
         }
     }
+<<<<<<< HEAD
 }
 
 
@@ -199,6 +211,16 @@ void funckja(stringNode * & H, stringNode * & fun){
     Data.clear();
     Data.open("Data.gv");
     Data<<"digraph foo{\n";
+=======
+   
+    WriteRunBashFile("GraphStoryTwo");
+
+
+}
+
+void funckja(stringNode * & H, stringNode * & fun){
+    Data.open("Data.gv");
+>>>>>>> dbd1ff905ccf12d2c8620bda6aeb6bdd9e1065a1
     stringNode *p = H;
     stringNode *dec = NULL;
     stringNode *def = NULL;
