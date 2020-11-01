@@ -13,8 +13,8 @@ int main(void) {
     std::cout<<"grafy tworzone przy uzyciu Graphviz\n";
     std::cout<<"Wybierz historyjke\n";
     int historyjka;
-    //std::cin>>historyjka;
-    historyjka=2;
+    std::cin>>historyjka;
+    //historyjka=2;
     if(historyjka == 1){
 
         DIR *dr;
