@@ -119,6 +119,12 @@ void WriteRunBashFile(string name){
     grr=grr+"png";
     
     script<<"#/bin/bash\ndot -Tpng Data.gv -o "<<grr<<"\ndisplay "<<grr;
+
+    //dolinuxa
+    #if !(defined(WIN32) || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__))
+        scriptname = "bash "+scriptname;
+    #endif
+
     const char* c=scriptname.c_str();
     script.close();
     system(c);

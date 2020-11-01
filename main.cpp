@@ -49,10 +49,6 @@ int main(void) {
         
     }
 
-   
-
-
-
    return(0);
 }
 #pragma endregion
