@@ -1,5 +1,4 @@
 digraph weighted{
 "main.cpp"->"InFileIncludes.h" [label = "1"];
 "InFileIncludes.h"->"header.h" [label = "1"];
-//"main.cpp"->"ZEROO POTRZEB" [label = "10000"];
 }

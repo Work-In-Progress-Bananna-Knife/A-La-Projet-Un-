@@ -1,20 +1,14 @@
-Add
-Show
-GetX
-FindCharInString
-Contains
-Connections
-	Contains
-IsSourceFile
-	Connections
-GetFunNode
-	Add
-CheckIfInNode
-FunConnections
-	CheckIfInNode
-	GetX
-	CheckIfInNode
-	GetX
-	GetX
-	FindCharInString
-	FindCharInString
+digraph weighted{
+"Add"
+"Show"
+"GetX"
+"FindCharInString"
+"Contains"
+"Connections" -> "Contains" [label = "1"]
+"IsSourceFile" -> "Connections" [label = "1"]
+"GetFunNode" -> "Add" [label = "1"]
+"CheckIfInNode"
+"FunConnections" -> 	CheckIfInNode [label = "2"]
+"FunConnections" -> 	"GetX" [label = "3"]
+"FunConnections" -> 	"FindCharInString" [label = "2"]
+}
