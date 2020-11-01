@@ -1,15 +1,4 @@
-digraph weighted{
-label = "Relacje między funkcjami"
 Add
 Show
 GetX
 FindCharInString
-Contains
-Connections -> Contains [label = "1"]
-IsSourceFile -> Connections [label = "1"]
-GetFunNode -> Add [label = "1"]
-CheckIfInNode
-FunConnections ->     CheckIfInNode [label = "2"]
-FunConnections ->     GetX [label = "3"]
-FunConnections ->     FindCharInString [label = "2"]
-}

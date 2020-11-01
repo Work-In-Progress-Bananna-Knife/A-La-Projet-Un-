@@ -54,7 +54,6 @@ void Connections(string FileName,vector <string> NotSystem){
 void IsSourceFile(stringNode * H, vector<string>  NotSystem){
     stringNode *p=H;
     Data<<"digraph weighted{\n";
-    //Data<<"edge.attr['label']=1 \n";
     while(p!=NULL){
 
         if((p->val[p->val.size()-1]=='h' && p->val[p->val.size()-2]=='.')||(p->val[p->val.size()-1]=='p'&&p->val[p->val.size()-2]=='p'&&p->val[p->val.size()-3]=='c'&&p->val[p->val.size()-4]=='.'))
@@ -136,9 +135,9 @@ int CheckIfInNode(string word, stringNode * H){
 void FunConnections(string FileName, stringNode * & functions){
     ifstream File(FileName);
     ofstream outFile("functions.txt");
-    /*Data.open();
+    Data.open();
     Data.clear();
-    Data<<"digraph foo{\n";*/
+    Data<<"digraph weighted{\n";
     cout<<FileName<<endl;
     int a; //{ //Diego co to kurna jest?
     int b; //}
@@ -175,6 +174,9 @@ void FunConnections(string FileName, stringNode * & functions){
             }
         }
     }
+    Data<<"}";
+    WriteRunBashFile("GraphStoryTwo");
+    
 
 }
 
