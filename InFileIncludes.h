@@ -7,8 +7,6 @@ bool IsAny=0;
 ofstream Data("Data.gv");
 
 
-
-
 void Contains(string Line,vector<string> Ours,string file){
     string LookFor="#include";
     size_t Where=Line.find(LookFor);
@@ -139,10 +137,8 @@ void FunConnections(string FileName, stringNode * & functions){
     /*Data.open();
     Data.clear();
     Data<<"digraph foo{\n";*/
-    cout<<FileName<<endl;
-    int a; //{ //Diego co to kurna jest?
-    int b; //}
-    //no dosłownie a odpowiada ilości "{" a b ilości "}"
+    int a; // ilość: { 
+    int b; //ilość: }
     string word;
     string wordguard;
     while (!File.eof()){
@@ -177,6 +173,7 @@ void FunConnections(string FileName, stringNode * & functions){
     }
 
 }
+
 
 void funckja(stringNode * & H, stringNode * & fun){
 

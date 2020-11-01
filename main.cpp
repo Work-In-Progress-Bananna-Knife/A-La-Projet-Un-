@@ -32,13 +32,11 @@ int main(void) {
         Show(files);
         closedir(dr); //close all directory
         }
-
         IsSourceFile(files,Ours);
 
     }
     else if(historyjka == 2){
 
-        
         DIR *dr;
         vector <string> Ours;
         struct dirent *en;
@@ -53,22 +51,14 @@ int main(void) {
                 }
                 Ours.push_back(en->d_name);
             }
-        //Show(files);
         closedir(dr); //close all directory
         }
 
-
         stringNode * fun = NULL;
-
         funckja(files,fun);
-        //GetFunNode(fun);
-        //Show(fun);
-        //FunConnections("InFileIncludes.h", fun);
-
     }
     else{
         std::cout<<"UPS cos poszlo nie tak :/\n";
-        
     }
 
    return(0);
