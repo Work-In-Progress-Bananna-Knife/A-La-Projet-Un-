@@ -1,4 +1,5 @@
-digraph foo{
-"main.cpp"->"InFileIncludes.h";
-"InFileIncludes.h"->"header.h";
+digraph weighted{
+edge.attr['label']=1 
+"main.cpp"->"InFileIncludes.h" [label = "1"];
+"InFileIncludes.h"->"header.h" [label = "1"];
 }

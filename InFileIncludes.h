@@ -68,7 +68,7 @@ void Contains(string Line,vector<string> Ours,string file){
         }
         for(int i =0;i<Ours.size();i++){
             if(Ours[i]==Contain){
-                Data<<"\""<<file<<"\""<<"->"<<"\""<<Contain<<"\""<<";\n";
+                Data<<"\""<<file<<"\""<<"->"<<"\""<<Contain<<"\""<<" [label = \"1\"];\n";
                 //cout<<"\t"<<Contain<<endl;
                 IsAny=1;
                 break;
@@ -98,7 +98,8 @@ void Connections(string FileName,vector <string> NotSystem){
 
 void IsSourceFile(stringNode * H, vector<string>  NotSystem){
     stringNode *p=H;
-    Data<<"digraph foo{\n";
+    Data<<"digraph weighted{\n";
+    //Data<<"edge.attr['label']=1 \n";
     while(p!=NULL){
 
         if((p->val[p->val.size()-1]=='h' && p->val[p->val.size()-2]=='.')||(p->val[p->val.size()-1]=='p'&&p->val[p->val.size()-2]=='p'&&p->val[p->val.size()-3]=='c'&&p->val[p->val.size()-4]=='.'))
