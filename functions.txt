@@ -1,23 +1,4 @@
-Contains
-Connections
-	Contains
-IsSourceFile
-	Connections
-	WriteRunBashFile
-WriteRunBashFile
-GetFunNode
-	Add
-CheckIfInNode
-FunConnections
-	CheckIfInNode
-	GetX
-	CheckIfInNode
-	GetX
-	GetX
-	FindCharInString
-	FindCharInString
-funckja
-	Add
-	Add
-	GetFunNode
-	FunConnections
+Add
+Show
+GetX
+FindCharInString
