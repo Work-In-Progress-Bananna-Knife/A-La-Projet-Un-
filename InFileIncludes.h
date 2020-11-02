@@ -134,7 +134,6 @@ int CheckIfInNode(string word, stringNode * H){
 void FunConnections(string FileName, stringNode * & functions){
     
     ifstream File(FileName);
-    ofstream outFile("functions.txt");
     int a; // ilość: { 
     int b; //ilość: }
     int tabsize=0;
@@ -162,7 +161,6 @@ void FunConnections(string FileName, stringNode * & functions){
             }
             wordguard = GetX(functions, where);
             std::cout<<wordguard<<endl;
-            outFile<<wordguard<<"\n";
             
             while((a!=b)||(a == 0)){
                 File>>word;
@@ -170,7 +168,6 @@ void FunConnections(string FileName, stringNode * & functions){
                 if(where>-1){
                 
                     cout<<" - "<<GetX(functions, where)<<endl;
-                    outFile<<"\t"<<GetX(functions, where)<<"\n";
                     tab[where]++;
                     
                 }
