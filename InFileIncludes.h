@@ -196,6 +196,7 @@ void funckja(stringNode * & H, stringNode * & fun){
     Data.open("Data.gv");
     Data.clear();
     Data<<"digraph foo{\n";
+    Data<<"label =\"Relacje między funkcjami\"";
 
     stringNode *p = H;
     stringNode *dec = NULL;
