@@ -1,5 +1,4 @@
 #pragma once
-
 #include "header.h"   
 #include "stringNode.h"
 //ContainDefinitions
@@ -189,7 +188,9 @@ void FunConnections(string FileName, stringNode * & functions){
         }
     }
 }
-void funckja(stringNode * & H, stringNode * & fun){
+
+
+void StoryTwo(stringNode * & H, stringNode * & fun){
     Data.open("Data.gv");
     Data.clear();
     Data<<"digraph foo{\n";

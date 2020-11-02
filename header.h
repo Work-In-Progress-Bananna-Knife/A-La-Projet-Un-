@@ -1,5 +1,4 @@
 #pragma once
-
 #include<iostream>
 #include<string>
 #include<fstream>
@@ -33,9 +32,10 @@ void WriteRunBashFile(string name);
 #pragma region functions dependencys
 
 void GetFunNode(stringNode * & H, string a);
-void funckja(stringNode * & H, stringNode * &fun);
+void StoryTwo(stringNode * & H, stringNode * &fun);
+void FunConnections(string FileName, stringNode * & functions);
 #pragma endregion
 
 
-void FunConnections(string FileName, stringNode * & functions);
+
 

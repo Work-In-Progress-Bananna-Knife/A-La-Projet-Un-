@@ -7,7 +7,6 @@
 
 using namespace std;
 
-#pragma region main()
 int main(void) {
 
     std::cout<<"grafy tworzone przy uzyciu Graphviz\n";
@@ -55,7 +54,7 @@ int main(void) {
         }
 
         stringNode * fun = NULL;
-        funckja(files,fun);
+        StoryTwo(files,fun);
     }
     else{
         std::cout<<"UPS cos poszlo nie tak :/\n";
@@ -63,4 +62,3 @@ int main(void) {
 
    return(0);
 }
-#pragma endregion
