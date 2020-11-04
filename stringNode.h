@@ -11,13 +11,13 @@ void Add(stringNode * & H, std::string x){
 
 
 void Show(stringNode * H){
-    cout<<"H->";
+    std::cout<<"H->";
     stringNode *p=H;
     while(p!=NULL){
-        cout<<p->val<<"->";
+        std::cout<<p->val<<"->";
         p=p->next;
     }
-    cout<<"NULL"<<endl;
+    std::cout<<"NULL"<<endl;
 }
 
 
@@ -44,4 +44,44 @@ bool FindCharInString(string a, char b){
         }
     }
     return false;
+}
+
+
+bool CheckIfIn(string a, stringNode * H){
+
+     while(H!=NULL){
+     
+         if(a == H->val){
+             return true;
+         }
+        H=H->next;
+    }
+    return false;
+}
+
+
+int where(string word, stringNode * H){
+
+    int a=-1;
+    while(H!=NULL){
+        a++;
+        if(word == H->val){
+            return a;
+        }
+        H=H->next;
+    }
+    return -1;
+}
+
+
+int howManyTimes(string word, stringNode * H){
+    
+    int a=0;
+    while(H != NULL){
+        if(word == H->val){
+            a++;
+        }
+        H=H->next;
+    }
+    return a;
 }

@@ -3,6 +3,7 @@
 #include <dirent.h>
 #include <sys/types.h>
 #include <vector>
+#include "moduleFinder.h"
 
 
 using namespace std;
@@ -55,6 +56,27 @@ int main(void) {
 
         stringNode * fun = NULL;
         StoryTwo(files,fun);
+    }
+    else if(historyjka == 3){
+
+         DIR *dr;
+        vector <string> Ours;
+        struct dirent *en;
+        stringNode * files = NULL;
+        dr = opendir("."); //open all directory
+        if (dr) {
+
+            while ((en = readdir(dr)) != NULL) {
+            
+                Add(files, en->d_name);
+                Ours.push_back(en->d_name);
+            }
+        
+            closedir(dr); //close all directory
+        }
+
+        funkcja(files);
+
     }
     else{
         std::cout<<"UPS cos poszlo nie tak :/\n";

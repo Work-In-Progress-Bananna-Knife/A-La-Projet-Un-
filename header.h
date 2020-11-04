@@ -18,6 +18,9 @@ void Show(stringNode * H);
 string GetX(stringNode * & H, int x);
 int CheckIfInNode(string word, stringNode * H);
 bool FindCharInString(string a, char b);
+bool CheckIfIn(string a, stringNode * H);
+int where(string word, stringNode * H);
+int howManyTimes(string word, stringNode * H);
 #pragma endregion
 
 

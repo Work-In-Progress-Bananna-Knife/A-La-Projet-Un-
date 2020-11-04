@@ -10,7 +10,7 @@ ofstream Data("Data.gv");
 void Contains(string Line,vector<string> Ours,string file){
     string LookFor="#include";
     size_t Where=Line.find(LookFor);
-    if(Line.find(LookFor)!=string::npos){
+    if(Line.find(LookFor)!=string :: npos){
         Where+=LookFor.size();
         string Contain = Line.substr(Where);
         for(int i=0;i<Contain.size();i++){
@@ -166,7 +166,7 @@ void FunConnections(string FileName, stringNode * & functions){
                 where = CheckIfInNode(word, functions);
                 if(where>-1){
                 
-                    cout<<" - "<<GetX(functions, where)<<endl;
+                    std::cout<<" - "<<GetX(functions, where)<<endl;
                     tab[where]++;
                     
                 }
