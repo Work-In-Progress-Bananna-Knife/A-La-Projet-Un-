@@ -14,7 +14,7 @@ int main(void) {
     std::cout<<"Wybierz historyjke\n";
     int historyjka;
    // std::cin>>historyjka;
-    historyjka=2;
+    historyjka=1;
     if(historyjka == 1){
 
         DIR *dr;
