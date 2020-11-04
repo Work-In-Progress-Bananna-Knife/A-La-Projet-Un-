@@ -8,13 +8,20 @@
 
 using namespace std;
 
+#pragma region main()
 int main(void) {
+
+
+        //wybor historyjki uzytkownika z zajec
 
     std::cout<<"grafy tworzone przy uzyciu Graphviz\n";
     std::cout<<"Wybierz historyjke\n";
     int historyjka;
-    std::cin>>historyjka;
-    //historyjka=2;
+     std::cin>>historyjka;
+    //historyjka=1;
+
+        //historyjka 1 - graf polaczen fizycznych
+
     if(historyjka == 1){
 
         DIR *dr;
@@ -35,6 +42,9 @@ int main(void) {
         IsSourceFile(files,Ours);
 
     }
+
+        //historyjka 2 graf polaczen logicznych
+
     else if(historyjka == 2){
 
         DIR *dr;
@@ -84,3 +94,4 @@ int main(void) {
 
    return(0);
 }
+#pragma endregion

@@ -10,7 +10,7 @@ ofstream Data("Data.gv");
 void Contains(string Line,vector<string> Ours,string file){
     string LookFor="#include";
     size_t Where=Line.find(LookFor);
-    if(Line.find(LookFor)!=string :: npos){
+    if(Line.find(LookFor)!=string::npos){
         Where+=LookFor.size();
         string Contain = Line.substr(Where);
         for(int i=0;i<Contain.size();i++){
@@ -22,7 +22,7 @@ void Contains(string Line,vector<string> Ours,string file){
         for(int i =0;i<Ours.size();i++){
             if(Ours[i]==Contain){
                 Data<<"\""<<file<<"\""<<"->"<<"\""<<Contain<<"\""<<" [label = \"1\"];\n";
-                //cout<<"\t"<<Contain<<endl;
+                
                 IsAny=1;
                 break;
             }
@@ -35,15 +35,12 @@ void Contains(string Line,vector<string> Ours,string file){
 
 void Connections(string FileName,vector <string> NotSystem){
     ifstream File(FileName);
-    //cout<<FileName<<endl;
+   
     IsAny=0;
     while(!File.eof()){
         string Line;
         getline(File,Line);
         Contains(Line,NotSystem,FileName);
-    }
-    if(!IsAny){
-        cout<<"None"<<endl;
     }
     
 }
