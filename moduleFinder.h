@@ -26,7 +26,7 @@ void funkcja(stringNode * H){
     p = H;
     while(p!=NULL){
         if((p->val[p->val.size()-1]=='h' && p->val[p->val.size()-2]=='.')||(p->val[p->val.size()-1]=='p'&&p->val[p->val.size()-2]=='p'&&p->val[p->val.size()-3]=='c'&&p->val[p->val.size()-4]=='.')){
-            ifstream File(p->val);
+            std::ifstream File(p->val);
 
             string word;
             //nazwa namespa..
@@ -51,7 +51,7 @@ void funkcja(stringNode * H){
                                 a=1;
                             }
                             else{
-                                if((word[j] == '<')||(word[j] == '>')){
+                                if((word[j] == '<')||(word[j] == '>')||(word[j] == '(')){
                                     break;
                                 }
                                 if(a == 0){
@@ -86,7 +86,7 @@ void findProbableModules(string file, stringNode * & nsNode){
     
     bool exist;
     stringNode * p;
-    ifstream File(file);
+    std::ifstream File(file);
     string word;
     string name;
     while(!File.eof()){

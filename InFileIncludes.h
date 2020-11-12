@@ -4,7 +4,7 @@
 //ContainDefinitions
 
 bool IsAny=0;
-ofstream Data("Data.gv");
+std::ofstream Data("Data.gv");
 
 
 void Contains(string Line,vector<string> Ours,string file){
@@ -34,10 +34,10 @@ void Contains(string Line,vector<string> Ours,string file){
 
 
 void Connections(string FileName,vector <string> NotSystem){
-    ifstream File(FileName);
+    std::ifstream File(FileName);
    
     IsAny=0;
-    while(!File.eof()){
+    while(!File.std::ios::eof()){
         string Line;
         getline(File,Line);
         Contains(Line,NotSystem,FileName);
@@ -64,7 +64,7 @@ void WriteRunBashFile(string name){
     Data.close();
     string run=name+".sh";
     string scriptname=run;
-    ofstream script(run);
+    std::ofstream script(run);
     string grr=run.substr(0,run.size()-2);
     grr=grr+"png";
     
@@ -84,10 +84,10 @@ void WriteRunBashFile(string name){
 
 
 void GetFunNode(stringNode * & H, string a){
-    ifstream File(a);
+    std::ifstream File(a);
     string word;
     string funName;
-    while(!File.eof()){
+    while( !File.eof() ){
         funName = "";
         File>>word;
         for(int i=0;i<word.size();i++){
@@ -129,7 +129,7 @@ int CheckIfInNode(string word, stringNode * H){
 
 void FunConnections(string FileName, stringNode * & functions){
     
-    ifstream File(FileName);
+    std::ifstream File(FileName);
     int a; // ilość: { 
     int b; //ilość: }
     int tabsize=0;
@@ -191,7 +191,7 @@ void StoryTwo(stringNode * & H, stringNode * & fun){
     Data.open("Data.gv");
     Data.clear();
     Data<<"digraph foo{\n";
-    Data<<"label =\"Relacje między funkcjami\"";
+    Data<<"label =\"Relacje między funcjami\"";
 
     stringNode *p = H;
     stringNode *dec = NULL;
@@ -199,7 +199,7 @@ void StoryTwo(stringNode * & H, stringNode * & fun){
     string word="";
     string wordHolder="";
     while(p != NULL){
-        ifstream File(p->val);
+        std::ifstream File(p->val);
         while(!File.eof()){
             File>>word;
             if(word == "//ContainDeclarations"){

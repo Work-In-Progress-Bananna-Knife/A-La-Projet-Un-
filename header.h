@@ -9,7 +9,8 @@
 using namespace std;
     //ContainDeclarations
 
-
+//czuję wstyd no ale co zrobisz no :/
+int main(void);
     //region deklaracji wezla string oraz fukcji z nim zwiazanych
 #pragma region Node
 
@@ -40,6 +41,7 @@ void Connections(string FileName,vector <string> NotSystem, string file);
 void WriteRunBashFile(string name);
 
 #pragma endregion
+
 
     //region deklaracji funckji szukajacych logicznych polaczen miedzy funckjami
 #pragma region functions dependencys
