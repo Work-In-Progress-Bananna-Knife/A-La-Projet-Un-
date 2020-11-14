@@ -40,7 +40,14 @@ int main(void) {
         closedir(dr); //close all directory
         }
         IsSourceFile(files,Ours);
-
+        
+        string scriptname = "GraphStoryOne.sh";
+        #if !(defined(WIN32) || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__))
+        scriptname = "bash "+scriptname;
+        #endif
+        const char* c=scriptname.c_str();
+        system(c);
+        
     }
 
         //historyjka 2 graf polaczen logicznych
@@ -66,6 +73,14 @@ int main(void) {
 
         stringNode * fun = NULL;
         StoryTwo(files,fun);
+
+        string scriptname = "GraphStoryTwo.sh";
+        #if !(defined(WIN32) || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__))
+        scriptname = "bash "+scriptname;
+        #endif
+        const char* c=scriptname.c_str();
+        system(c);
+        
     }
 
     //historyjka 3 pokazuje graf połączeń między modułami
@@ -90,6 +105,18 @@ int main(void) {
 
         funkcja(files);
 
+        string scriptname = "GraphStoryThree.sh";
+        #if !(defined(WIN32) || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__))
+        scriptname = "bash "+scriptname;
+        #endif
+        const char* c=scriptname.c_str();
+        system(c);
+
+    }
+    else if(historyjka == 4){
+
+
+        
     }
     
     

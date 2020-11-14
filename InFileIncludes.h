@@ -77,9 +77,9 @@ void WriteRunBashFile(string name){
 
     const char* c=scriptname.c_str();
     script.close();
-    system(c);
-    c=grr.c_str();
-    system(c);
+    //system(c);
+    //c=grr.c_str();
+    //system(c);
     }
 
 
