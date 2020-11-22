@@ -118,13 +118,6 @@ int main(void) {
         }
         
 
-       stringNode * a = NULL;
-       AddSecond(a,"haha");
-       AddSecond(a,"hehe");
-       AddSecond(a,"hihi");
-       AddSecond(a,"hoho");
-       AddSecond(a,"huhu");
-       Show(a);
        */
 
     }

@@ -7,7 +7,7 @@
 #include<fstream>
 #include<vector>
 using namespace std;
-    //ContainDeclarations
+//ContainDeclarations
 
 //czuję wstyd no ale co zrobisz no :/
 int main(void);
@@ -23,6 +23,7 @@ class stringNode{
 };
 
 void Add(stringNode * & H, std::string x);
+void AddSecond(stringNode * & H, std::string x);
 void Show(stringNode * H);
 string GetX(stringNode * & H, int x);
 int CheckIfInNode(string word, stringNode * H);

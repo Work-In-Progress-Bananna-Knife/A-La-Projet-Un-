@@ -11,10 +11,10 @@ vector< stringNode* > vec;
 void Contains(string Line,vector<string> Ours,string file){
     int a=0;
     string LookFor="#include";
-    size_t Where=Line.find(LookFor);
+    size_t dziee=Line.find(LookFor);
     if(Line.find(LookFor)!=string::npos){
-        Where+=LookFor.size();
-        string Contain = Line.substr(Where);
+        dziee+=LookFor.size();
+        string Contain = Line.substr(dziee);
         for(int i=0;i<Contain.size();i++){
             if(Contain[i]==' ' || Contain[i]==34){
                 Contain.erase(i,1);
@@ -147,20 +147,20 @@ void FunConnections(string FileName, stringNode * & functions){
         a=0;
         b=0;
         File>>word;
-        int where = CheckIfInNode(word, functions);
-        if(where>-1){
+        int dzie = CheckIfInNode(word, functions);
+        if(dzie>-1){
             for(int i=0;i<tabsize;i++){
                 tab[i]=0;
             }
-            wordguard = GetX(functions, where);
+            wordguard = GetX(functions, dzie);
             std::cout<<wordguard<<endl;
             
             while((a!=b)||(a == 0)){
                 File>>word;
-                where = CheckIfInNode(word, functions);
-                if(where>-1){
-                    std::cout<<" - "<<GetX(functions, where)<<endl;
-                    tab[where]++;  
+                dzie = CheckIfInNode(word, functions);
+                if(dzie>-1){
+                    std::cout<<" - "<<GetX(functions, dzie)<<endl;
+                    tab[dzie]++;  
                 }
                 if(FindCharInString(word,'{'))
                     a++;
@@ -221,17 +221,13 @@ void StoryTwo(stringNode * & H, stringNode * & fun){
 }
 
 
-//funkcja przyjmuje jako argument vector list
+// przyjmuje jako argument vector list
 //na początku każdej listy musi znajdować się nazwa tego, co łączy się z resztą obiektów na liście
-//dlatego trzeba używać AddSecond()
 void DrawGv(vector<stringNode*> v){
     
         for (auto i = v.begin(); i != v.end(); ++i) {
-            //(*i)->val
-        
                 stringNode * p=(*i);
                 p=p->next;
-        
             while(p){
                 Data<<"\""<<(*i)->val<<"\""<<"->"<<"\""<<p->val<<"\""<<" [label = \""<<p->val1<<"\"];\n";
                 p=p->next;
@@ -243,11 +239,8 @@ void DrawGv(vector<stringNode*> v){
 void CheckAndAddVector(vector<stringNode*> & v, string head, string connection){
     bool exist = false;
     for (auto i = v.begin(); i != v.end(); ++i) {
-        
         stringNode * p = (*i);
-       
         //pomijamy pierwszy objekt, bo łączone objekty są od następnego
-        
         //jeżeli nie null
         if(*i){
             p=p->next;
@@ -273,9 +266,8 @@ void CheckAndAddVector(vector<stringNode*> & v, string head, string connection){
         v.push_back(a);
         auto i = v.begin();
         for (i; i != v.end(); ++i) {
-
         }
         AddSecond(*(i-1),connection);
-        
+
     }
 }
