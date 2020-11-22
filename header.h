@@ -19,6 +19,7 @@ class stringNode{
     public:
     stringNode* next;
     std::string val;
+    int val1=1;
 };
 
 void Add(stringNode * & H, std::string x);
@@ -54,4 +55,5 @@ void FunConnections(string FileName, stringNode * & functions);
 
 
 
-
+void DrawGv(vector<stringNode*> v);
+void CheckAndAddVector(vector<stringNode*> & v, string head, string connection);

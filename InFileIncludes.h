@@ -4,10 +4,12 @@
 //ContainDefinitions
 
 bool IsAny=0;
-std::ofstream Data("Data.gv");
 
+std::ofstream Data("Data.gv");
+vector< stringNode* > vec;
 
 void Contains(string Line,vector<string> Ours,string file){
+    int a=0;
     string LookFor="#include";
     size_t Where=Line.find(LookFor);
     if(Line.find(LookFor)!=string::npos){
@@ -20,29 +22,28 @@ void Contains(string Line,vector<string> Ours,string file){
             }
         }
         for(int i =0;i<Ours.size();i++){
+            
             if(Ours[i]==Contain){
-                Data<<"\""<<file<<"\""<<"->"<<"\""<<Contain<<"\""<<" [label = \"1\"];\n";
-                
+                CheckAndAddVector(vec,file,Contain);
+                //Data<<"\""<<file<<"\""<<"->"<<"\""<<Contain<<"\""<<" [label = \"1\"];\n";
                 IsAny=1;
                 break;
             }
-        }
-        
+        }  
     }
+    
     
 }
 
 
 void Connections(string FileName,vector <string> NotSystem){
     std::ifstream File(FileName);
-   
     IsAny=0;
     while(!File.std::ios::eof()){
         string Line;
         getline(File,Line);
         Contains(Line,NotSystem,FileName);
     }
-    
 }
 
 
@@ -50,11 +51,11 @@ void IsSourceFile(stringNode * H, vector<string>  NotSystem){
     stringNode *p=H;
     Data<<"digraph weighted{\n";
     while(p!=NULL){
-
         if((p->val[p->val.size()-1]=='h' && p->val[p->val.size()-2]=='.')||(p->val[p->val.size()-1]=='p'&&p->val[p->val.size()-2]=='p'&&p->val[p->val.size()-3]=='c'&&p->val[p->val.size()-4]=='.'))
         Connections(p->val,NotSystem);
         p=p->next;
     }
+    DrawGv(vec); 
     Data<<"}";
     WriteRunBashFile("GraphStoryOne");
 }
@@ -77,6 +78,7 @@ void WriteRunBashFile(string name){
 
     const char* c=scriptname.c_str();
     script.close();
+    //tymczasowo(?) zakomentowane
     //system(c);
     //c=grr.c_str();
     //system(c);
@@ -99,9 +101,7 @@ void GetFunNode(stringNode * & H, string a){
                 break;
             }
         }
-
     }
-
 }
 
 
@@ -112,8 +112,7 @@ int CheckIfInNode(string word, stringNode * H){
     int ret=-1;
     stringNode *p=H;
     while(p!=NULL){
-        if((word.find(p->val)) != string::npos){
-            
+        if((word.find(p->val)) != string::npos){ 
             if(p->val.size()>fun.size()){
                 fun = p->val;
                 ret = a;
@@ -122,7 +121,6 @@ int CheckIfInNode(string word, stringNode * H){
         p=p->next;
         a++;
     }
-
     return ret;
 }
 
@@ -151,7 +149,6 @@ void FunConnections(string FileName, stringNode * & functions){
         File>>word;
         int where = CheckIfInNode(word, functions);
         if(where>-1){
-
             for(int i=0;i<tabsize;i++){
                 tab[i]=0;
             }
@@ -162,25 +159,18 @@ void FunConnections(string FileName, stringNode * & functions){
                 File>>word;
                 where = CheckIfInNode(word, functions);
                 if(where>-1){
-                
                     std::cout<<" - "<<GetX(functions, where)<<endl;
-                    tab[where]++;
-                    
+                    tab[where]++;  
                 }
-                if(FindCharInString(word,'{')){
+                if(FindCharInString(word,'{'))
                     a++;
-                }
-                if(FindCharInString(word,'}')){
+                if(FindCharInString(word,'}'))
                     b++;
-                }
-
             }
             for(int i=0;i<tabsize;i++){
                 
-                if(tab[i] != 0){
-                    
+                if(tab[i] != 0)
                     Data<<"\""<<wordguard<<"\""<<" -> \""<<GetX(functions,i)<<"\""<<"[label =  \""<<tab[i]<<"\"]\n";
-                }
             }
         }
     }
@@ -218,7 +208,6 @@ void StoryTwo(stringNode * & H, stringNode * & fun){
     {
         GetFunNode(fun, dec->val);
         dec = dec->next;
-
     }
      
     while (def != NULL)
@@ -232,4 +221,61 @@ void StoryTwo(stringNode * & H, stringNode * & fun){
 }
 
 
+//funkcja przyjmuje jako argument vector list
+//na początku każdej listy musi znajdować się nazwa tego, co łączy się z resztą obiektów na liście
+//dlatego trzeba używać AddSecond()
+void DrawGv(vector<stringNode*> v){
+    
+        for (auto i = v.begin(); i != v.end(); ++i) {
+            //(*i)->val
+        
+                stringNode * p=(*i);
+                p=p->next;
+        
+            while(p){
+                Data<<"\""<<(*i)->val<<"\""<<"->"<<"\""<<p->val<<"\""<<" [label = \""<<p->val1<<"\"];\n";
+                p=p->next;
+            }
+        }
+}
 
+
+void CheckAndAddVector(vector<stringNode*> & v, string head, string connection){
+    bool exist = false;
+    for (auto i = v.begin(); i != v.end(); ++i) {
+        
+        stringNode * p = (*i);
+       
+        //pomijamy pierwszy objekt, bo łączone objekty są od następnego
+        
+        //jeżeli nie null
+        if(*i){
+            p=p->next;
+            if((*i)->val == head){
+                while(p){
+                    if(p->val == connection){
+                        exist = true;
+                        p->val1++;
+                    }
+                    p=p->next;
+                }
+                if(!exist){
+                    AddSecond((*i),connection);
+                    exist = true;
+                }
+            }
+        }
+    }
+    if(!exist){
+        stringNode * a = new stringNode;
+        a->val = head;
+        a->next = NULL;
+        v.push_back(a);
+        auto i = v.begin();
+        for (i; i != v.end(); ++i) {
+
+        }
+        AddSecond(*(i-1),connection);
+        
+    }
+}

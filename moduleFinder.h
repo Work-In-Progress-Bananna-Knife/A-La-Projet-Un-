@@ -7,8 +7,7 @@ void funkcja(stringNode * H){
 
     stringNode * p = H;
     while(p!=NULL){
-        if((p->val[p->val.size()-1]=='h' && p->val[p->val.size()-2]=='.')||(p->val[p->val.size()-1]=='p'&&p->val[p->val.size()-2]=='p'&&p->val[p->val.size()-3]=='c'&&p->val[p->val.size()-4]=='.')){
-            
+        if((p->val[p->val.size()-1]=='h' && p->val[p->val.size()-2]=='.')||(p->val[p->val.size()-1]=='p'&&p->val[p->val.size()-2]=='p'&&p->val[p->val.size()-3]=='c'&&p->val[p->val.size()-4]=='.')){ 
             findProbableModules(p->val, nsNode);
         }
         p=p->next;
@@ -17,7 +16,6 @@ void funkcja(stringNode * H){
     int nsTabSize =0;
     p = nsNode;
     while(p!=NULL){
-
         nsTabSize++;
         p=p->next;
     }
@@ -34,8 +32,6 @@ void funkcja(stringNode * H){
             //nazwa tego co się w nim znajduje
             string name2;
             while(!File.eof()){
-
-    
                 File>>word;
                 bool loop=true;
                 //przeszukiwanie czy w słowie jest ::
@@ -45,7 +41,6 @@ void funkcja(stringNode * H){
                     a=0;
                     if((word[i] == ':')&&(word[i+1] == ':')&&(word.size()>2)){
                         //od :: w prawo do ;
-
                         for( int j=0; j<word.size(); j++){
                             if((word[j] == ':')){
                                 a=1;
@@ -62,19 +57,12 @@ void funkcja(stringNode * H){
                                 }
                             }
                         }
-                        
-                        if(where(name1,nsNode) >= 0 ){
-                           
-                                Add(nsTab[where(name1,nsNode)],name2);
-
-                        }
+                        if(where(name1,nsNode) >= 0 )
+                            Add(nsTab[where(name1,nsNode)],name2);
                         break;
                     }
-
                 }
-
             }
-
         }
         p=p->next;
     }    
@@ -114,7 +102,6 @@ void findProbableModules(string file, stringNode * & nsNode){
             }
         }
     }
-
 }
 
 
@@ -126,7 +113,6 @@ void countAndDraw(int nsTabSize, stringNode ** nsTab, stringNode * nsNode){
     Data<<"label =\"Relacje między modułami\"";
 
     for(int i=0;i<nsTabSize;i++){
-
         stringNode * p = nsTab[i];
         stringNode * p1 = NULL;
         stringNode * p2 = NULL;
@@ -136,8 +122,7 @@ void countAndDraw(int nsTabSize, stringNode ** nsTab, stringNode * nsNode){
             if(where(p->val,p1)<0){
                 Add(p1,p->val);
                 a++;
-            }
-        
+            } 
             p=p->next;
         }
         int tab[a];
@@ -153,20 +138,14 @@ void countAndDraw(int nsTabSize, stringNode ** nsTab, stringNode * nsNode){
         a=0;
         p=nsNode;
         while (p!=NULL){
-        
             while (p1!=NULL){
-
                 Data<<"\""<<p->val<<"\""<<" -> \""<<p1->val<<"\""<<"[label =  \""<<tab[a]<<"\"]\n";
                 a++;
                 p1=p1->next;
             }
-
             p=p->next;
         }
     }
-
     Data<<"}";
     WriteRunBashFile("GraphStoryThree");
-
-
 }

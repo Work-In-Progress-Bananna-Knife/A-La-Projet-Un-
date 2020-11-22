@@ -10,6 +10,19 @@ void Add(stringNode * & H, std::string x){
 }
 
 
+void AddSecond(stringNode * & H, std::string x){
+    if(H){
+        stringNode *p = new stringNode;
+        p->val=x;
+        p->next=H->next;
+        H->next=p;
+    }
+    else
+        Add(H,x);
+
+}
+
+
 void Show(stringNode * H){
     std::cout<<"H->";
     stringNode *p=H;

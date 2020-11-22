@@ -3,5 +3,5 @@ label ="Relacje między modułami""std" -> "cin"[label =  "1"]
 "std" -> "ofstream"[label =  "2"]
 "std" -> "cout"[label =  "8"]
 "std" -> "ifstream"[label =  "6"]
-"std" -> "string"[label =  "6"]
+"std" -> "string"[label =  "7"]
 }
