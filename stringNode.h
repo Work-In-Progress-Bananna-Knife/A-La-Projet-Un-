@@ -49,7 +49,7 @@ string GetX(stringNode * & H, int x){
 }
 
 
-bool FindCharInString(std::string a, char b){
+bool FindCharInString( std::string a, char b){
 
     for(int i = 0;i<a.size();i++){
         if(a[i]==b){
@@ -60,7 +60,7 @@ bool FindCharInString(std::string a, char b){
 }
 
 
-bool CheckIfIn(std::string a, stringNode * H){
+bool CheckIfIn( std::string a, stringNode * H){
 
      while(H!=NULL){
      
@@ -73,7 +73,7 @@ bool CheckIfIn(std::string a, stringNode * H){
 }
 
 
-int where(std::string word, stringNode * H){
+int where( std::string word, stringNode * H){
 
     int a=-1;
     while(H!=NULL){
@@ -87,7 +87,7 @@ int where(std::string word, stringNode * H){
 }
 
 
-int howManyTimes(std::string word, stringNode * H){
+int howManyTimes( std::string word, stringNode * H){
     
     int a=0;
     while(H != NULL){
