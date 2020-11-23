@@ -47,17 +47,21 @@ void Connections(string FileName,vector <string> NotSystem){
 }
 
 
-void IsSourceFile(stringNode * H, vector<string>  NotSystem){
+void IsSourceFile(stringNode * H, vector<string>  NotSystem, bool isStory5){
     stringNode *p=H;
-    Data<<"digraph weighted{\n";
+    if(!isStory5)
+        Data<<"digraph weighted{\n";
     while(p!=NULL){
         if((p->val[p->val.size()-1]=='h' && p->val[p->val.size()-2]=='.')||(p->val[p->val.size()-1]=='p'&&p->val[p->val.size()-2]=='p'&&p->val[p->val.size()-3]=='c'&&p->val[p->val.size()-4]=='.'))
         Connections(p->val,NotSystem);
         p=p->next;
     }
     DrawGv(vec); 
-    Data<<"}";
-    WriteRunBashFile("GraphStoryOne");
+    if(!isStory5){
+        Data<<"}";
+        WriteRunBashFile("GraphStoryOne");
+    }
+    
 }
 
 
@@ -98,6 +102,13 @@ void GetFunNode(stringNode * & H, string a){
                     funName+=word[j];
                 }
                 Add(H, funName);
+
+                //story 5
+                stringNode * a = NULL;
+                Add(a,funName);
+                vec.push_back(a);
+                //
+
                 break;
             }
         }
@@ -170,19 +181,21 @@ void FunConnections(string FileName, stringNode * & functions){
             for(int i=0;i<tabsize;i++){
                 
                 if(tab[i] != 0)
-                    Data<<"\""<<wordguard<<"\""<<" -> \""<<GetX(functions,i)<<"\""<<"[label =  \""<<tab[i]<<"\"]\n";
+                    //Data<<"\""<<wordguard<<"\""<<" -> \""<<GetX(functions,i)<<"\""<<"[label =  \""<<tab[i]<<"\"]\n";
+                    CheckAndAddVector(vec,wordguard,GetX(functions,i));
             }
         }
     }
 }
 
 
-void StoryTwo(stringNode * & H, stringNode * & fun){
-    Data.open("Data.gv");
-    Data.clear();
-    Data<<"digraph foo{\n";
-    Data<<"label =\"Relacje między funcjami\"";
-
+void StoryTwo(stringNode * & H, stringNode * & fun, bool isStory5){
+    if(!isStory5){
+        Data.open("Data.gv");
+        Data.clear();
+        Data<<"digraph foo{\n";
+        Data<<"label =\"Relacje między funcjami\"";
+    }
     stringNode *p = H;
     stringNode *dec = NULL;
     stringNode *def = NULL;
@@ -216,8 +229,12 @@ void StoryTwo(stringNode * & H, stringNode * & fun){
         def = def->next;
     }
 
-    Data<<"}";
-    WriteRunBashFile("GraphStoryTwo");
+    if(!isStory5){
+        DrawGv(vec); 
+        Data<<"}";
+        //WriteRunBashFile("GraphStoryTwo");
+    }
+    
 }
 
 
@@ -260,14 +277,9 @@ void CheckAndAddVector(vector<stringNode*> & v, string head, string connection){
         }
     }
     if(!exist){
-        stringNode * a = new stringNode;
-        a->val = head;
-        a->next = NULL;
+        stringNode * a = NULL;
+        Add(a,head);
         v.push_back(a);
-        auto i = v.begin();
-        for (i; i != v.end(); ++i) {
-        }
-        AddSecond(*(i-1),connection);
-
+        AddSecond(*(v.rbegin()),connection);
     }
 }

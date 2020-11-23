@@ -27,7 +27,6 @@ int main(void) {
             Add(files, en->d_name);
             Ours.push_back(en->d_name);   
         }
-        //Show(files);
         closedir(dr); //close all directory
         }
         
@@ -99,27 +98,11 @@ int main(void) {
     }
     //historyjka 4
     else if(historyjka == 4){
+        cout<<"No cos tu mialo byc, ale co?\n Nie mam pojecia :/ \n";
 
-        /*int h1,h2,h3;
-        cout<<"Wyswietlic graf 1?\n";
-        cin>>h1;
-        cout<<"Wyswietlic graf 2?\n";
-        cin>>h2;
-        cout<<"Wyswietlic graf 3?\n";
-        cin>>h3;
-        if(h1){
-
-        }
-        if(h2){
-
-        }
-        if(h3){
-
-        }
+    }
+    else if(historyjka == 5){
         
-
-       */
-
     }
     //obsługa błędu
     else{

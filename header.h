@@ -37,7 +37,7 @@ int howManyTimes(string word, stringNode * H);
     //region deklaracji funckji wyszukujacych polaczenia fizyczne w plikach - include 
 #pragma region File dependencys
 
-void IsSourceFile(stringNode * H, vector<string>  NotSystem);
+void IsSourceFile(stringNode * H, vector<string>  NotSystembool, bool isStory5=false);
 void Contains(string Line,vector<string> Ours);
 void Connections(string FileName,vector <string> NotSystem, string file);
 void WriteRunBashFile(string name);
@@ -49,7 +49,7 @@ void WriteRunBashFile(string name);
 #pragma region functions dependencys
 
 void GetFunNode(stringNode * & H, string a);
-void StoryTwo(stringNode * & H, stringNode * &fun);
+void StoryTwo(stringNode * & H, stringNode * &fun, bool isStory5=false);
 void FunConnections(string FileName, stringNode * & functions);
 
 #pragma endregion
