@@ -97,62 +97,79 @@ int main(void) {
     }
     //historyjka 4
     else if(historyjka == 4){
-        cout<<"No cos tu mialo byc, ale co?\n Nie mam pojecia :/ \n";
+        std::cout<<"No cos tu mialo byc, ale co?\n Nie mam pojecia :/ \n";
 
     }
     else if(historyjka == 5){
-
-        //historyjka 1
         DIR *dr;
         vector <string> Ours;
         struct dirent *en;
-        stringNode * files = NULL;
-        dr = opendir("."); //open all directory
-        if (dr) {
-        while ((en = readdir(dr)) != NULL) {  
-            Add(files, en->d_name);
-            Ours.push_back(en->d_name);   
-        }
-        closedir(dr); //close all directory
-        }
-        IsSourceFile(files,Ours,true);
-
-
-        files = NULL;
-        dr = opendir("."); //open all directory
-        if (dr) {
-            while ((en = readdir(dr)) != NULL) {
-                std::string p =en->d_name;
-                if((p[p.size()-1]=='h' && p[p.size()-2]=='.')||(p[p.size()-1]=='p'&&p[p.size()-2]=='p'&&p[p.size()-3]=='c'&&p[p.size()-4]=='.')){
-                   Add(files, p); 
+        stringNode * files;
+        char h1;
+        std::cout<<"Chcesz zobaczyc historyjke 1?\n y/n\n";
+        std::cin>>h1;
+            
+        if(h1=='y'){
+            //historyjka 1
+            files = NULL;
+            dr = opendir("."); //open all directory
+            if (dr) {
+                while ((en = readdir(dr)) != NULL) {  
+                    Add(files, en->d_name);
+                    Ours.push_back(en->d_name);   
                 }
-                Ours.push_back(en->d_name);
+                closedir(dr); //close all directory
             }
-        closedir(dr); //close all directory
+            IsSourceFile(files,Ours,true);
         }
-        stringNode * fun = NULL;
-        StoryTwo(files,fun,true);
-
-
-        files = NULL;
-        dr = opendir("."); //open all directory
-        if (dr) {
-            while ((en = readdir(dr)) != NULL) {
-                Add(files, en->d_name);
-                Ours.push_back(en->d_name);
+        
+        char h2;
+        std::cout<<"Chcesz zobaczyc historyjke 2?\n y/n\n";
+        std::cin>>h2;
+        if(h2=='y'){
+            files = NULL;
+            dr = opendir("."); //open all directory
+            if (dr) {
+                while ((en = readdir(dr)) != NULL) {
+                    std::string p =en->d_name;
+                        if((p[p.size()-1]=='h' && p[p.size()-2]=='.')||(p[p.size()-1]=='p'&&p[p.size()-2]=='p'&&p[p.size()-3]=='c'&&p[p.size()-4]=='.')){
+                           Add(files, p); 
+                        }
+                    Ours.push_back(en->d_name);
+                }
+                closedir(dr); //close all directory
             }
-            closedir(dr); //close all directory
+            stringNode * fun = NULL;
+            StoryTwo(files,fun,true);
         }
-        funkcja(files,true);
 
-        storyFive();
-// wywołanie okienka z grafem
-        string scriptname = "GraphStoryFive.sh";
-        #if !(defined(WIN32) || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__))
-        scriptname = "bash "+scriptname;
-        #endif
-        const char* c=scriptname.c_str();
-        system(c);
+        char h3;
+        std::cout<<"Chcesz zobaczyc historyjke 3?\n y/n\n";
+        std::cin>>h3;
+        if(h3=='y'){
+            files = NULL;
+            dr = opendir("."); //open all directory
+            if (dr) {
+                while ((en = readdir(dr)) != NULL) {
+                    Add(files, en->d_name);
+                    Ours.push_back(en->d_name);
+                }
+                closedir(dr); //close all directory
+            }
+            funkcja(files,true);
+        }
+        
+        if((h1=='y')||(h2=='y')||(h3=='y')){
+            storyFive();
+            // wywołanie okienka z grafem
+            string scriptname = "GraphStoryFive.sh";
+            #if !(defined(WIN32) || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__))
+                scriptname = "bash "+scriptname;
+            #endif
+            const char* c=scriptname.c_str();
+            system(c);
+        }   
+        
 
     }
     //obsługa błędu

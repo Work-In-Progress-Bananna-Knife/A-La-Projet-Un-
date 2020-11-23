@@ -10,11 +10,11 @@ vector< stringNode* > vec;
 
 void Contains(string Line,vector<string> Ours,string file){
     int a=0;
-    string LookFor="#include";
+    std::string LookFor="#include";
     size_t dziee=Line.find(LookFor);
-    if(Line.find(LookFor)!=string::npos){
+    if(Line.find(LookFor) != string::npos ){
         dziee+=LookFor.size();
-        string Contain = Line.substr(dziee);
+        std::string Contain = Line.substr(dziee);
         for(int i=0;i<Contain.size();i++){
             if(Contain[i]==' ' || Contain[i]==34){
                 Contain.erase(i,1);
@@ -35,12 +35,12 @@ void Contains(string Line,vector<string> Ours,string file){
     
 }
 
-
+// std::ios
 void Connections(string FileName,vector <string> NotSystem){
     std::ifstream File(FileName);
     IsAny=0;
-    while(!File.std::ios::eof()){
-        string Line;
+    while( !File. ios::eof() ){
+        std::string Line;
         getline(File,Line);
         Contains(Line,NotSystem,FileName);
     }
@@ -68,10 +68,10 @@ void IsSourceFile(stringNode * H, vector<string>  NotSystem, bool isStory5){
 
 void WriteRunBashFile(string name){
     Data.close();
-    string run=name+".sh";
-    string scriptname=run;
+    std::string run=name+".sh";
+    std::string scriptname=run;
     std::ofstream script(run);
-    string grr=run.substr(0,run.size()-2);
+    std::string grr=run.substr(0,run.size()-2);
     grr=grr+"png";
     
     script<<"#/bin/bash\ndot -Tpng Data.gv -o "<<grr<<"\ndisplay "<<grr;
@@ -92,8 +92,8 @@ void WriteRunBashFile(string name){
 
 void GetFunNode(stringNode * & H, string a){
     std::ifstream File(a);
-    string word;
-    string funName;
+    std::string word;
+    std::string funName;
     while( !File.eof() ){
         funName = "";
         File>>word;
@@ -109,7 +109,6 @@ void GetFunNode(stringNode * & H, string a){
                 Add(a,funName);
                 vec.push_back(a);
                 //
-
                 break;
             }
         }
@@ -119,12 +118,12 @@ void GetFunNode(stringNode * & H, string a){
 
 int CheckIfInNode(string word, stringNode * H){
     
-    string fun ="";
+    std::string fun ="";
     int a=0;
     int ret=-1;
     stringNode *p=H;
     while(p!=NULL){
-        if((word.find(p->val)) != string::npos){ 
+        if((word.find(p->val)) != string::npos ){ 
             if(p->val.size()>fun.size()){
                 fun = p->val;
                 ret = a;
@@ -149,7 +148,6 @@ void FunConnections(string FileName, stringNode * & functions){
 
     p = functions;
     while(p != NULL){
-
         tabsize++;    
         p = p->next;
     }
@@ -182,7 +180,6 @@ void FunConnections(string FileName, stringNode * & functions){
             for(int i=0;i<tabsize;i++){
                 
                 if(tab[i] != 0)
-                    //Data<<"\""<<wordguard<<"\""<<" -> \""<<GetX(functions,i)<<"\""<<"[label =  \""<<tab[i]<<"\"]\n";
                     CheckAndAddVector(vec,wordguard,GetX(functions,i));
             }
         }
@@ -200,8 +197,8 @@ void StoryTwo(stringNode *  H, stringNode * & fun, bool isStory5){
     stringNode *p = H;
     stringNode *dec = NULL;
     stringNode *def = NULL;
-    string word="";
-    string wordHolder="";
+    std::string word="";
+    std::string wordHolder="";
     while(p != NULL){
         std::ifstream File(p->val);
         while(!File.eof()){
@@ -241,15 +238,14 @@ void StoryTwo(stringNode *  H, stringNode * & fun, bool isStory5){
 // przyjmuje jako argument vector list
 //na początku każdej listy musi znajdować się nazwa tego, co łączy się z resztą obiektów na liście
 void DrawGv(vector<stringNode*> v){
-    
-        for (auto i = v.begin(); i != v.end(); ++i) {
-                stringNode * p=(*i);
-                p=p->next;
-            while(p){
-                Data<<"\""<<(*i)->val<<"\""<<"->"<<"\""<<p->val<<"\""<<" [label = \""<<p->val1<<"\"];\n";
-                p=p->next;
-            }
+    for (auto i = v.begin(); i != v.end(); ++i) {
+        stringNode * p=(*i);
+        p=p->next;
+        while(p){
+            Data<<"\""<<(*i)->val<<"\""<<"->"<<"\""<<p->val<<"\""<<" [label = \""<<p->val1<<"\"];\n";
+            p=p->next;
         }
+    }
 }
 
 
@@ -287,7 +283,6 @@ void CheckAndAddVector(vector<stringNode*> & v, string head, string connection){
 
 
 void storyFive(){
-
     if(0==0){
         Data.open("Data.gv");
         Data.clear();
@@ -297,5 +292,4 @@ void storyFive(){
         Data<<"}";
         WriteRunBashFile("GraphStoryFive");
     }
-    
 }

@@ -48,7 +48,7 @@ void WriteRunBashFile(string name);
     //region deklaracji funckji szukajacych logicznych polaczen miedzy funckjami
 #pragma region functions dependencys
 
-void GetFunNode(stringNode * & H, string a);
+void GetFunNode(stringNode * & H, std::string a);
 void StoryTwo(stringNode *  H, stringNode * &fun, bool isStory5=false);
 void FunConnections(string FileName, stringNode * & functions);
 
@@ -57,5 +57,5 @@ void FunConnections(string FileName, stringNode * & functions);
 
 
 void DrawGv(vector<stringNode*> v);
-void CheckAndAddVector(vector<stringNode*> & v, string head, string connection);
+void CheckAndAddVector(vector<stringNode*> & v, std::string head, std::string connection);
 void storyFive();
