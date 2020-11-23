@@ -56,8 +56,9 @@ void IsSourceFile(stringNode * H, vector<string>  NotSystem, bool isStory5){
         Connections(p->val,NotSystem);
         p=p->next;
     }
-    DrawGv(vec); 
+     
     if(!isStory5){
+        DrawGv(vec);
         Data<<"}";
         WriteRunBashFile("GraphStoryOne");
     }
@@ -189,7 +190,7 @@ void FunConnections(string FileName, stringNode * & functions){
 }
 
 
-void StoryTwo(stringNode * & H, stringNode * & fun, bool isStory5){
+void StoryTwo(stringNode *  H, stringNode * & fun, bool isStory5){
     if(!isStory5){
         Data.open("Data.gv");
         Data.clear();
@@ -232,9 +233,8 @@ void StoryTwo(stringNode * & H, stringNode * & fun, bool isStory5){
     if(!isStory5){
         DrawGv(vec); 
         Data<<"}";
-        //WriteRunBashFile("GraphStoryTwo");
+        WriteRunBashFile("GraphStoryTwo");
     }
-    
 }
 
 
@@ -282,4 +282,20 @@ void CheckAndAddVector(vector<stringNode*> & v, string head, string connection){
         v.push_back(a);
         AddSecond(*(v.rbegin()),connection);
     }
+}
+
+
+
+void storyFive(){
+
+    if(0==0){
+        Data.open("Data.gv");
+        Data.clear();
+        Data<<"digraph foo{\n";
+        Data<<"label =\"Relacje między wszystkim\""; 
+        DrawGv(vec);  
+        Data<<"}";
+        WriteRunBashFile("GraphStoryFive");
+    }
+    
 }

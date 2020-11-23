@@ -49,7 +49,7 @@ void WriteRunBashFile(string name);
 #pragma region functions dependencys
 
 void GetFunNode(stringNode * & H, string a);
-void StoryTwo(stringNode * & H, stringNode * &fun, bool isStory5=false);
+void StoryTwo(stringNode *  H, stringNode * &fun, bool isStory5=false);
 void FunConnections(string FileName, stringNode * & functions);
 
 #pragma endregion
@@ -58,3 +58,4 @@ void FunConnections(string FileName, stringNode * & functions);
 
 void DrawGv(vector<stringNode*> v);
 void CheckAndAddVector(vector<stringNode*> & v, string head, string connection);
+void storyFive();

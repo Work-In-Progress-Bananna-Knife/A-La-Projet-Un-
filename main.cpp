@@ -1,5 +1,4 @@
 #include <iostream>
-#include "InFileIncludes.h"
 #include <dirent.h>
 #include <sys/types.h>
 #include "moduleFinder.h"
@@ -102,7 +101,59 @@ int main(void) {
 
     }
     else if(historyjka == 5){
-        
+
+        //historyjka 1
+        DIR *dr;
+        vector <string> Ours;
+        struct dirent *en;
+        stringNode * files = NULL;
+        dr = opendir("."); //open all directory
+        if (dr) {
+        while ((en = readdir(dr)) != NULL) {  
+            Add(files, en->d_name);
+            Ours.push_back(en->d_name);   
+        }
+        closedir(dr); //close all directory
+        }
+        IsSourceFile(files,Ours,true);
+
+
+        files = NULL;
+        dr = opendir("."); //open all directory
+        if (dr) {
+            while ((en = readdir(dr)) != NULL) {
+                std::string p =en->d_name;
+                if((p[p.size()-1]=='h' && p[p.size()-2]=='.')||(p[p.size()-1]=='p'&&p[p.size()-2]=='p'&&p[p.size()-3]=='c'&&p[p.size()-4]=='.')){
+                   Add(files, p); 
+                }
+                Ours.push_back(en->d_name);
+            }
+        closedir(dr); //close all directory
+        }
+        stringNode * fun = NULL;
+        StoryTwo(files,fun,true);
+
+
+        files = NULL;
+        dr = opendir("."); //open all directory
+        if (dr) {
+            while ((en = readdir(dr)) != NULL) {
+                Add(files, en->d_name);
+                Ours.push_back(en->d_name);
+            }
+            closedir(dr); //close all directory
+        }
+        funkcja(files,true);
+
+        storyFive();
+// wywołanie okienka z grafem
+        string scriptname = "GraphStoryFive.sh";
+        #if !(defined(WIN32) || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__))
+        scriptname = "bash "+scriptname;
+        #endif
+        const char* c=scriptname.c_str();
+        system(c);
+
     }
     //obsługa błędu
     else{

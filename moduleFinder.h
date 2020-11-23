@@ -1,14 +1,15 @@
 #include "moduleFinderHeader.h"
+
 //ContainDefinitions
 
-void funkcja(stringNode * H){
+void funkcja(stringNode * H, bool isStory5){
 
     stringNode * nsNode = NULL;
 
     stringNode * p = H;
     while(p!=NULL){
         if((p->val[p->val.size()-1]=='h' && p->val[p->val.size()-2]=='.')||(p->val[p->val.size()-1]=='p'&&p->val[p->val.size()-2]=='p'&&p->val[p->val.size()-3]=='c'&&p->val[p->val.size()-4]=='.')){ 
-            findProbableModules(p->val, nsNode);
+            findProbableModules(p->val, nsNode,isStory5);
         }
         p=p->next;
     }
@@ -57,6 +58,7 @@ void funkcja(stringNode * H){
                                 }
                             }
                         }
+                        
                         if(where(name1,nsNode) >= 0 )
                             Add(nsTab[where(name1,nsNode)],name2);
                         break;
@@ -66,11 +68,11 @@ void funkcja(stringNode * H){
         }
         p=p->next;
     }    
-    countAndDraw(nsTabSize,nsTab,nsNode);
+    countAndDraw(nsTabSize,nsTab,nsNode,isStory5);
 }
 
 
-void findProbableModules(string file, stringNode * & nsNode){
+void findProbableModules(string file, stringNode * & nsNode, bool isStory5){
     
     bool exist;
     stringNode * p;
@@ -99,21 +101,31 @@ void findProbableModules(string file, stringNode * & nsNode){
             }
             if(!exist){
                 Add(nsNode,name);
+
+                //story 5
+                stringNode * a = NULL;
+                Add(a,name);
+                vec.push_back(a);
+                //
+
             }
         }
     }
 }
 
 
-void countAndDraw(int nsTabSize, stringNode ** nsTab, stringNode * nsNode){
+void countAndDraw(int nsTabSize, stringNode ** nsTab, stringNode * nsNode, bool isStory5){
 
-    Data.open("Data.gv");
-    Data.clear();
-    Data<<"digraph foo{\n";
-    Data<<"label =\"Relacje między modułami\"";
+    if(!isStory5){
+        Data.open("Data.gv");
+        Data.clear();
+        Data<<"digraph foo{\n";
+        Data<<"label =\"Relacje między moduami\"";
+    }
+    
 
     for(int i=0;i<nsTabSize;i++){
-        stringNode * p = nsTab[i];
+        stringNode * p = nsTab[i];// tablica list
         stringNode * p1 = NULL;
         stringNode * p2 = NULL;
         int a=0;
@@ -136,16 +148,20 @@ void countAndDraw(int nsTabSize, stringNode ** nsTab, stringNode * nsNode){
         }
 
         a=0;
-        p=nsNode;
+        p=nsNode;//lista namesp
         while (p!=NULL){
             while (p1!=NULL){
-                Data<<"\""<<p->val<<"\""<<" -> \""<<p1->val<<"\""<<"[label =  \""<<tab[a]<<"\"]\n";
+                //Data<<"\""<<p->val<<"\""<<" -> \""<<p1->val<<"\""<<"[label =  \""<<tab[a]<<"\"]\n";
+                CheckAndAddVector(vec,p->val,p1->val);
                 a++;
                 p1=p1->next;
             }
             p=p->next;
         }
     }
-    Data<<"}";
-    WriteRunBashFile("GraphStoryThree");
+    
+    if(!isStory5){
+        Data<<"}";
+        WriteRunBashFile("GraphStoryThree");
+    }
 }
