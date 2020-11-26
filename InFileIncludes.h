@@ -141,27 +141,14 @@ void FunConnections(string FileName, stringNode * & functions){
     std::ifstream File(FileName);
     int a; // ilość: { 
     int b; //ilość: }
-    int tabsize=0;
     std::string word;
     std::string wordguard;
-    stringNode * p = NULL;
-
-    p = functions;
-    while(p != NULL){
-        tabsize++;    
-        p = p->next;
-    }
-    int tab[tabsize];
-
     while(!File.eof()){
         a=0;
         b=0;
         File>>word;
         int dzie = CheckIfInNode(word, functions);
         if(dzie>-1){
-            for(int i=0;i<tabsize;i++){
-                tab[i]=0;
-            }
             wordguard = GetX(functions, dzie);
             std::cout<<wordguard<<endl;
             
@@ -170,17 +157,12 @@ void FunConnections(string FileName, stringNode * & functions){
                 dzie = CheckIfInNode(word, functions);
                 if(dzie>-1){
                     std::cout<<" - "<<GetX(functions, dzie)<<endl;
-                    tab[dzie]++;  
+                    CheckAndAddVector(vec,wordguard,GetX(functions,dzie));
                 }
                 if(FindCharInString(word,'{'))
                     a++;
                 if(FindCharInString(word,'}'))
                     b++;
-            }
-            for(int i=0;i<tabsize;i++){
-                
-                if(tab[i] != 0)
-                    CheckAndAddVector(vec,wordguard,GetX(functions,i));
             }
         }
     }
