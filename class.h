@@ -10,7 +10,6 @@ class StoryOne{
     
 
     public:
-    
 
     //tworzy liste plikow w folderze zawierajacym
     static vector<string> Files(){
