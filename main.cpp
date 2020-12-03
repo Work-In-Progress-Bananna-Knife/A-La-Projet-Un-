@@ -38,7 +38,7 @@ int main(){
 
             StoryOne::Generategv(Hi);
             
-            //utworzenie grafy plikow
+            //utworzenie grafu plikow
             
             StoryOne::draw();
             StoryOne::showgraph();
