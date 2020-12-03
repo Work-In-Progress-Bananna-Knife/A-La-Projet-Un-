@@ -1,180 +1,69 @@
 #include <iostream>
 #include <dirent.h>
 #include <sys/types.h>
-#include "moduleFinder.h"
-//ContainDefinitions
+#include "class.h"
+#include <vector>
+#include <map>
 
 using namespace std;
 
+int main(){
 
-int main(void) {
-    //wybor historyjki
-    std::cout<<"grafy tworzone przy uzyciu Graphviz\n";
-    std::cout<<"Wybierz historyjke\n";
+    map<string, vector<string>> Hi;
+    //deklaracja uzytych programow zewnetrznych
+    cout<<"grafy tworzone przy uzyciu Graphviz\n";
+
+    // wybor dzialania programu - wybiera uzytkownik
+    cout<<"Wybierz historyjke\n";
     int historyjka;
-    std::cin>>historyjka;
-    //historyjka 1 - graf polaczen fizycznych
-    if(historyjka == 1){
-        //pobieranie nazw plików z folderu
-        DIR *dr;
-        vector <string> Ours;
-        struct dirent *en;
-        stringNode * files = NULL;
-        dr = opendir("."); //open all directory
-        if (dr) {
-        while ((en = readdir(dr)) != NULL) {  
-            Add(files, en->d_name);
-            Ours.push_back(en->d_name);   
-        }
-        closedir(dr); //close all directory
-        }
-        
-        IsSourceFile(files,Ours);
-        
-        // wywołanie okienka z grafem
-        string scriptname = "GraphStoryOne.sh";
-        #if !(defined(WIN32) || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__))
-        scriptname = "bash "+scriptname;
-        #endif
-        const char* c=scriptname.c_str();
-        system(c);
-        
+    while(historyjka!=1 &&historyjka!=2 && historyjka!=3 && historyjka!=5){
+    cin>>historyjka;
+    if(historyjka <1 || historyjka > 5 || historyjka==4){
+        cout<<"wprowadzono nieprawidlowe dane. Sprobuj ponownie\n";
     }
-    //historyjka 2 graf polaczen logicznych
-    else if(historyjka == 2){
-        //pobieranie nazw plików z folderu
-        DIR *dr;
-        vector <string> Ours;
-        struct dirent *en;
-        stringNode * files = NULL;
-        dr = opendir("."); //open all directory
-        if (dr) {
-            while ((en = readdir(dr)) != NULL) {
-                std::string p =en->d_name;
-                if((p[p.size()-1]=='h' && p[p.size()-2]=='.')||(p[p.size()-1]=='p'&&p[p.size()-2]=='p'&&p[p.size()-3]=='c'&&p[p.size()-4]=='.')){
-                   Add(files, p); 
-                }
-                Ours.push_back(en->d_name);
-            }
-        closedir(dr); //close all directory
-        }
-        stringNode * fun = NULL;
-        StoryTwo(files,fun);
-
-        // wywołanie okienka z grafem
-        string scriptname = "GraphStoryTwo.sh";
-        #if !(defined(WIN32) || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__))
-        scriptname = "bash "+scriptname;
-        #endif
-        const char* c=scriptname.c_str();
-        system(c);
-        
     }
-    //historyjka 3 pokazuje graf połączeń między modułami
-    else if(historyjka == 3){
-        //pobieranie nazw plików z folderu
-        DIR *dr;
-        vector <string> Ours;
-        struct dirent *en;
-        stringNode * files = NULL;
-        dr = opendir("."); //open all directory
-        if (dr) {
-            while ((en = readdir(dr)) != NULL) {
-                Add(files, en->d_name);
-                Ours.push_back(en->d_name);
-            }
-            closedir(dr); //close all directory
-        }
-        funkcja(files);
-
-        // wywołanie okienka z grafem
-        string scriptname = "GraphStoryThree.sh";
-        #if !(defined(WIN32) || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__))
-        scriptname = "bash "+scriptname;
-        #endif
-        const char* c=scriptname.c_str();
-        system(c);
-    }
-    //historyjka 4
-    else if(historyjka == 4){
-        std::cout<<"No cos tu mialo byc, ale co?\n Nie mam pojecia :/ \n";
-
-    }
-    else if(historyjka == 5){
-        DIR *dr;
-        vector <string> Ours;
-        struct dirent *en;
-        stringNode * files;
-        char h1;
-        std::cout<<"Chcesz zobaczyc historyjke 1?\n y/n\n";
-        std::cin>>h1;
+    switch (historyjka)
+    {
+    case 1:{
+            //wywolanie metod historyjki pierwszej
             
-        if(h1=='y'){
-            //historyjka 1
-            files = NULL;
-            dr = opendir("."); //open all directory
-            if (dr) {
-                while ((en = readdir(dr)) != NULL) {  
-                    Add(files, en->d_name);
-                    Ours.push_back(en->d_name);   
-                }
-                closedir(dr); //close all directory
-            }
-            IsSourceFile(files,Ours,true);
-        }
-        
-        char h2;
-        std::cout<<"Chcesz zobaczyc historyjke 2?\n y/n\n";
-        std::cin>>h2;
-        if(h2=='y'){
-            files = NULL;
-            dr = opendir("."); //open all directory
-            if (dr) {
-                while ((en = readdir(dr)) != NULL) {
-                    std::string p =en->d_name;
-                        if((p[p.size()-1]=='h' && p[p.size()-2]=='.')||(p[p.size()-1]=='p'&&p[p.size()-2]=='p'&&p[p.size()-3]=='c'&&p[p.size()-4]=='.')){
-                           Add(files, p); 
-                        }
-                    Ours.push_back(en->d_name);
-                }
-                closedir(dr); //close all directory
-            }
-            stringNode * fun = NULL;
-            StoryTwo(files,fun,true);
-        }
+            //lista plikow w folderze zapisana do vectora Files
+            
+            vector <string> Files = StoryOne::Files();
+            
+            //ustalenie plikow zawierajacych sie w include pomijajac biblioteki systemowe
+            
+            StoryOne::includes(Files,Hi);
+            
+            //stworzenie danych do grafu
 
-        char h3;
-        std::cout<<"Chcesz zobaczyc historyjke 3?\n y/n\n";
-        std::cin>>h3;
-        if(h3=='y'){
-            files = NULL;
-            dr = opendir("."); //open all directory
-            if (dr) {
-                while ((en = readdir(dr)) != NULL) {
-                    Add(files, en->d_name);
-                    Ours.push_back(en->d_name);
-                }
-                closedir(dr); //close all directory
-            }
-            funkcja(files,true);
-        }
-        
-        if((h1=='y')||(h2=='y')||(h3=='y')){
-            storyFive();
-            // wywołanie okienka z grafem
-            string scriptname = "GraphStoryFive.sh";
-            #if !(defined(WIN32) || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__))
-                scriptname = "bash "+scriptname;
-            #endif
-            const char* c=scriptname.c_str();
-            system(c);
-        }   
-        
+            StoryOne::Generategv(Hi);
+            
+            //utworzenie grafy plikow
+            
+            StoryOne::draw();
+            StoryOne::showgraph();
 
+
+            
     }
-    //obsługa błędu
-    else{
-        std::cout<<"UPS cos poszlo nie tak :/\n";
+        
+        break;
+    case 2:
+        /* code */
+        break;
+    case 3:
+        /* code */
+        break;
+    case 5:
+        /* code */
+        break;
+         
+    default:
+        break;
     }
-   return(0);
+        
+    
+
+    return 0;
 }

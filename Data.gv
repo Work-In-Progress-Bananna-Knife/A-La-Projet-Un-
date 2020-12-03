@@ -1,33 +1,3 @@
 digraph foo{
-label ="Relacje między funcjami""main"->"storyFive" [label = "1"];
-"main"->"funkcja" [label = "2"];
-"main"->"StoryTwo" [label = "3"];
-"main"->"IsSourceFile" [label = "2"];
-"main"->"Add" [label = "6"];
-"AddSecond"->"Add" [label = "1"];
-"IsSourceFile"->"WriteRunBashFile" [label = "1"];
-"IsSourceFile"->"DrawGv" [label = "1"];
-"IsSourceFile"->"Connections" [label = "1"];
-"Contains"->"CheckAndAddVector" [label = "1"];
-"Connections"->"Contains" [label = "1"];
-"GetFunNode"->"Add" [label = "2"];
-"StoryTwo"->"WriteRunBashFile" [label = "1"];
-"StoryTwo"->"DrawGv" [label = "1"];
-"StoryTwo"->"FunConnections" [label = "1"];
-"StoryTwo"->"GetFunNode" [label = "1"];
-"StoryTwo"->"Add" [label = "2"];
-"FunConnections"->"FindCharInString" [label = "2"];
-"FunConnections"->"CheckAndAddVector" [label = "1"];
-"FunConnections"->"GetX" [label = "2"];
-"FunConnections"->"CheckIfInNode" [label = "2"];
-"CheckAndAddVector"->"Add" [label = "1"];
-"CheckAndAddVector"->"AddSecond" [label = "2"];
-"storyFive"->"WriteRunBashFile" [label = "1"];
-"storyFive"->"DrawGv" [label = "1"];
-"funkcja"->"Draw" [label = "1"];
-"funkcja"->"CheckAndAddVector" [label = "1"];
-"funkcja"->"findProbableModules" [label = "1"];
-"findProbableModules"->"Add" [label = "1"];
-"Draw"->"WriteRunBashFile" [label = "1"];
-"Draw"->"DrawGv" [label = "1"];
+"main.cpp"->"class.h"[label = "1"];
 }
