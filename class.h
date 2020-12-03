@@ -30,9 +30,7 @@ class StoryOne{
     //jesli plik jest typu cpp lub .h otwieramy go i sprawdzamy jego zawartosc
     static void includes(vector<string> f, map<string, vector<string>> & k){
         for(int i=0;i<f.size();++i){
-            cout<<f[i]<<endl;
             if( (f[i][f[i].size()-1]=='p' && f[i][f[i].size()-2]=='p' && f[i][f[i].size()-3]=='c' && f[i][f[i].size()-4]=='.') || (f[i][f[i].size()-1]=='h' && f[i][f[i].size()-2]=='.')){
-                cout<<"-\n";
                 connections(f[i],k,f);
             }
         }
@@ -62,7 +60,6 @@ class StoryOne{
                     i--;
                 }
             }
-            cout<<conta<<endl;
             for(int i=0;i<h.size();++i){
                 if(conta==h[i]){
                     system=0;
