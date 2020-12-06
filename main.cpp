@@ -1,5 +1,6 @@
 #include <iostream>
 #include <sys/types.h>
+#include "StoryTwo.h"
 #include "class.h"
 #include <vector>
 #include <map>
@@ -7,7 +8,7 @@
 using namespace std;
 
 int main(){
-
+    map<string,map<string, int>> FunctionsConnectionsMap;
     map<string, vector<string>> Hi;
     //deklaracja uzytych programow zewnetrznych
     cout<<"grafy tworzone przy uzyciu Graphviz\n";
@@ -49,7 +50,9 @@ int main(){
         
         break;
     case 2:
-        /* code */
+        StoryTwo::ST(FunctionsConnectionsMap);
+        StoryTwo::draw();
+        StoryTwo::showgraph();
         break;
     case 3:
         /* code */
