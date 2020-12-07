@@ -5,15 +5,18 @@
 #include <map>
 #include <fstream>
 
+
 using namespace std;
 
 class StoryOne{
     
 
     public:
+    //zmienna przetrzymujaca dane o wezlach połączeniach oraz ilosciach wystąpień
+    map<string,map<string, int>> FunctionsConnectionsMap;
 
     //tworzy liste plikow w folderze zawierajacym
-    static vector<string> Files(){
+    static vector<string> Files(const char * directory = "."){
         DIR *dr;
         vector <string> Ours;
         struct dirent *en;
@@ -74,28 +77,52 @@ class StoryOne{
     }
 
     //jesli plik nie wystepuje dopisujemy go do vectora
-    static void CheckAdd(map <string,vector<string>> & list, string name,string conta){
-        bool is=0;
-        for(int j=0;j<list[name].size();++j){
-            if(list[name][j]==conta){
-                is=1;
-            }
+    static void CheckAdd( map<string,map<string, int>> & connectionMap, string name, string conta){
+        bool exist1 = false;
+        bool exist2 = false;
+        map<string,map<string, int>>::iterator itr;
+        for(itr = connectionMap.begin(); itr != connectionMap.end(); ++itr){
+            if(itr->first == name){
+                exist1 = true;
+                map<string,int>::iterator itr2;
+                for(itr2 = itr->second.begin(); itr2 != itr->second.end(); ++itr2){
+                    if(itr2->first == conta){
+                        int a=itr2->second;
+                        a++;
+                        itr->second.erase(conta);
+                        itr->second.insert({conta,a});
+                        
+                        exist2 = true;
+                    }
+                }
+                if(!exist2){
+                    itr->second.insert({conta,1});
+                }
+
+            } 
         }
-        if(is==0){
-            list[name].push_back(conta);
+        if(!exist1){
+            map<string, int> a;
+            a.insert({conta, 1});
+            connectionMap.insert({name,a});
         }
     }
 
     //generowanie .gv wykorzystywanego przez graphviz- do zmiany przy zmianie programu do grafow
-    static void Generategv(map<string,vector<string>> k){
+    static void Generategv(map<string,map<string, int>> connectionMap){
         ofstream plik;
         plik.open("Data.gv");
         plik<<"digraph foo{\n";
-        for( auto it=k.begin();it!=k.end();++it){
-            for(int i=0;i<it->second.size();++i){
-                plik<<"\""<<it->first<<"\""<<"->"<<"\""<<it->second[i]<<"\""<<"[label = \"1\"];\n";
+        map<string,map<string, int>>::iterator itr;
+        for(itr = connectionMap.begin(); itr != connectionMap.end(); ++itr){
+            map<string, int >::iterator itr2;
+            for(itr2 = itr->second.begin(); itr2 != itr->second.end(); ++itr2){
+                plik<<"\""<<itr->first<<"\""<<"->"<<"\""<<itr2->first<<"\""<<"[label = \""<<itr2->second<<"\"];\n";
             }
+
         }
+                //plik<<"\""<<itr->first<<"\""<<"->"<<"\""<<itr2->second<<"\""<<"[label = \""<<itr2->first<<"\"];\n";
+
         plik<<"}";
         plik.close();
     }
