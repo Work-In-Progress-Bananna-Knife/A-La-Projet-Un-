@@ -1,10 +1,8 @@
 #include "class.h"
 
 
-class StoryTwo : public StoryOne{
-public: 
-    //tworzy liste plikow w folderze zawierajacym
-    
+struct StoryTwo : public StoryOne{
+
     //Usuwanie plików złego typu (nie .cpp czy .h)
     static void RemoveWrongTypeOfFile(vector<string>  &f){
         vector <string> F;
@@ -14,6 +12,7 @@ public:
         } 
         f=F;
     }
+
 // ( >63&& <91 ) || (>96 && <123)
     static string GetWordFromX(string word,int x){
         x++;
@@ -80,6 +79,7 @@ public:
                 if(!exist2){
                     itr->second.insert({conta,1});
                 }
+
             } 
         }
         if(!exist1){
@@ -102,6 +102,7 @@ public:
                     a++;
                 else if((line[i] == '}')&&(line[i-1] != '\''))
                     b++;
+
                 where = i;
                 if(line[where] == '('){
                     string name = ReverseGetWordFromX(line,where);
@@ -113,11 +114,16 @@ public:
                         }
                     }
                 }
-            }  
+            }
+                
             getline(File,line);
             x=0;   
         }
+        
+
+
     }
+
     static void GetFunctionConnections(ifstream &File, map<string,map<string, int>> & connectionsMap){
         string word;
         string line;
@@ -172,5 +178,4 @@ public:
         plik<<"}";
         plik.close();
     }
-
 };

@@ -11,7 +11,6 @@ class StoryOne{
     
 
     public:
-
     //tworzy liste plikow w folderze zawierajacym
     static vector<string> Files(const char * directory = "."){
         DIR *dr;
@@ -26,6 +25,7 @@ class StoryOne{
         }
         return Ours;
     }
+
     //jesli plik jest typu cpp lub .h otwieramy go i sprawdzamy jego zawartosc
     static void includes(vector<string> f, map<string, vector<string>> & k){
         for(int i=0;i<f.size();++i){
@@ -41,7 +41,7 @@ class StoryOne{
         string line;
         while(!File.eof()){
             getline(File,line);
-            Contains(line,list,name,h); 
+            Contains(line,list,name,h);
         }
     }
 
@@ -51,7 +51,6 @@ class StoryOne{
         string LookFor="#include";
         size_t gdzie=line.find(LookFor);
         if(gdzie!=string::npos){
-            
             gdzie+=LookFor.size();
             string conta=line.substr(gdzie);
             for(int i=0;i<conta.size();i++){
@@ -59,9 +58,7 @@ class StoryOne{
                     conta.erase(i,1);
                     i--;
                 }
-                    
             }
-            cout<<"haaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\n";
             for(int i=0;i<h.size();++i){
                 if(conta==h[i]){
                     system=0;
@@ -70,9 +67,9 @@ class StoryOne{
             }
             if(!system){
                 CheckAdd(list,name,conta);
-                
             }
         }
+       
     }
 
     //jesli plik nie wystepuje dopisujemy go do vectora
