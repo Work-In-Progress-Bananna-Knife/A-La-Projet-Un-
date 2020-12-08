@@ -30,11 +30,10 @@ int main(){
             //lista plikow w folderze zapisana do vectora Files
             
             vector <string> Files = StoryOne::Files();
-            
             //ustalenie plikow zawierajacych sie w include pomijajac biblioteki systemowe
             
             StoryOne::includes(Files,Hi);
-            
+            cout<<"haaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\n";
             //stworzenie danych do grafu
 
             StoryOne::Generategv(Hi);

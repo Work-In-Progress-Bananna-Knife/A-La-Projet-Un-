@@ -1,22 +1,10 @@
 #include "class.h"
 
 
-struct StoryTwo{
-
+class StoryTwo : public StoryOne{
+public: 
     //tworzy liste plikow w folderze zawierajacym
-    static vector<string> Files(const char * directory = "."){
-        DIR *dr;
-        vector <string> Ours;
-        struct dirent *en;
-        dr = opendir(directory); //open all directory
-        if (dr) {
-        while ((en = readdir(dr)) != NULL) {  
-            Ours.push_back(en->d_name);   
-        }
-        closedir(dr); //close all directory
-        }
-        return Ours;
-    }
+    
     //Usuwanie plików złego typu (nie .cpp czy .h)
     static void RemoveWrongTypeOfFile(vector<string>  &f){
         vector <string> F;
@@ -26,10 +14,7 @@ struct StoryTwo{
         } 
         f=F;
     }
-
 // ( >63&& <91 ) || (>96 && <123)
-
-
     static string GetWordFromX(string word,int x){
         x++;
         string result = "";
@@ -95,7 +80,6 @@ struct StoryTwo{
                 if(!exist2){
                     itr->second.insert({conta,1});
                 }
-
             } 
         }
         if(!exist1){
@@ -118,7 +102,6 @@ struct StoryTwo{
                     a++;
                 else if((line[i] == '}')&&(line[i-1] != '\''))
                     b++;
-
                 where = i;
                 if(line[where] == '('){
                     string name = ReverseGetWordFromX(line,where);
@@ -130,16 +113,11 @@ struct StoryTwo{
                         }
                     }
                 }
-            }
-                
+            }  
             getline(File,line);
             x=0;   
         }
-        
-
-
     }
-
     static void GetFunctionConnections(ifstream &File, map<string,map<string, int>> & connectionsMap){
         string word;
         string line;
@@ -194,14 +172,5 @@ struct StoryTwo{
         plik<<"}";
         plik.close();
     }
-    static void draw(){
-         ofstream script("script.sh");
-        script<<"#/bin/bash\ndot -Tpng Data.gv -o graf.png"<<"\ndisplay graf.png";
-        script.close();
-    }
 
-    static void showgraph(){
-        system("bash script.sh");
-        system("graf.png");
-    }
 };
