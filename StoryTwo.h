@@ -1,3 +1,4 @@
+#pragma once
 #include "class.h"
 
 
@@ -14,6 +15,7 @@ struct StoryTwo : public StoryOne{
     }
 
 // ( >63&& <91 ) || (>96 && <123)
+//zwraca string od miejsca x do następnego napotkanego znaku (idąc w prawo) nie będącego literą
     static string GetWordFromX(string word,int x){
         x++;
         string result = "";
@@ -28,6 +30,7 @@ struct StoryTwo : public StoryOne{
         return result;
     }
 
+//zwraca string od miejsca x do następnego napotkanego znaku (idąc w lewo) nie będącego literą
     static string ReverseGetWordFromX(string word,int x){
         x--;
         string result = "";
@@ -42,6 +45,7 @@ struct StoryTwo : public StoryOne{
         return result;
     }
 
+//zwraca miejsce w którym kończy się nawiaz którego początek został podany w x
     static int skip(string word,int x){
         int a = 0; //liczba otwierających nawiasów
         int b = 0; //liczba zamykających nawiasów
@@ -58,6 +62,7 @@ struct StoryTwo : public StoryOne{
         return x;
     }
 
+//dodaje połączenie do mapy połączeń 
     static void CheckAdd( map<string,map<string, int>> & connectionMap, string name, string conta){
         bool exist1 = false;
         bool exist2 = false;
@@ -89,6 +94,7 @@ struct StoryTwo : public StoryOne{
         }
     }
     
+    //wyszukuje wywołań funkcji w funkcji któ©ej nazwa została podana w functionName
     static void FindFunctionCallsInDefinitions(ifstream &File, map<string,map<string, int>> & connectionsMap, string line, int x, string functionName){
         int a = 1; //ammount of '{'
         int b = 0; //ammount of '}'
@@ -109,7 +115,6 @@ struct StoryTwo : public StoryOne{
                     if((name != "if") && (name != "while") && (name != "for") && (name != "switch") && (name != "") && (name != "\'")&& (name != "\"")){
                         where = skip(line,where);
                         if(line[where+1] == ';'){
-                            cout<<" - "<<name<<endl;
                             CheckAdd(connectionsMap,functionName,name);
                         }
                     }
@@ -119,11 +124,9 @@ struct StoryTwo : public StoryOne{
             getline(File,line);
             x=0;   
         }
-        
-
-
     }
 
+//wyszukuje definicji funkcji i wywołuje FindFunctionCallsInDefinitions
     static void GetFunctionConnections(ifstream &File, map<string,map<string, int>> & connectionsMap){
         string word;
         string line;
@@ -138,29 +141,28 @@ struct StoryTwo : public StoryOne{
                 if((name != "if") && (name != "while") && (name != "for") && (name != "switch") && (name != "") && (name != "\'")&& (name != "\"")){
                     where = skip(line,where);
                     if(line[where+1] == '{'){
-                        cout<<name<<endl;
+
                         FindFunctionCallsInDefinitions(File,connectionsMap,line,where+1, name);
                     }
                 }
                 
             }
         }
-
     }
 
-    
+//wywoływanie funkcji do historyjki druiej
     static void ST(map<string,map<string, int>> & connectionsMap, const char * directory = "."){
         //tworzenie listy plików w folderze
         vector<string> files = Files(directory);
         RemoveWrongTypeOfFile(files);
         for (auto i = files.begin(); i != files.end(); ++i){
             ifstream File(*i);
-            cout<<(*i)<<"-------------------------------"<<endl;
             GetFunctionConnections(File,connectionsMap);
-            Generategv(connectionsMap);
+            
         }
+        Generategv(connectionsMap);
     }
-
+//tworzenie grafu połączeń między funkcjami
     static void Generategv(map<string,map<string, int>> connectionMap){
         ofstream plik;
         plik.open("Data.gv");

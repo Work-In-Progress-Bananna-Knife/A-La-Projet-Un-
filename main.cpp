@@ -8,8 +8,10 @@
 using namespace std;
 
 int main(){
-    map<string,map<string, int>> FunctionsConnectionsMap;
+   
     map<string, vector<string>> Hi;
+    map<string,map<string, int>> FunctionsConnectionsMap;
+    map<string,map<string, int>> ModulesConnetcionsMap;
     //deklaracja uzytych programow zewnetrznych
     cout<<"grafy tworzone przy uzyciu Graphviz\n";
 
@@ -49,12 +51,14 @@ int main(){
         
         break;
     case 2:
+        
         StoryTwo::ST(FunctionsConnectionsMap);
         StoryTwo::draw();
         StoryTwo::showgraph();
         break;
     case 3:
-        /* code */
+        
+        //StoryThree::STh(ModulesConnetcionsMap);
         break;
     case 5:
         /* code */
