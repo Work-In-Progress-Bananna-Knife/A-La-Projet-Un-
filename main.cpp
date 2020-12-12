@@ -1,6 +1,5 @@
 #include <iostream>
 #include <sys/types.h>
-#include "StoryTwo.h"
 #include "class.h"
 #include <vector>
 #include <map>
@@ -45,7 +44,7 @@ int main(){
     case 3:{
         /* code */
         vector <string> Files = StoryOne::Files(); //Pobranie nazw plikow z folderu.
-        StoryThree::Create_Connections_Between_Namespaces//Wywolanie funkcji tworzacej polaczenia modulow
+        StoryThree::Create_Connections_Between_Namespaces(Files);//Wywolanie funkcji tworzacej polaczenia modulow
         StoryThree::Draw_Graph();//Utworzenie grafu
         StoryThree::View_Graph();//Wyswietlenie grafu
     }break;

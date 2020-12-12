@@ -296,7 +296,34 @@ class StoryThree : StoryOne{
 
     //Głowna funkcja do historyjki nr. 3. Tworzy polaczenia polaczenia pomiedzy plikami i zapisuje
     static void Create_Connections_Between_Namespaces(vector <string> H){
-
+        //2# z tych plikow odrzucic wszystkie pliki ktore nie maja koncowki .h lub .cpp       
+        vector<string>Files;
+        for(int i=0;H.size();++i){
+            if((H[i][H[i].size()-1]=='h' && H[i][H[i].size()-2]=='.') || (H[i][H[i].size()-1]=='p' && H[i][H[i].size()-2]=='p' && H[i][H[i].size()-3]=='c' && H[i][H[i].size()-4]=='.')){
+                Files.push_back(H[i]);
+            }
+        }
+        //3# przeszukac pliki pod katem namespace
+        map<string,map<string,int>> namespace_connections_map;
+        for( int i=0; i <Files.size();++i){
+            ifstream Input(Files[i]);
+            string namespace_name;
+            string namespace_contains;
+            string line;
+            while(!Input.eof()){
+                //3.1# wyszukaj sama lokalizacje namespace i co sie w nim znajduje        
+                getline(Input,line);
+                size_t line_location=line.find("::");
+                if(line_location!=string::npos){                   
+                    namespace_name = StoryTwo::ReverseGetWordFromX(line,line_location);
+                    namespace_contains = StoryTwo::GetWordFromX(line,line_location+1);
+                    StoryTwo::CheckAdd(namespace_connections_map,namespace_name,namespace_contains);
+                    //4# zapisz to info
+                }
+            }       
+        }
+        //5# wygeneruj polaczenia na podstawie danych
+        StoryTwo::Generategv(namespace_connections_map);
     }
 
     //Funkcja generujaca skrypt uruchamiajacy plik z grafem polaczen modulow
