@@ -19,34 +19,23 @@ int main(){
     while(historyjka!=1 &&historyjka!=2 && historyjka!=3 && historyjka!=5){
     cin>>historyjka;
     if(historyjka <1 || historyjka > 5 || historyjka==4){
-        cout<<"wprowadzono nieprawidlowe dane. Sprobuj ponownie\n";
+        cout<<"Cos poszlo nie tak. Sprobuj ponownie c:\n";
     }
     }
     switch (historyjka)
     {
-    case 1:{
-            //wywolanie metod historyjki pierwszej
-            
-            //lista plikow w folderze zapisana do vectora Files
-            
-            vector <string> Files = StoryOne::Files();
-            //ustalenie plikow zawierajacych sie w include pomijajac biblioteki systemowe
-            
-            StoryOne::includes(Files,Hi);
-            cout<<"haaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\n";
-            //stworzenie danych do grafu
-
-            StoryOne::Generategv(Hi);
-            
-            //utworzenie grafu plikow
-            
-            StoryOne::draw();
-            StoryOne::showgraph();
-
-
-            
-    }
-        
+    case 1:
+        //wywolanie metod historyjki pierwszej
+        //lista plikow w folderze zapisana do vectora Files   
+        vector <string> Files = StoryOne::Files();
+        //ustalenie plikow zawierajacych sie w include pomijajac biblioteki systemowe           
+        StoryOne::includes(Files,Hi);
+        cout<<"haaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\n";
+        //stworzenie danych do grafu
+        StoryOne::Generategv(Hi);            
+        //utworzenie grafu plikow            
+        StoryOne::draw();
+        StoryOne::showgraph();     
         break;
     case 2:
         StoryTwo::ST(FunctionsConnectionsMap);
@@ -55,9 +44,11 @@ int main(){
         break;
     case 3:
         /* code */
+
         break;
     case 5:
         /* code */
+        //chcem wczytać pliki
         break;
          
     default:
