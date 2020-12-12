@@ -339,3 +339,6 @@ class StoryThree : StoryOne{
         system("graf.png");
     }
 };
+class StoryFive : StoryOne{
+
+};

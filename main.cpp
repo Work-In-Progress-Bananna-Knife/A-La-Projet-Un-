@@ -24,6 +24,13 @@ int main(){
     switch (historyjka)
     {
     case 1:{
+        //---------------------------------------------------------------------------------        
+        // Historyjka 1:
+        /*
+        Jako programista, chcę zobaczyć graf pokazujący połączenia pomiędzy plikami z
+        kodem źródłowym w projekcie
+        */
+
         //wywolanie metod historyjki pierwszej
         //lista plikow w folderze zapisana do vectora Files   
         vector <string> Files = StoryOne::Files();
@@ -37,20 +44,43 @@ int main(){
         StoryOne::showgraph();  
      } break;
     case 2:
+        //---------------------------------------------------------------------------------
+        // Historyjka 2:
+        /*
+        Jako programista chcę zobaczyć graf relacji między funkcjami/metodami w podanym
+        kodzie źródłowym, w celu analizy zależności w kodzie źródłowym.
+        */
         StoryTwo::ST(FunctionsConnectionsMap);
         StoryTwo::draw();
         StoryTwo::showgraph();
         break;
     case 3:{
-        /* code */
+        //---------------------------------------------------------------------------------        
+        // Historyjka 3:
+        /*
+        Jako architekt oproramowania chcę zobaczyć graf relacji między modułami logicznymi
+        w podanym kodzie źródłowym, w celu analizy zależności w programie.
+        */
         vector <string> Files = StoryOne::Files(); //Pobranie nazw plikow z folderu.
         StoryThree::Create_Connections_Between_Namespaces(Files);//Wywolanie funkcji tworzacej polaczenia modulow
         StoryThree::Draw_Graph();//Utworzenie grafu
         StoryThree::View_Graph();//Wyswietlenie grafu
     }break;
     case 5:
-        /* code */
-        //chcem wczytać pliki
+        //---------------------------------------------------------------------------------        
+        // Historyjka 5:
+        /*
+        Jako architekt oprogramowania chcę mieć możliwość zobaczenia na tym samym grafie
+        relacji pomiędzy: plikami, metodami, pakietami, w celu analizy struktury oprogramowania.
+        */
+
+        //Przejście przez wszystkie wcześniejsze historyjki i zapytanie go które mają zostać wyświetlone
+        //Zrobić różne wywołania dla różnych kombinacji. Przykładowo dla h1,h2,h3 lub h1,h3 lub h2,h3
+        
+
+
+        //Albo zrobić w kompletnie inny sposób 
+
         break;
          
     default:
