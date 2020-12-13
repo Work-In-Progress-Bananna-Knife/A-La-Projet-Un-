@@ -293,7 +293,6 @@ struct StoryTwo : public StoryOne{
 
 class StoryThree : StoryOne{
     public:
-
     //Głowna funkcja do historyjki nr. 3. Tworzy polaczenia polaczenia pomiedzy plikami i zapisuje
     static void Create_Connections_Between_Namespaces(vector <std::string> H){
         //2# z tych plikow odrzucic wszystkie pliki ktore nie maja koncowki .h lub .cpp       
@@ -306,25 +305,77 @@ class StoryThree : StoryOne{
         }
         //3# przeszukac pliki pod katem namespace
         map<std::string,map<std::string,int>> namespace_connections_map;
-        for( int i=0; i <Files.size();++i){
+        vector<std::string> class_list = Check_If_Class_Or_Struct(Files);
+        for( int i=0;i<Files.size();++i){
             ifstream Input(Files[i]);
             std::string namespace_name;
             std::string namespace_contains;
-            std::string line;
+            std::string line;            
             while(!Input.eof()){
                 //3.1# wyszukaj sama lokalizacje namespace i co sie w nim znajduje        
                 getline(Input,line);
-                size_t line_location=line.find("::");
-                if(line_location!=std::string::npos){                   
+                size_t line_location=line.find("::std");
+                if(line_location!=std::string::npos){ 
                     namespace_name = StoryTwo::ReverseGetWordFromX(line,line_location);
-                    namespace_contains = StoryTwo::GetWordFromX(line,line_location+1);
-                    StoryTwo::CheckAdd(namespace_connections_map,namespace_name,namespace_contains);
-                    //4# zapisz to info
+                    bool condition = Check_If_In_Vector(namespace_name,class_list);                  
+                    if(condition==false){  
+                        //4# zapisz to info                      
+                        namespace_contains = StoryTwo::GetWordFromX(line,line_location+1);
+                        StoryTwo::CheckAdd(namespace_connections_map,namespace_name,namespace_contains);
+                        //4.1# sprawdź czy w tej linijce coś jeszcze się znajduje
+                        size_t location2= line[line_location+namespace_contains.size()+2];                        
+                        while((location2) == ':'){                            
+                            if((location2+1)== ':'){
+                                namespace_name=StoryTwo::GetWordFromX(,location2+1);    
+                            }
+                        }
+                    }
                 }
             }       
         }
         //5# wygeneruj polaczenia na podstawie danych
         StoryTwo::Generategv(namespace_connections_map);
+    }
+
+    static vector<string> Check_If_Class_Or_Struct(vector <std::string> H){
+        //wczytaj kontener z plikami
+        vector<string> class_container;
+        for(int i=0;i<H.size();++i){
+            ifstream Input(H[i]);
+            std::string class_name;
+            std::string line;
+            while(!Input.eof()){
+                getline(Input,line);
+                size_t line_location=line.find("class ");
+                if(line_location!=std::string::npos){
+                    class_name=StoryTwo::GetWordFromX(line,line_location+5);
+                    class_container.push_back(class_name);
+                }
+                else{
+                    line_location=line.find("struct ");
+                    if(line_location!=std::string::npos){
+                        class_name=StoryTwo::GetWordFromX(line,line_location+6);
+                        class_container.push_back(class_name);
+                    }
+                }
+            }
+        }
+        return class_container;
+        //przeszukaj ten plik pod wzgledem słowa klucz "class"
+        //jeśli jest class to zapisz nazwę stojącą po prawej stronie
+        //zapisz wynik do vectora
+        //zwróć vector
+    }
+
+    static bool Check_If_In_Vector(std::string word,vector<std::string> container){
+        bool isInside=false;
+        for(int i=0;i<container.size();++i){
+            if(word==container[i]){
+                isInside=true;
+                break;
+            }
+        }
+        return isInside;
     }
 
     //Funkcja generujaca skrypt uruchamiajacy plik z grafem polaczen modulow
