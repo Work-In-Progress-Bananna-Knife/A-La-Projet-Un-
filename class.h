@@ -12,9 +12,9 @@ class StoryOne{
 
     public:
     //tworzy liste plikow w folderze zawierajacym
-    static vector<string> Files(const char * directory = "."){
+    static vector<std::string> Files(const char * directory = "."){
         DIR *dr;
-        vector <string> Ours;
+        vector <std::string> Ours;
         struct dirent *en;
         dr = opendir(directory); //open all directory
         if (dr) {
@@ -27,7 +27,7 @@ class StoryOne{
     }
 
     //jesli plik jest typu cpp lub .h otwieramy go i sprawdzamy jego zawartosc
-    static void includes(vector<string> f, map<string, vector<string>> & k){
+    static void includes(vector<std::string> f, map<std::string, vector<std::string>> & k){
         for(int i=0;i<f.size();++i){
             if( (f[i][f[i].size()-1]=='p' && f[i][f[i].size()-2]=='p' && f[i][f[i].size()-3]=='c' && f[i][f[i].size()-4]=='.') || (f[i][f[i].size()-1]=='h' && f[i][f[i].size()-2]=='.')){
                 connections(f[i],k,f);
@@ -36,9 +36,9 @@ class StoryOne{
     }
 
     //po otwarciu pliku przechodzimy linijka po linijce
-    static void connections(string name, map<string,vector<string>> & list,vector<string>h){
+    static void connections(std::string name, map<std::string,vector<std::string>> & list,vector<std::string>h){
         ifstream File(name);
-        string line;
+        std::string line;
         while(!File.eof()){
             getline(File,line);
             Contains(line,list,name,h);
@@ -46,13 +46,13 @@ class StoryOne{
     }
 
     //jesli znalezlismy include sprawdzamy czy jest to plik systemowy czy nasz wlasny
-    static void Contains(string line, map <string,vector<string>> & list, string name,vector<string>h){
+    static void Contains(std::string line, map <std::string,vector<std::string>> & list, std::string name,vector<std::string>h){
         bool system=1;
-        string LookFor="#include";
+        std::string LookFor="#include";
         size_t gdzie=line.find(LookFor);
-        if(gdzie!=string::npos){
+        if(gdzie!=std::string::npos){
             gdzie+=LookFor.size();
-            string conta=line.substr(gdzie);
+            std::string conta=line.substr(gdzie);
             for(int i=0;i<conta.size();i++){
                 if(conta[i]==' ' || conta[i]==34){
                     conta.erase(i,1);
@@ -73,7 +73,7 @@ class StoryOne{
     }
 
     //jesli plik nie wystepuje dopisujemy go do vectora
-    static void CheckAdd(map <string,vector<string>> & list, string name,string conta){
+    static void CheckAdd(map <std::string,vector<std::string>> & list, std::string name,std::string conta){
         bool is=0;
         for(int j=0;j<list[name].size();++j){
             if(list[name][j]==conta){
@@ -86,7 +86,7 @@ class StoryOne{
     }
 
     //generowanie .gv wykorzystywanego przez graphviz- do zmiany przy zmianie programu do grafow
-    static void Generategv(map<string,vector<string>> k){
+    static void Generategv(map<std::string,vector<std::string>> k){
         ofstream plik;
         plik.open("Data.gv");
         plik<<"digraph foo{\n";
@@ -114,8 +114,8 @@ class StoryOne{
 struct StoryTwo : public StoryOne{
 
     //Usuwanie plików złego typu (nie .cpp czy .h)
-    static void RemoveWrongTypeOfFile(vector<string>  &f){
-        vector <string> F;
+    static void RemoveWrongTypeOfFile(vector<std::string>  &f){
+        vector <std::string> F;
         for(int i=0;i<f.size();++i){
             if((f[i][f[i].size()-1]=='p' && f[i][f[i].size()-2]=='p' && f[i][f[i].size()-3]=='c' && f[i][f[i].size()-4]=='.') || (f[i][f[i].size()-1]=='h' && f[i][f[i].size()-2]=='.'))
                 F.push_back(f[i]);
@@ -124,10 +124,10 @@ struct StoryTwo : public StoryOne{
     }
 
 // ( >63&& <91 ) || (>96 && <123)
-//zwraca string od miejsca x do następnego napotkanego znaku (idąc w prawo) nie będącego literą
-    static string GetWordFromX(string word,int x){
+//zwraca std::string od miejsca x do następnego napotkanego znaku (idąc w prawo) nie będącego literą
+    static std::string GetWordFromX(std::string word,int x){
         x++;
-        string result = "";
+        std::string result = "";
         for(int i=x;i<word.size();++i){
             if((word[i]>63 && word[i]<91) || (word[i]>96 && word[i]<123)){
                 result += word[i];
@@ -139,10 +139,10 @@ struct StoryTwo : public StoryOne{
         return result;
     }
 
-//zwraca string od miejsca x do następnego napotkanego znaku (idąc w lewo) nie będącego literą
-    static string ReverseGetWordFromX(string word,int x){
+//zwraca std::string od miejsca x do następnego napotkanego znaku (idąc w lewo) nie będącego literą
+    static std::string ReverseGetWordFromX(std::string word,int x){
         x--;
-        string result = "";
+        std::string result = "";
         for(int i=x;i>=0;i--){
             if((word[i]>63 && word[i]<91) || (word[i]>96 && word[i]<123)){
                 result = word[i] + result;
@@ -155,7 +155,7 @@ struct StoryTwo : public StoryOne{
     }
 
 //zwraca miejsce w którym kończy się nawiaz którego początek został podany w x
-    static int skip(string word,int x){
+    static int skip(std::string word,int x){
         int a = 0; //liczba otwierających nawiasów
         int b = 0; //liczba zamykających nawiasów
         for(int i=x; i<word.size(); i++){
@@ -172,14 +172,14 @@ struct StoryTwo : public StoryOne{
     }
 
 //dodaje połączenie do mapy połączeń 
-    static void CheckAdd( map<string,map<string, int>> & connectionMap, string name, string conta){
+    static void CheckAdd( map<std::string,map<std::string, int>> & connectionMap, std::string name, std::string conta){
         bool exist1 = false;
         bool exist2 = false;
-        map<string,map<string, int>>::iterator itr;
+        map<std::string,map<std::string, int>>::iterator itr;
         for(itr = connectionMap.begin(); itr != connectionMap.end(); ++itr){
             if(itr->first == name){
                 exist1 = true;
-                map<string,int>::iterator itr2;
+                map<std::string,int>::iterator itr2;
                 for(itr2 = itr->second.begin(); itr2 != itr->second.end(); ++itr2){
                     if(itr2->first == conta){
                         int a=itr2->second;
@@ -197,19 +197,19 @@ struct StoryTwo : public StoryOne{
             } 
         }
         if(!exist1){
-            map<string, int> a;
+            map<std::string, int> a;
             a.insert({conta, 1});
             connectionMap.insert({name,a});
         }
     }
     
     //wyszukuje wywołań funkcji w funkcji któ©ej nazwa została podana w functionName
-    static void FindFunctionCallsInDefinitions(ifstream &File, map<string,map<string, int>> & connectionsMap, string line, int x, string functionName){
+    static void FindFunctionCallsInDefinitions(ifstream &File, map<std::string,map<std::string, int>> & connectionsMap, std::string line, int x, std::string functionName){
         int a = 1; //ammount of '{'
         int b = 0; //ammount of '}'
         size_t where;
         x++;
-        string LookFor="(";
+        std::string LookFor="(";
         while(a != b){
             for(int i=x; i<line.size(); i++){
                 x=i;
@@ -220,7 +220,7 @@ struct StoryTwo : public StoryOne{
 
                 where = i;
                 if(line[where] == '('){
-                    string name = ReverseGetWordFromX(line,where);
+                    std::string name = ReverseGetWordFromX(line,where);
                     if((name != "if") && (name != "while") && (name != "for") && (name != "switch") && (name != "") && (name != "\'")&& (name != "\"")){
                         where = skip(line,where);
                         if(line[where+1] == ';'){
@@ -236,17 +236,17 @@ struct StoryTwo : public StoryOne{
     }
 
 //wyszukuje definicji funkcji i wywołuje FindFunctionCallsInDefinitions
-    static void GetFunctionConnections(ifstream &File, map<string,map<string, int>> & connectionsMap){
-        string word;
-        string line;
+    static void GetFunctionConnections(ifstream &File, map<std::string,map<std::string, int>> & connectionsMap){
+        std::string word;
+        std::string line;
         while(!File.std::ios::eof()){
             //File>>word;
             getline(File,line);
-            string LookFor="(";
+            std::string LookFor="(";
             size_t where=line.find(LookFor);
             
-            if(where!=string::npos){            
-                string name = ReverseGetWordFromX(line,where);
+            if(where!=std::string::npos){            
+                std::string name = ReverseGetWordFromX(line,where);
                 if((name != "if") && (name != "while") && (name != "for") && (name != "switch") && (name != "") && (name != "\'")&& (name != "\"")){
                     where = skip(line,where);
                     if(line[where+1] == '{'){
@@ -260,9 +260,9 @@ struct StoryTwo : public StoryOne{
     }
 
 //wywoływanie funkcji do historyjki druiej
-    static void ST(map<string,map<string, int>> & connectionsMap, const char * directory = "."){
+    static void ST(map<std::string,map<std::string, int>> & connectionsMap, const char * directory = "."){
         //tworzenie listy plików w folderze
-        vector<string> files = Files(directory);
+        vector<std::string> files = Files(directory);
         RemoveWrongTypeOfFile(files);
         for (auto i = files.begin(); i != files.end(); ++i){
             ifstream File(*i);
@@ -272,13 +272,13 @@ struct StoryTwo : public StoryOne{
         Generategv(connectionsMap);
     }
 //tworzenie grafu połączeń między funkcjami
-    static void Generategv(map<string,map<string, int>> connectionMap){
+    static void Generategv(map<std::string,map<std::string, int>> connectionMap){
         ofstream plik;
         plik.open("Data.gv");
         plik<<"digraph foo{\n";
-        map<string,map<string, int>>::iterator itr;
+        map<std::string,map<std::string, int>>::iterator itr;
         for(itr = connectionMap.begin(); itr != connectionMap.end(); ++itr){
-            map<string, int >::iterator itr2;
+            map<std::string, int >::iterator itr2;
             for(itr2 = itr->second.begin(); itr2 != itr->second.end(); ++itr2){
                 plik<<"\""<<itr->first<<"\""<<"->"<<"\""<<itr2->first<<"\""<<"[label = \""<<itr2->second<<"\"];\n";
             }
@@ -295,26 +295,27 @@ class StoryThree : StoryOne{
     public:
 
     //Głowna funkcja do historyjki nr. 3. Tworzy polaczenia polaczenia pomiedzy plikami i zapisuje
-    static void Create_Connections_Between_Namespaces(vector <string> H){
+    static void Create_Connections_Between_Namespaces(vector <std::string> H){
         //2# z tych plikow odrzucic wszystkie pliki ktore nie maja koncowki .h lub .cpp       
-        vector<string>Files;
-        for(int i=0;H.size();++i){
+        vector<std::string>Files;
+        for(int i=0;i<H.size();++i){
             if((H[i][H[i].size()-1]=='h' && H[i][H[i].size()-2]=='.') || (H[i][H[i].size()-1]=='p' && H[i][H[i].size()-2]=='p' && H[i][H[i].size()-3]=='c' && H[i][H[i].size()-4]=='.')){
                 Files.push_back(H[i]);
+                cout<<"-----------------------------------------------\n";
             }
         }
         //3# przeszukac pliki pod katem namespace
-        map<string,map<string,int>> namespace_connections_map;
+        map<std::string,map<std::string,int>> namespace_connections_map;
         for( int i=0; i <Files.size();++i){
             ifstream Input(Files[i]);
-            string namespace_name;
-            string namespace_contains;
-            string line;
+            std::string namespace_name;
+            std::string namespace_contains;
+            std::string line;
             while(!Input.eof()){
                 //3.1# wyszukaj sama lokalizacje namespace i co sie w nim znajduje        
                 getline(Input,line);
                 size_t line_location=line.find("::");
-                if(line_location!=string::npos){                   
+                if(line_location!=std::string::npos){                   
                     namespace_name = StoryTwo::ReverseGetWordFromX(line,line_location);
                     namespace_contains = StoryTwo::GetWordFromX(line,line_location+1);
                     StoryTwo::CheckAdd(namespace_connections_map,namespace_name,namespace_contains);
