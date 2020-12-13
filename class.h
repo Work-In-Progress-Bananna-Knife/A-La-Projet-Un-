@@ -318,8 +318,6 @@ class StoryThree : StoryOne{
                     namespace_name = StoryTwo::ReverseGetWordFromX(line,line_location);
                     bool condition = Check_If_In_Vector(namespace_name,class_list);                  
                     if(condition==false){  
-                        cout<<"===========\n"<<line<<endl;
-                        cout<<namespace_name<<endl;
                         //4# zapisz to info                      
                         namespace_contains = StoryTwo::GetWordFromX(line,line_location+1);
                         StoryTwo::CheckAdd(namespace_connections_map,namespace_name,namespace_contains);
