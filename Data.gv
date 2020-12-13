@@ -1,20 +1,7 @@
 digraph foo{
 ""->""[label = "1"];
-"StoryOne"->"Files"[label = "2"];
-"StoryOne"->"Generategv"[label = "1"];
-"StoryOne"->"draw"[label = "1"];
-"StoryOne"->"includes"[label = "1"];
-"StoryOne"->"showgraph"[label = "1"];
-"StoryThree"->"Create"[label = "1"];
-"StoryThree"->"Draw"[label = "1"];
-"StoryThree"->"View"[label = "1"];
-"StoryTwo"->"CheckAdd"[label = "1"];
-"StoryTwo"->"Generategv"[label = "1"];
-"StoryTwo"->"GetWordFromX"[label = "1"];
-"StoryTwo"->"ReverseGetWordFromX"[label = "1"];
-"StoryTwo"->"ST"[label = "1"];
-"StoryTwo"->"draw"[label = "1"];
-"StoryTwo"->"showgraph"[label = "1"];
+"ios"->"eof"[label = "1"];
 "std"->"ios"[label = "1"];
-"std"->"string"[label = "45"];
+"std"->"string"[label = "52"];
+"string"->"npos"[label = "5"];
 }

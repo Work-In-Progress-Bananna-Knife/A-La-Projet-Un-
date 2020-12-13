@@ -300,7 +300,6 @@ class StoryThree : StoryOne{
         for(int i=0;i<H.size();++i){
             if((H[i][H[i].size()-1]=='h' && H[i][H[i].size()-2]=='.') || (H[i][H[i].size()-1]=='p' && H[i][H[i].size()-2]=='p' && H[i][H[i].size()-3]=='c' && H[i][H[i].size()-4]=='.')){
                 Files.push_back(H[i]);
-                cout<<"-----------------------------------------------\n";
             }
         }
         //3# przeszukac pliki pod katem namespace
@@ -314,19 +313,27 @@ class StoryThree : StoryOne{
             while(!Input.eof()){
                 //3.1# wyszukaj sama lokalizacje namespace i co sie w nim znajduje        
                 getline(Input,line);
-                size_t line_location=line.find("::std");
+                size_t line_location=line.find("::");
                 if(line_location!=std::string::npos){ 
                     namespace_name = StoryTwo::ReverseGetWordFromX(line,line_location);
                     bool condition = Check_If_In_Vector(namespace_name,class_list);                  
                     if(condition==false){  
+                        cout<<"===========\n"<<line<<endl;
+                        cout<<namespace_name<<endl;
                         //4# zapisz to info                      
                         namespace_contains = StoryTwo::GetWordFromX(line,line_location+1);
                         StoryTwo::CheckAdd(namespace_connections_map,namespace_name,namespace_contains);
                         //4.1# sprawdź czy w tej linijce coś jeszcze się znajduje
-                        size_t location2= line[line_location+namespace_contains.size()+2];                        
-                        while((location2) == ':'){                            
-                            if((location2+1)== ':'){
-                                namespace_name=StoryTwo::GetWordFromX(,location2+1);    
+                        size_t location2= line_location+namespace_contains.size()+2;                        
+                        while(line[location2] == ':'){                            
+                            if(line[location2+1]== ':'){
+                                namespace_name=namespace_contains;
+                                namespace_contains = StoryTwo::GetWordFromX(line,location2+1);
+                                StoryTwo::CheckAdd(namespace_connections_map,namespace_name,namespace_contains);
+                                location2 += (namespace_contains.size()+2);
+                            }
+                            else{
+                                break;
                             }
                         }
                     }
@@ -346,23 +353,29 @@ class StoryThree : StoryOne{
             std::string line;
             while(!Input.eof()){
                 getline(Input,line);
-                size_t line_location=line.find("class ");
+                string lookfor = "class";
+                lookfor+=" ";
+                size_t line_location=line.find(lookfor);
                 if(line_location!=std::string::npos){
                     class_name=StoryTwo::GetWordFromX(line,line_location+5);
                     class_container.push_back(class_name);
+                
                 }
                 else{
-                    line_location=line.find("struct ");
+                    lookfor = "struct";
+                    lookfor+= " ";
+                    line_location=line.find(lookfor);
                     if(line_location!=std::string::npos){
                         class_name=StoryTwo::GetWordFromX(line,line_location+6);
                         class_container.push_back(class_name);
+                        
                     }
                 }
             }
         }
         return class_container;
         //przeszukaj ten plik pod wzgledem słowa klucz "class"
-        //jeśli jest class to zapisz nazwę stojącą po prawej stronie
+        //jeśli jest class-to zapisz nazwę stojącą po prawej stronie
         //zapisz wynik do vectora
         //zwróć vector
     }
