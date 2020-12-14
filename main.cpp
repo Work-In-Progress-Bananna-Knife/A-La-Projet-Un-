@@ -15,12 +15,13 @@ int main(){
     // wybor dzialania programu - wybiera uzytkownik
     cout<<"Wybierz historyjke\n";
     int historyjka;
-    while(historyjka!=1 &&historyjka!=2 && historyjka!=3 && historyjka!=5){
     cin>>historyjka;
-    if(historyjka <1 || historyjka > 5 || historyjka==4){
-        cout<<"Cos poszlo nie tak. Sprobuj ponownie c:\n";
-    }
-    }
+//    while(historyjka!=1 &&historyjka!=2 && historyjka!=3 && historyjka!=6){
+//    cin>>historyjka;
+//    if(historyjka <1 || historyjka > 6 || historyjka==4){
+//        cout<<"Cos poszlo nie tak. Sprobuj ponownie c:\n";
+//    }
+//    }
     switch (historyjka)
     {
     case 1:{
@@ -43,7 +44,7 @@ int main(){
         StoryOne::draw();
         StoryOne::showgraph();  
      } break;
-    case 2:
+        case 2:{
         //---------------------------------------------------------------------------------
         // Historyjka 2:
         /*
@@ -53,7 +54,7 @@ int main(){
         StoryTwo::ST(FunctionsConnectionsMap);
         StoryTwo::draw();
         StoryTwo::showgraph();
-        break;
+        }break;
     case 3:{
         //---------------------------------------------------------------------------------        
         // Historyjka 3:
@@ -66,7 +67,8 @@ int main(){
         StoryOne::draw();//Utworzenie grafu
         StoryOne::showgraph();//Wyswietlenie grafu
     }break;
-    case 5:
+            
+        case 5:{
         //---------------------------------------------------------------------------------        
         // Historyjka 5:
         /*
@@ -81,19 +83,22 @@ int main(){
 
         //Albo zrobić w kompletnie inny sposób 
 
-        break;
+        }break;
          
-    case 6:
+        case 6:{
 //          ------------------------------------------------------------------
 //             Historyjka 6:
 //            Jako programista chcę zobaczyć graf relacji między plikami a
 //            funkcjami/metodami w podanym kodzie źródłowym,
 //            w celu analizy zależności w kodzie źródłowym.
             
-        break;
+            vector <string> Files = StoryOne::Files();
+            StoryTwo::RemoveWrongTypeOfFile(Files);
+        }break;
             
-    default:
-        break;
+        default:{
+            cout<<"Cos poszlo nie tak. Sprobuj ponownie c:\n";
+        }break;
     }
         
     

@@ -393,6 +393,63 @@ class StoryThree : StoryOne{
 
     
 };
-class StoryFive : StoryOne{
+//class StoryFive : StoryOne{
+//
+//    public:
+//};
 
+class StorySix : StoryOne{
+
+    public:
+    
+    static void CreateConnectionsBetweenFilesAndMethods(vector<string> Files){
+        std::string line;
+        map<string, string> Connections;
+        for(int i=0;i<Files.size();++i){
+            ifstream inFiles(Files[i]);
+            
+            while(!inFiles.std::ios::eof()){
+                std::getline(inFiles,line);
+                size_t where=line.find("(");
+               
+                if(where!=std::string::npos){
+                    std::string name = StoryTwo::ReverseGetWordFromX(line,where);
+                
+                    if((name != "if") && (name != "while") && (name != "for") && (name != "switch") && (name != "") && (name != "\'")&& (name != "\"")){
+                        where = StoryTwo::skip(line,where);
+                        
+                        if(line[where+1] == '{'){
+                            Connections.insert({Files[i],name});
+                            skip2(inFiles, line, where+2);
+                        }
+                        
+                    }
+                    
+                }
+                        
+            }
+            
+        }
+        
+    }
+        
+    
+    
+    static void skip2(ifstream &File, std::string line, int x){
+                int a = 1; //ammount of '{'
+                int b = 0; //ammount of '}'
+                x++;
+                while(a != b){
+                    for(int i=x; i<line.size(); i++){
+                        x=i;
+                        if((line[i] == '{')&&(line[i-1] != '\''))
+                            a++;
+                        else if((line[i] == '}')&&(line[i-1] != '\''))
+                            b++;
+                    }
+                        
+                    getline(File,line);
+                    x=0;
+                }
+            }
 };
