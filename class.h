@@ -27,7 +27,7 @@ class StoryOne{
     }
 
     //jesli plik jest typu cpp lub .h otwieramy go i sprawdzamy jego zawartosc
-    static void includes(vector<std::string> f, map<std::string, vector<std::string>> & k){
+    static void includes(vector<std::string> f, map<std::string, vector<std::string> > & k){
         for(int i=0;i<f.size();++i){
             if( (f[i][f[i].size()-1]=='p' && f[i][f[i].size()-2]=='p' && f[i][f[i].size()-3]=='c' && f[i][f[i].size()-4]=='.') || (f[i][f[i].size()-1]=='h' && f[i][f[i].size()-2]=='.')){
                 connections(f[i],k,f);
@@ -36,7 +36,7 @@ class StoryOne{
     }
 
     //po otwarciu pliku przechodzimy linijka po linijce
-    static void connections(std::string name, map<std::string,vector<std::string>> & list,vector<std::string>h){
+    static void connections(std::string name, map<std::string,vector<std::string> > & list,vector<std::string>h){
         ifstream File(name);
         std::string line;
         while(!File.eof()){
@@ -46,7 +46,7 @@ class StoryOne{
     }
 
     //jesli znalezlismy include sprawdzamy czy jest to plik systemowy czy nasz wlasny
-    static void Contains(std::string line, map <std::string,vector<std::string>> & list, std::string name,vector<std::string>h){
+    static void Contains(std::string line, map <std::string,vector<std::string> > & list, std::string name,vector<std::string>h){
         bool system=1;
         std::string LookFor="#include";
         size_t gdzie=line.find(LookFor);
@@ -73,7 +73,7 @@ class StoryOne{
     }
 
     //jesli plik nie wystepuje dopisujemy go do vectora
-    static void CheckAdd(map <std::string,vector<std::string>> & list, std::string name,std::string conta){
+    static void CheckAdd(map <std::string,vector<std::string> > & list, std::string name,std::string conta){
         bool is=0;
         for(int j=0;j<list[name].size();++j){
             if(list[name][j]==conta){
@@ -86,7 +86,7 @@ class StoryOne{
     }
 
     //generowanie .gv wykorzystywanego przez graphviz- do zmiany przy zmianie programu do grafow
-    static void Generategv(map<std::string,vector<std::string>> k){
+    static void Generategv(map<std::string,vector<std::string> > k){
         ofstream plik;
         plik.open("Data.gv");
         plik<<"digraph foo{\n";
@@ -172,10 +172,10 @@ struct StoryTwo : public StoryOne{
     }
 
 //dodaje połączenie do mapy połączeń 
-    static void CheckAdd( map<std::string,map<std::string, int>> & connectionMap, std::string name, std::string conta){
+    static void CheckAdd( map<std::string,map<std::string, int> > & connectionMap, std::string name, std::string conta){
         bool exist1 = false;
         bool exist2 = false;
-        map<std::string,map<std::string, int>>::iterator itr;
+        map<std::string,map<std::string, int> >::iterator itr;
         for(itr = connectionMap.begin(); itr != connectionMap.end(); ++itr){
             if(itr->first == name){
                 exist1 = true;
@@ -204,7 +204,7 @@ struct StoryTwo : public StoryOne{
     }
     
     //wyszukuje wywołań funkcji w funkcji któ©ej nazwa została podana w functionName
-    static void FindFunctionCallsInDefinitions(ifstream &File, map<std::string,map<std::string, int>> & connectionsMap, std::string line, int x, std::string functionName){
+    static void FindFunctionCallsInDefinitions(ifstream &File, map<std::string,map<std::string, int> > & connectionsMap, std::string line, int x, std::string functionName){
         int a = 1; //ammount of '{'
         int b = 0; //ammount of '}'
         size_t where;
@@ -236,11 +236,11 @@ struct StoryTwo : public StoryOne{
     }
 
 //wyszukuje definicji funkcji i wywołuje FindFunctionCallsInDefinitions
-    static void GetFunctionConnections(ifstream &File, map<std::string,map<std::string, int>> & connectionsMap){
+    static void GetFunctionConnections(ifstream &File, map<std::string,map<std::string, int> > & connectionsMap){
         std::string word;
         std::string line;
         while(!File.std::ios::eof()){
-            //File>>word;
+            //File> >word;
             getline(File,line);
             std::string LookFor="(";
             size_t where=line.find(LookFor);
@@ -260,7 +260,7 @@ struct StoryTwo : public StoryOne{
     }
 
 //wywoływanie funkcji do historyjki druiej
-    static void ST(map<std::string,map<std::string, int>> & connectionsMap, const char * directory = "."){
+    static void ST(map<std::string,map<std::string, int> > & connectionsMap, const char * directory = "."){
         //tworzenie listy plików w folderze
         vector<std::string> files = Files(directory);
         RemoveWrongTypeOfFile(files);
@@ -272,11 +272,11 @@ struct StoryTwo : public StoryOne{
         Generategv(connectionsMap);
     }
 //tworzenie grafu połączeń między funkcjami
-    static void Generategv(map<std::string,map<std::string, int>> connectionMap){
+    static void Generategv(map<std::string,map<std::string, int> > connectionMap){
         ofstream plik;
         plik.open("Data.gv");
         plik<<"digraph foo{\n";
-        map<std::string,map<std::string, int>>::iterator itr;
+        map<std::string,map<std::string, int> >::iterator itr;
         for(itr = connectionMap.begin(); itr != connectionMap.end(); ++itr){
             map<std::string, int >::iterator itr2;
             for(itr2 = itr->second.begin(); itr2 != itr->second.end(); ++itr2){
@@ -284,7 +284,6 @@ struct StoryTwo : public StoryOne{
             }
 
         }
-                //plik<<"\""<<itr->first<<"\""<<"->"<<"\""<<itr2->second<<"\""<<"[label = \""<<itr2->first<<"\"];\n";
 
         plik<<"}";
         plik.close();
@@ -303,7 +302,7 @@ class StoryThree : StoryOne{
             }
         }
         //3# przeszukac pliki pod katem namespace
-        map<std::string,map<std::string,int>> namespace_connections_map;
+        map<std::string,map<std::string,int> > namespace_connections_map;
         vector<std::string> class_list = Check_If_Class_Or_Struct(Files);
         for( int i=0;i<Files.size();++i){
             ifstream Input(Files[i]);
@@ -402,6 +401,7 @@ class StorySix : StoryOne{
 
     public:
     
+    //generowanie grafu dla S6 
     static void GenerateGraph(map<std::string,std::string> Connections){
         ofstream file;
         file.open("Data.gv");
@@ -410,11 +410,12 @@ class StorySix : StoryOne{
         for(itr = Connections.begin(); itr != Connections.end(); ++itr){
             file<<"\""<<itr->second<<"\""<<"->"<<"\""<<itr->first<<"\""<<"[label = \"1\"];\n";
         }
-        //file<<"\""<<it->first<<"\""<<"->"<<"\""<<it->second<<"\""<<"[label = \"1\"];\n";
+       
         file<<"}";
         file.close();
     }
     
+//metoda pozbywająca się klamer
     static void skip2(ifstream &File, std::string line, int x){
                 int a = 1; //ammount of '{'
                 int b = 0; //ammount of '}'
@@ -432,7 +433,8 @@ class StorySix : StoryOne{
                     x=0;
                 }
             }
-    
+//metoda znajduje w podanych plikach metody/funkcje
+//zapisuje je w mapie i tworzy graf
     static void CreateConnectionsBetweenFilesAndMethods(vector<string> Files){
         std::string line;
         map<string, string> Connections;
