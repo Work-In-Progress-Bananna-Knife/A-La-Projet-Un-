@@ -406,11 +406,11 @@ class StorySix : StoryOne{
         ofstream file;
         file.open("Data.gv");
         file<<"digraph foo{\n";
-        for( auto it=Connections.begin();it!=Connections.end();++it){
-            for(int i=0;i<it->second.size();++i){
-                file<<"\""<<it->first<<"\""<<"->"<<"\""<<it->second[i]<<"\""<<"[label = \"1\"];\n";
-            }
+        map<std::string,std::string>::iterator itr;
+        for(itr = Connections.begin(); itr != Connections.end(); ++itr){
+            file<<"\""<<itr->second<<"\""<<"->"<<"\""<<itr->first<<"\""<<"[label = \"1\"];\n";
         }
+        //file<<"\""<<it->first<<"\""<<"->"<<"\""<<it->second<<"\""<<"[label = \"1\"];\n";
         file<<"}";
         file.close();
     }
@@ -450,20 +450,14 @@ class StorySix : StoryOne{
                         where = StoryTwo::skip(line,where);
                         
                         if(line[where+1] == '{'){
-                            Connections.insert({Files[i],name});
+                            Connections.insert({name,Files[i]});
                             skip2(inFiles, line, where+2);
-                        
                         }
-                    
                     }
-                        
                 }
-            
             }
-        
         }
             GenerateGraph(Connections);
     }
-
 };
 
