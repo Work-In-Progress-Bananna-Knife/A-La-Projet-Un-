@@ -63,8 +63,8 @@ int main(){
         */
         vector <string> Files = StoryOne::Files(); //Pobranie nazw plikow z folderu.
         StoryThree::Create_Connections_Between_Namespaces(Files);//Wywolanie funkcji tworzacej polaczenia modulow
-        StoryThree::Draw_Graph();//Utworzenie grafu
-        StoryThree::View_Graph();//Wyswietlenie grafu
+        StoryOne::draw();//Utworzenie grafu
+        StoryOne::showgraph();//Wyswietlenie grafu
     }break;
     case 5:
         //---------------------------------------------------------------------------------        

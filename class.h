@@ -361,7 +361,6 @@ class StoryThree : StoryOne{
                 if(line_location!=std::string::npos){
                     class_name=StoryTwo::GetWordFromX(line,line_location+5);
                     class_container.push_back(class_name);
-                
                 }
                 else{
                     lookfor = "struct";
@@ -370,7 +369,6 @@ class StoryThree : StoryOne{
                     if(line_location!=std::string::npos){
                         class_name=StoryTwo::GetWordFromX(line,line_location+6);
                         class_container.push_back(class_name);
-                        
                     }
                 }
             }
@@ -393,18 +391,7 @@ class StoryThree : StoryOne{
         return isInside;
     }
 
-    //Funkcja generujaca skrypt uruchamiajacy plik z grafem polaczen modulow
-    static void Draw_Graph(){
-        ofstream script("script.sh");
-        script<<"#/bin/bash\ndot -Tpng Data.gv -o graf.png"<<"\ndisplay graf.png";
-        script.close();
-    }
-
-    //Funkcja wyswietlajaca graf polaczen
-    static void View_Graph(){
-        system("bash script.sh");
-        system("graf.png");
-    }
+    
 };
 class StoryFive : StoryOne{
 
