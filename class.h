@@ -402,6 +402,37 @@ class StorySix : StoryOne{
 
     public:
     
+    static void GenerateGraph(map<std::string,std::string> Connections){
+        ofstream file;
+        file.open("Data.gv");
+        file<<"digraph foo{\n";
+        for( auto it=Connections.begin();it!=Connections.end();++it){
+            for(int i=0;i<it->second.size();++i){
+                file<<"\""<<it->first<<"\""<<"->"<<"\""<<it->second[i]<<"\""<<"[label = \"1\"];\n";
+            }
+        }
+        file<<"}";
+        file.close();
+    }
+    
+    static void skip2(ifstream &File, std::string line, int x){
+                int a = 1; //ammount of '{'
+                int b = 0; //ammount of '}'
+                x++;
+                while(a != b){
+                    for(int i=x; i<line.size(); i++){
+                        x=i;
+                        if((line[i] == '{')&&(line[i-1] != '\''))
+                            a++;
+                        else if((line[i] == '}')&&(line[i-1] != '\''))
+                            b++;
+                    }
+                        
+                    getline(File,line);
+                    x=0;
+                }
+            }
+    
     static void CreateConnectionsBetweenFilesAndMethods(vector<string> Files){
         std::string line;
         map<string, string> Connections;
@@ -421,35 +452,18 @@ class StorySix : StoryOne{
                         if(line[where+1] == '{'){
                             Connections.insert({Files[i],name});
                             skip2(inFiles, line, where+2);
+                        
                         }
-                        
-                    }
                     
-                }
-                        
-            }
-            
-        }
-        
-    }
-        
-    
-    
-    static void skip2(ifstream &File, std::string line, int x){
-                int a = 1; //ammount of '{'
-                int b = 0; //ammount of '}'
-                x++;
-                while(a != b){
-                    for(int i=x; i<line.size(); i++){
-                        x=i;
-                        if((line[i] == '{')&&(line[i-1] != '\''))
-                            a++;
-                        else if((line[i] == '}')&&(line[i-1] != '\''))
-                            b++;
                     }
                         
-                    getline(File,line);
-                    x=0;
                 }
+            
             }
+        
+        }
+            GenerateGraph(Connections);
+    }
+
 };
+

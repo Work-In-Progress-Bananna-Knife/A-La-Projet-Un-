@@ -94,6 +94,9 @@ int main(){
             
             vector <string> Files = StoryOne::Files();
             StoryTwo::RemoveWrongTypeOfFile(Files);
+            StorySix::CreateConnectionsBetweenFilesAndMethods(Files);
+            StoryOne::draw();
+            StoryOne::showgraph();
         }break;
             
         default:{
