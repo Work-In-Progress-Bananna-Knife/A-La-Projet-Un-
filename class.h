@@ -316,22 +316,26 @@ class StoryThree : StoryOne{
                 size_t line_location=line.find("::");
                 if(line_location!=std::string::npos){ 
                     namespace_name = StoryTwo::ReverseGetWordFromX(line,line_location);
-                    bool condition = Check_If_In_Vector(namespace_name,class_list);                  
-                    if(condition==false){  
-                        //4# zapisz to info                      
-                        namespace_contains = StoryTwo::GetWordFromX(line,line_location+1);
-                        StoryTwo::CheckAdd(namespace_connections_map,namespace_name,namespace_contains);
-                        //4.1# sprawdź czy w tej linijce coś jeszcze się znajduje
-                        size_t location2= line_location+namespace_contains.size()+2;                        
-                        while(line[location2] == ':'){                            
-                            if(line[location2+1]== ':'){
-                                namespace_name=namespace_contains;
-                                namespace_contains = StoryTwo::GetWordFromX(line,location2+1);
+                    if(namespace_name!=""){
+                        bool condition = Check_If_In_Vector(namespace_name,class_list);                  
+                        if(condition==false){  
+                            //4# zapisz to info                      
+                            namespace_contains = StoryTwo::GetWordFromX(line,line_location+1);
+                            if(namespace_contains!=""){
                                 StoryTwo::CheckAdd(namespace_connections_map,namespace_name,namespace_contains);
-                                location2 += (namespace_contains.size()+2);
-                            }
-                            else{
-                                break;
+                                //4.1# sprawdź czy w tej linijce coś jeszcze się znajduje
+                                size_t location2= line_location+namespace_contains.size()+2;                        
+                                while(line[location2] == ':'){                            
+                                    if(line[location2+1]== ':'){
+                                        namespace_name=namespace_contains;
+                                        namespace_contains = StoryTwo::GetWordFromX(line,location2+1);
+                                        StoryTwo::CheckAdd(namespace_connections_map,namespace_name,namespace_contains);
+                                        location2 += (namespace_contains.size()+2);
+                                    }
+                                    else{
+                                        break;
+                                    }
+                                }
                             }
                         }
                     }

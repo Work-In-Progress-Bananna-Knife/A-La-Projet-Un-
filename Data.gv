@@ -1,5 +1,4 @@
 digraph foo{
-""->""[label = "1"];
 "ios"->"eof"[label = "1"];
 "std"->"ios"[label = "1"];
 "std"->"string"[label = "52"];
