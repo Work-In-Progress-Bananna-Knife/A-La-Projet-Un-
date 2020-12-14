@@ -52,6 +52,7 @@ int main(){
         kodzie źródłowym, w celu analizy zależności w kodzie źródłowym.
         */
         StoryTwo::ST(FunctionsConnectionsMap);
+        StoryTwo::Generategv(FunctionsConnectionsMap);
         StoryTwo::draw();
         StoryTwo::showgraph();
         }break;
@@ -62,8 +63,11 @@ int main(){
         Jako architekt oproramowania chcę zobaczyć graf relacji między modułami logicznymi
         w podanym kodzie źródłowym, w celu analizy zależności w programie.
         */
+        map<string,map<string, int>> namespace_connections_map;//mapa pomocnicza 
+        
         vector <string> Files = StoryOne::Files(); //Pobranie nazw plikow z folderu.
-        StoryThree::Create_Connections_Between_Namespaces(Files);//Wywolanie funkcji tworzacej polaczenia modulow
+        StoryThree::Create_Connections_Between_Namespaces(Files,namespace_connections_map);//Wywolanie funkcji tworzacej polaczenia modulow
+        StoryTwo::Generategv(namespace_connections_map);
         StoryOne::draw();//Utworzenie grafu
         StoryOne::showgraph();//Wyswietlenie grafu
     }break;
@@ -79,8 +83,22 @@ int main(){
         //Przejście przez wszystkie wcześniejsze historyjki i zapytanie go które mają zostać wyświetlone
         //Zrobić różne wywołania dla różnych kombinacji. Przykładowo dla h1,h2,h3 lub h1,h3 lub h2,h3
         
+            vector <string> Files = StoryOne::Files();
+            StoryOne::includes(Files,Hi);
+            
+            StoryTwo::ST(FunctionsConnectionsMap);
+            
+            vector <string> Files2 = StoryOne::Files();
+            StoryThree::Create_Connections_Between_Namespaces(Files2,FunctionsConnectionsMap);
 
-
+            map<string, string> Connections;
+            vector <string> Files3 = StoryOne::Files();
+            StoryTwo::RemoveWrongTypeOfFile(Files3);
+            StorySix::CreateConnectionsBetweenFilesAndMethods(Files3,Connections);
+            
+            StoryFive::OneGraphToShowThemAll(Hi, FunctionsConnectionsMap, Connections);
+            StoryOne::draw();
+            StoryOne::showgraph();
         //Albo zrobić w kompletnie inny sposób 
 
         }break;
@@ -91,11 +109,12 @@ int main(){
 //            Jako programista chcę zobaczyć graf relacji między plikami a
 //            funkcjami/metodami w podanym kodzie źródłowym,
 //            w celu analizy zależności w kodzie źródłowym.
-            
+            map<string, string> Connections;
             vector <string> Files = StoryOne::Files();
             StoryTwo::RemoveWrongTypeOfFile(Files);
-            StorySix::CreateConnectionsBetweenFilesAndMethods(Files);
-            StoryOne::draw();
+            StorySix::CreateConnectionsBetweenFilesAndMethods(Files,Connections);
+            StorySix::GenerateGraph(Connections);
+            StorySix::draw();
             StoryOne::showgraph();
         }break;
             

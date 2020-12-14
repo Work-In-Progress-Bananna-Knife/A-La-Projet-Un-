@@ -101,7 +101,7 @@ class StoryOne{
 
     static void draw(){
          ofstream script("script.sh");
-        script<<"#/bin/bash\ndot -Tpng Data.gv -o graf.png"<<"\ndisplay graf.png";
+        script<<"#/bin/bash\ndot -Tpng Data.gv -o graf.png"<<"\ndisplay graf.png"<<"\nopen graf.png";
         script.close();
     }
 
@@ -269,7 +269,7 @@ struct StoryTwo : public StoryOne{
             GetFunctionConnections(File,connectionsMap);
             
         }
-        Generategv(connectionsMap);
+//        Generategv(connectionsMap);
     }
 //tworzenie grafu połączeń między funkcjami
     static void Generategv(map<std::string,map<std::string, int> > connectionMap){
@@ -293,7 +293,7 @@ struct StoryTwo : public StoryOne{
 class StoryThree : StoryOne{
     public:
     //Głowna funkcja do historyjki nr. 3. Tworzy polaczenia polaczenia pomiedzy plikami i zapisuje
-    static void Create_Connections_Between_Namespaces(vector <std::string> H){
+    static void Create_Connections_Between_Namespaces(vector <std::string> H, map<std::string,map<std::string,int> > &namespace_connections_map){
         //2# z tych plikow odrzucic wszystkie pliki ktore nie maja koncowki .h lub .cpp       
         vector<std::string>Files;
         for(int i=0;i<H.size();++i){
@@ -302,7 +302,7 @@ class StoryThree : StoryOne{
             }
         }
         //3# przeszukac pliki pod katem namespace
-        map<std::string,map<std::string,int> > namespace_connections_map;
+//        map<std::string,map<std::string,int> > namespace_connections_map;
         vector<std::string> class_list = Check_If_Class_Or_Struct(Files);
         for( int i=0;i<Files.size();++i){
             ifstream Input(Files[i]);
@@ -392,14 +392,92 @@ class StoryThree : StoryOne{
 
     
 };
-//class StoryFive : StoryOne{
-//
-//    public:
-//};
+class StoryFive : StoryOne{
+
+    public:
+    //Story 1
+    static void Generategv(map<std::string,vector<std::string> > k){
+        ofstream plik;
+        plik.open("Data.gv");
+        plik<<"digraph foo{\n";
+        for( auto it=k.begin();it!=k.end();++it){
+            for(int i=0;i<it->second.size();++i){
+                plik<<"\""<<it->first<<"\""<<"->"<<"\""<<it->second[i]<<"\""<<"[label = \"1\"];\n";
+            }
+        }
+        plik<<"}";
+        plik.close();
+    }
+//    Story 2 i 3
+    static void Generategv(map<std::string,map<std::string, int> > connectionMap){
+        ofstream plik;
+        plik.open("Data.gv");
+        plik<<"digraph foo{\n";
+        map<std::string,map<std::string, int> >::iterator itr;
+        for(itr = connectionMap.begin(); itr != connectionMap.end(); ++itr){
+            map<std::string, int >::iterator itr2;
+            for(itr2 = itr->second.begin(); itr2 != itr->second.end(); ++itr2){
+                plik<<"\""<<itr->first<<"\""<<"->"<<"\""<<itr2->first<<"\""<<"[label = \""<<itr2->second<<"\"];\n";
+            }
+        }
+
+        plik<<"}";
+        plik.close();
+    }
+    
+//    Story 6
+    static void GenerateGraph(map<std::string,std::string> Connections){
+        ofstream plik;
+        plik.open("Data.gv");
+        plik<<"digraph foo{\n";
+        map<std::string,std::string>::iterator itr;
+        for(itr = Connections.begin(); itr != Connections.end(); ++itr){
+            plik<<"\""<<itr->second<<"\""<<"->"<<"\""<<itr->first<<"\""<<"[label = \"1\"];\n";
+        }
+       
+        plik<<"}";
+        plik.close();
+    }
+    
+    
+    static void OneGraphToShowThemAll(map<std::string,vector<std::string> > k,map<std::string,map<std::string, int> > connectionMap,map<std::string,std::string> Connections){
+        ofstream plik;
+        plik.open("Data.gv");
+        plik<<"digraph foo{\n";
+        //3 for elven kings
+        for( auto it=k.begin();it!=k.end();++it){
+            for(int i=0;i<it->second.size();++i){
+                plik<<"\""<<it->first<<"\""<<"->"<<"\""<<it->second[i]<<"\""<<"[label = \"1\"];\n";
+            }
+        }
+        //7 for dwarf lords
+        map<std::string,map<std::string, int> >::iterator itr;
+        for(itr = connectionMap.begin(); itr != connectionMap.end(); ++itr){
+            map<std::string, int >::iterator itr2;
+            for(itr2 = itr->second.begin(); itr2 != itr->second.end(); ++itr2){
+                plik<<"\""<<itr->first<<"\""<<"->"<<"\""<<itr2->first<<"\""<<"[label = \""<<itr2->second<<"\"];\n";
+            }
+        }
+        //9 for mortal men
+        map<std::string,std::string>::iterator iter;
+        for(iter = Connections.begin(); iter != Connections.end(); ++iter){
+            plik<<"\""<<iter->second<<"\""<<"->"<<"\""<<iter->first<<"\""<<"[label = \"1\"];\n";
+        }
+        plik<<"}";
+        plik.close();
+    }
+    
+};
 
 class StorySix : StoryOne{
 
     public:
+    
+    static void draw(){
+         ofstream script("script.sh");
+        script<<"#/bin/bash\ncirco -Tpng Data.gv -o graf.png"<<"\ndisplay graf.png"<<"\nopen graf.png";
+        script.close();
+    }
     
     //generowanie grafu dla S6 
     static void GenerateGraph(map<std::string,std::string> Connections){
@@ -435,9 +513,9 @@ class StorySix : StoryOne{
             }
 //metoda znajduje w podanych plikach metody/funkcje
 //zapisuje je w mapie i tworzy graf
-    static void CreateConnectionsBetweenFilesAndMethods(vector<string> Files){
+    static void CreateConnectionsBetweenFilesAndMethods(vector<string> Files, map<string, string> &Connections){
         std::string line;
-        map<string, string> Connections;
+//        map<string, string> Connections;
         for(int i=0;i<Files.size();++i){
             ifstream inFiles(Files[i]);
             
@@ -459,7 +537,7 @@ class StorySix : StoryOne{
                 }
             }
         }
-            GenerateGraph(Connections);
+//            GenerateGraph(Connections);
     }
 };
 
