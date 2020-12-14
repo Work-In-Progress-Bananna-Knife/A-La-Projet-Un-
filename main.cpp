@@ -83,6 +83,15 @@ int main(){
 
         break;
          
+    case 6:
+//          ------------------------------------------------------------------
+//             Historyjka 6:
+//            Jako programista chcę zobaczyć graf relacji między plikami a
+//            funkcjami/metodami w podanym kodzie źródłowym,
+//            w celu analizy zależności w kodzie źródłowym.
+            
+        break;
+            
     default:
         break;
     }
