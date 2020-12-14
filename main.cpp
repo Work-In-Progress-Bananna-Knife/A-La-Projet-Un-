@@ -52,6 +52,7 @@ int main(){
         kodzie źródłowym, w celu analizy zależności w kodzie źródłowym.
         */
         StoryTwo::ST(FunctionsConnectionsMap);
+        StoryTwo::Generategv(FunctionsConnectionsMap);
         StoryTwo::draw();
         StoryTwo::showgraph();
         }break;

@@ -269,7 +269,7 @@ struct StoryTwo : public StoryOne{
             GetFunctionConnections(File,connectionsMap);
             
         }
-        Generategv(connectionsMap);
+        //Generategv(connectionsMap);
     }
 //tworzenie grafu połączeń między funkcjami
     static void Generategv(map<std::string,map<std::string, int>> connectionMap){
