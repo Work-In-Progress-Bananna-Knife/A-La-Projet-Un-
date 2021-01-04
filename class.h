@@ -101,7 +101,7 @@ class StoryOne{
 
     static void draw(){
          ofstream script("script.sh");
-        script<<"#/bin/bash\ndot -Tpng Data.gv -o graf.png"<<"\ndisplay graf.png"<<"\nopen graf.png";
+        script<<"#/bin/bash\ndot -Tpng Data.gv -o graf.png"<<"\ncirco -Tplain Data.gv -o paradigm.txt"<<"\ndisplay graf.png"<<"\nopen graf.png";
         script.close();
     }
 
@@ -394,6 +394,10 @@ class StoryThree : StoryOne{
     
 };
 
+class StoryFour{
+
+}
+
 class StoryFive : StoryOne{
 
     public:
@@ -478,7 +482,7 @@ class StorySix : StoryOne{
     
     static void draw(){
          ofstream script("script.sh");
-        script<<"#/bin/bash\ncirco -Tpng Data.gv -o graf.png"<<"\ndisplay graf.png"<<"\nopen graf.png";
+        script<<"#/bin/bash\ncirco -Tpng Data.gv -o graf.png"<<"\ncirco -Tplain Data.gv -o paradigm.txt"<<"\ndisplay graf.png"<<"\nopen graf.png";
         script.close();
     }
     
