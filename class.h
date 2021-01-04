@@ -102,7 +102,7 @@ class StoryOne{
     static void GenerateXML(map<std::string,vector<std::string> > k){
         ofstream plik;
         plik.open("paradigm.xml");
-        plik<<"<?xml version="1.0"?>\n"<<"<!DOCTYPE GraphXML SYSTEM \"file:GraphXML.dtd\">\n"<<"<GraphXML>\n"<<"graph>\n";
+        plik<<"<?xml version=\"1.0\"?>\n"<<"<!DOCTYPE GraphXML SYSTEM \"file:GraphXML.dtd\">\n"<<"<GraphXML>\n"<<"graph>\n";
         //for( auto it=k.begin();it!=k.end();++it){
         //    plik<<"<node name=\""<<it->first<<"\"/>\n";
         //}
@@ -110,7 +110,7 @@ class StoryOne{
             plik<<"<node name=\""<<it->first<<"\"/>\n";
             for(int i=0;i<it->second.size();++i){
                 plik<<"<node name = \""<<it->second[i]<<"\"/>";
-                plik<<"<edge source=\""<<it->first<<"\" target=\""<<it->seconf[i]<<"\"/>\n";
+                plik<<"<edge source=\""<<it->first<<"\" target=\""<<it->second[i]<<"\"/>\n";
             }
             plik<<"</graph>\n </GraphXML>";
         }
