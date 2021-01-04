@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE GraphXML SYSTEM "file:GraphXML.dtd">
 <GraphXML>
-graph>
+<graph>
 <node name="main.cpp"/>
 <node name = "class.h"/><edge source="main.cpp" target="class.h"/>
 </graph>
