@@ -155,7 +155,7 @@ struct StoryTwo : public StoryOne{
     }
 
 //zwraca miejsce w którym kończy się nawiaz którego początek został podany w x
-    static int skip(std::string word,int x){
+    static int BracesSkip(std::string word,int x){
         int a = 0; //liczba otwierających nawiasów
         int b = 0; //liczba zamykających nawiasów
         for(int i=x; i<word.size(); i++){
@@ -222,7 +222,7 @@ struct StoryTwo : public StoryOne{
                 if(line[where] == '('){
                     std::string name = ReverseGetWordFromX(line,where);
                     if((name != "if") && (name != "while") && (name != "for") && (name != "switch") && (name != "") && (name != "\'")&& (name != "\"")){
-                        where = skip(line,where);
+                        where = BracesSkip(line,where);
                         if(line[where+1] == ';'){
                             CheckAdd(connectionsMap,functionName,name);
                         }
@@ -248,7 +248,7 @@ struct StoryTwo : public StoryOne{
             if(where!=std::string::npos){            
                 std::string name = ReverseGetWordFromX(line,where);
                 if((name != "if") && (name != "while") && (name != "for") && (name != "switch") && (name != "") && (name != "\'")&& (name != "\"")){
-                    where = skip(line,where);
+                    where = BracesSkip(line,where);
                     if(line[where+1] == '{'){
 
                         FindFunctionCallsInDefinitions(File,connectionsMap,line,where+1, name);
@@ -269,7 +269,7 @@ struct StoryTwo : public StoryOne{
             GetFunctionConnections(File,connectionsMap);
             
         }
-        //Generategv(connectionsMap);
+//        Generategv(connectionsMap);
 
     }
 //tworzenie grafu połączeń między funkcjami
@@ -294,7 +294,7 @@ struct StoryTwo : public StoryOne{
 class StoryThree : StoryOne{
     public:
     //Głowna funkcja do historyjki nr. 3. Tworzy polaczenia polaczenia pomiedzy plikami i zapisuje
-    static void Create_Connections_Between_Namespaces(vector <std::string> H, map<std::string,map<std::string,int> > &namespace_connections_map){
+    static void CreateConnectionsBetweenNamespaces(vector <std::string> H, map<std::string,map<std::string,int> > &namespace_connections_map){
         //2# z tych plikow odrzucic wszystkie pliki ktore nie maja koncowki .h lub .cpp       
         vector<std::string>Files;
         for(int i=0;i<H.size();++i){
@@ -304,7 +304,7 @@ class StoryThree : StoryOne{
         }
         //3# przeszukac pliki pod katem namespace
 //        map<std::string,map<std::string,int> > namespace_connections_map;
-        vector<std::string> class_list = Check_If_Class_Or_Struct(Files);
+        vector<std::string> class_list = CheckIfClassOrStruct(Files);
         for( int i=0;i<Files.size();++i){
             ifstream Input(Files[i]);
             std::string namespace_name;
@@ -317,7 +317,7 @@ class StoryThree : StoryOne{
                 if(line_location!=std::string::npos){ 
                     namespace_name = StoryTwo::ReverseGetWordFromX(line,line_location);
                     if(namespace_name!=""){
-                        bool condition = Check_If_In_Vector(namespace_name,class_list);                  
+                        bool condition = CheckIfInVector(namespace_name,class_list);
                         if(condition==false){  
                             //4# zapisz to info                      
                             namespace_contains = StoryTwo::GetWordFromX(line,line_location+1);
@@ -343,10 +343,10 @@ class StoryThree : StoryOne{
             }       
         }
         //5# wygeneruj polaczenia na podstawie danych
-        StoryTwo::Generategv(namespace_connections_map);
+//        StoryTwo::Generategv(namespace_connections_map);
     }
 
-    static vector<string> Check_If_Class_Or_Struct(vector <std::string> H){
+    static vector<string> CheckIfClassOrStruct(vector <std::string> H){
         //wczytaj kontener z plikami
         vector<string> class_container;
         for(int i=0;i<H.size();++i){
@@ -380,7 +380,7 @@ class StoryThree : StoryOne{
         //zwróć vector
     }
 
-    static bool Check_If_In_Vector(std::string word,vector<std::string> container){
+    static bool CheckIfInVector(std::string word,vector<std::string> container){
         bool isInside=false;
         for(int i=0;i<container.size();++i){
             if(word==container[i]){
@@ -393,6 +393,7 @@ class StoryThree : StoryOne{
 
     
 };
+
 class StoryFive : StoryOne{
 
     public:
@@ -440,7 +441,8 @@ class StoryFive : StoryOne{
         plik.close();
     }
     
-    
+//    One Graph to rule them all, one Hraph to find them,
+//    One Graph to bring them all, and in the darkness bind them;
     static void OneGraphToShowThemAll(map<std::string,vector<std::string> > k,map<std::string,map<std::string, int> > connectionMap,map<std::string,std::string> Connections){
         ofstream plik;
         plik.open("Data.gv");
@@ -495,7 +497,7 @@ class StorySix : StoryOne{
     }
     
 //metoda pozbywająca się klamer
-    static void skip2(ifstream &File, std::string line, int x){
+    static void BuckleSkip(ifstream &File, std::string line, int x){
                 int a = 1; //ammount of '{'
                 int b = 0; //ammount of '}'
                 x++;
@@ -528,11 +530,11 @@ class StorySix : StoryOne{
                     std::string name = StoryTwo::ReverseGetWordFromX(line,where);
                 
                     if((name != "if") && (name != "while") && (name != "for") && (name != "switch") && (name != "") && (name != "\'")&& (name != "\"")){
-                        where = StoryTwo::skip(line,where);
+                        where = StoryTwo::BracesSkip(line,where);
                         
                         if(line[where+1] == '{'){
                             Connections.insert({name,Files[i]});
-                            skip2(inFiles, line, where+2);
+                            BuckleSkip(inFiles, line, where+2);
                         }
                     }
                 }

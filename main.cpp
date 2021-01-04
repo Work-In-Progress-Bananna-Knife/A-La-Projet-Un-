@@ -66,7 +66,7 @@ int main(){
         map<string,map<string, int>> namespace_connections_map;//mapa pomocnicza 
         
         vector <string> Files = StoryOne::Files(); //Pobranie nazw plikow z folderu.
-        StoryThree::Create_Connections_Between_Namespaces(Files,namespace_connections_map);//Wywolanie funkcji tworzacej polaczenia modulow
+        StoryThree::CreateConnectionsBetweenNamespaces(Files,namespace_connections_map);//Wywolanie funkcji tworzacej polaczenia modulow
         StoryTwo::Generategv(namespace_connections_map);
         StoryOne::draw();//Utworzenie grafu
         StoryOne::showgraph();//Wyswietlenie grafu
@@ -106,7 +106,7 @@ int main(){
             cout<<"Chcesz zobazczyc historyjke  3\n"<<endl;
             cin>>a;
             if(a=='y'){
-                StoryThree::Create_Connections_Between_Namespaces(Files2,FunctionsConnectionsMap);
+                StoryThree::CreateConnectionsBetweenNamespaces(Files2,FunctionsConnectionsMap);
                 a='n';
             }
 
