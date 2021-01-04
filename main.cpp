@@ -119,7 +119,7 @@ int main(){
             }
             
             StoryFive::OneGraphToShowThemAll(Hi, FunctionsConnectionsMap, Connections);
-            StoryOne::draw();
+            StorySix::draw();
             StoryOne::showgraph();
         //Albo zrobić w kompletnie inny sposób 
 
