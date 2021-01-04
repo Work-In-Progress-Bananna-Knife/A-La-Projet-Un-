@@ -393,6 +393,7 @@ class StoryThree : StoryOne{
 
     
 };
+
 class StoryFive : StoryOne{
 
     public:
