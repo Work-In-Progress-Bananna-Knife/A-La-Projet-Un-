@@ -396,7 +396,7 @@ class StoryThree : StoryOne{
 
 class StoryFour{
 
-}
+};
 
 class StoryFive : StoryOne{
 
