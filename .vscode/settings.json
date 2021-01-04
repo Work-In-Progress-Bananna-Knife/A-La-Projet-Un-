@@ -5,6 +5,7 @@
         "xstring": "cpp",
         "ostream": "cpp",
         "*.tcc": "cpp",
-        "fstream": "cpp"
+        "fstream": "cpp",
+        "map": "cpp"
     }
 }
