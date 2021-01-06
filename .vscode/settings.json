@@ -7,5 +7,6 @@
         "*.tcc": "cpp",
         "fstream": "cpp",
         "map": "cpp"
-    }
+    },
+    "cmake.configureOnOpen": true
 }

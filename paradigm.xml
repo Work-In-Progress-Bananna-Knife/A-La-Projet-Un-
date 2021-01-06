@@ -5,4 +5,7 @@
 <node name="main.cpp"/>
 <node name = "class.h"/><edge source="main.cpp" target="class.h"/>
 </graph>
+ </GraphXML><node name="mytests.cpp"/>
+<node name = "class.h"/><edge source="mytests.cpp" target="class.h"/>
+</graph>
  </GraphXML>
