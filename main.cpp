@@ -7,6 +7,9 @@
 using namespace std;
 // obecnosc 7.01.2021 
 // Bartosz Tonderski
+// Krystian Zapart
+// Diego Vega
+// Michał Zając 
 int main(){
     map<string,map<string, int>> FunctionsConnectionsMap;
     map<string, vector<string>> Hi;
