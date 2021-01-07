@@ -5,7 +5,8 @@
 #include <map>
 
 using namespace std;
-
+// obecnosc 7.01.2021 
+// Bartosz Tonderski
 int main(){
     map<string,map<string, int>> FunctionsConnectionsMap;
     map<string, vector<string>> Hi;
