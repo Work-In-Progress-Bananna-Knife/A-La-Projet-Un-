@@ -498,7 +498,7 @@ class StorySix : StoryOne{
 
     public:
     
-    static void draw(){
+    static void draw(){ //Draw graph with circo instead of Dot
          ofstream script("script.sh");
         script<<"#/bin/bash\ncirco -Tpng Data.gv -o graf.png"<<"\ndisplay graf.png"<<"\nopen graf.png";
         script.close();
@@ -564,5 +564,10 @@ class StorySix : StoryOne{
         }
 //            GenerateGraph(Connections);
     }
+    
 };
 
+static void Git_ID(){
+//Funkcja wywyłuje skrypt dodający aktualną wersję repozytorium 
+    system("bash id.sh");
+}

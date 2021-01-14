@@ -43,7 +43,8 @@ int main(){
         StoryOne::includes(Files,Hi);
         cout<<"haaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\n";
         //stworzenie danych do grafu
-        StoryOne::Generategv(Hi);            
+        StoryOne::Generategv(Hi);
+        Git_ID();
         //utworzenie grafu plikow            
         StoryOne::draw();
         StoryOne::showgraph();  
@@ -57,6 +58,7 @@ int main(){
         */
         StoryTwo::ST(FunctionsConnectionsMap);
         StoryTwo::Generategv(FunctionsConnectionsMap);
+        Git_ID();
         StoryTwo::draw();
         StoryTwo::showgraph();
         }break;
@@ -72,6 +74,7 @@ int main(){
         vector <string> Files = StoryOne::Files(); //Pobranie nazw plikow z folderu.
         StoryThree::CreateConnectionsBetweenNamespaces(Files,namespace_connections_map);//Wywolanie funkcji tworzacej polaczenia modulow
         StoryTwo::Generategv(namespace_connections_map);
+        Git_ID();
         StoryOne::draw();//Utworzenie grafu
         StoryOne::showgraph();//Wyswietlenie grafu
     }break;
@@ -123,7 +126,10 @@ int main(){
             }
             
             StoryFive::OneGraphToShowThemAll(Hi, FunctionsConnectionsMap, Connections);
-            StorySix::draw();
+            Git_ID();
+            //Option between Circo(6) And Dot(1)
+//            StorySix::draw();
+            StoryOne::draw();
             StoryOne::showgraph();
         //Albo zrobić w kompletnie inny sposób 
 
@@ -140,9 +146,16 @@ int main(){
             StoryTwo::RemoveWrongTypeOfFile(Files);
             StorySix::CreateConnectionsBetweenFilesAndMethods(Files,Connections);
             StorySix::GenerateGraph(Connections);
-            StorySix::draw();
+            Git_ID();
+            //Option between Circo(6) And Dot(1)
+//            StorySix::draw();
+            StoryOne::draw();
             StoryOne::showgraph();
         }break;
+//          ------------------------------------------------------------------
+//            Historyjka 9:
+//            Dodanie do grafów aktuaną wersję komita  
+            
             
         default:{
             cout<<"Cos poszlo nie tak. Sprobuj ponownie c:\n";
