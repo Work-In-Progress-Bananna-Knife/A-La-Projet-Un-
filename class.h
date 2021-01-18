@@ -572,19 +572,7 @@ class StoryEight : StoryOne{
     
 };
 
-//Metoda obliczająca złożoność cyklomatyczną - pseudokod
-static int (funkcja){
-    //przejdź do danej funkcji (potocznie)
-    // #funkcja obliczająca złożoność cyklomatyczną ma działać wyłącznie w obrębie danej funkcji
-    //Jako, iż nasze funkcje - metody mają tylko jeden punkt wyjściowy, to formuła na obliczanie CC wynosi
-    //CC = E - N + 2 (E - krawędzie, N - wierzchołki)
-    //stwórz zmienne zawierające informacje o występowaniu ilości komend: for, if, else, case
-    //przeszukaj kod pod względem tych występowania tych komend
-    //upewnij się, że dane komendy nie są zakomentowane, bądź nie znajdują się w innym conditionalu (jak w przypadku historyjki 6 i wyszukiwaniu ifów)
-    //jeśli wszystko ok, to inkrementuj dany typ countera
-    //Zmiana stanów zmiennych, to inkrementacja krawędzi bądź wierzchołka
-    //Oblicz CC i zwróć wartość, aby potem GraphViz mógł przedstawić CC na grafie z metodami 
-}
+
 
 static void Git_ID(){
 //Funkcja wywyłuje skrypt dodający aktualną wersję repozytorium 

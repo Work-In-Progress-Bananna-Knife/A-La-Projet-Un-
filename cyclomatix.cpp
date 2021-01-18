@@ -8,8 +8,46 @@
 using namespace std;
 
 class StoryEight : public StoryOne{
+    //Cała złożoność cyklomatyczna będzie wydzielona do osobnego pliku
     private:
     
+    //Metoda obliczająca złożoność cyklomatyczną - pomysł Michała
+    static int CyclomaticComplexityOfAFunction(){
+    //przejdź do danej funkcji (potocznie)
+
+    // #funkcja obliczająca złożoność cyklomatyczną ma działać wyłącznie w obrębie danej funkcji
+
+    //Każda funkcja ma być prosta w swoim działaniu. Ma wykonywać tylko jedną rzecz, do której została stworzona (by zmniejszyć złożonośc cyklomatyczną)
+
+    /*Określanie dla jakiej funkcji szukamy warunków wyglądałoby następująco
+    Musimy znaleźć definicję funkcji i linijkę, w której ta funkcja się znajduje. Następnie szukamy klamer otwierających i zamykających
+    metodą Bartka-Diegusza. Linijka z pierwszą klamrą otwierającą ("{" - PKO) najczęściej będzie tą samą linijką, gdzi ejest deklaracja funkcji
+    Potem szukamy ostatniej klamry zamykającej ("}" - OKZ) i zapisujemy jej linijkę występowania. Przechodzimy do zliczania
+    Funkcja potrzebuje mieć kontener danych przechowujący nazwę funkcji - string i liczbę CC - int.
+    Wyszukujemy w kodzie wszystkie conditionale (for, if, else... etc.). Przy okazji potrzeba metody filtrujacej te wyszukane conditionale, aby mieć pewność
+    że wyszukujemy występowanie komend, a nie komentarze/odniesienia do nich..
+    Po znalezieniu conditionala zapisujemy linijkę jego występowania.. jeśli znajduje się pomiędzy linijką PKO, a OKZ to inkrementujemy licznik.
+    */
+    //Jako, iż nasze funkcje - metody mają tylko jeden punkt wyjściowy, to formuła na obliczanie CC wynosi
+
+    //CC = E - N + 2 (E - krawędzie, N - wierzchołki)
+
+    //stwórz zmienne zawierające informacje o występowaniu ilości komend: for, if, else, case
+
+    //przeszukaj kod pod względem tych występowania tych komend
+
+    //upewnij się, że dane komendy nie są zakomentowane, bądź nie znajdują się w innym conditionalu (jak w przypadku historyjki 6 i wyszukiwaniu ifów)
+
+    //jeśli wszystko ok, to inkrementuj dany typ countera
+
+    //Zmiana stanów zmiennych, to inkrementacja krawędzi bądź wierzchołka
+
+    //Oblicz CC i zwróć wartość, aby potem GraphViz mógł przedstawić CC na grafie z metodami 
+    }
+
+
+
+    //Pomysł Bartka
     //usuwa elementy innego typu niz zalozone cpp lub header z vectora listy elementow w folderze
     
         vector <string> checked(){
