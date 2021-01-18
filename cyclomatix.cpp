@@ -13,7 +13,74 @@ class StoryEight : public StoryOne{
     
     //Metoda obliczająca złożoność cyklomatyczną - pomysł Michała
     static int CyclomaticComplexityOfAFunction(){
+        vector <std::string> FilesInAFolder = StoryOne::Files();
+        StoryTwo::RemoveWrongTypeOfFile(FilesInAFolder);
+        //stworzyć kontener danych zawierający każdą deklarację funkcji oraz informację ile ta funkcja ma warunków
+        map <std::string, map <std::string, int> >;
+        ifstream fileToExamine;
+        for(int i=0; i<FilesInAFolder.size(); ++i){        
+            fileToExamine.open(FilesInAFolder[i]);
+            while(!fileToExamine.std::ios::eof()){
+                //wyszukaj nazwę funkcji i dodaj ją gdzieś
+                GetFunctionName(fileToExamine);
+                //dla danej nazwy funkcji wyszukaj ilość wystąpień komend warunkowych
+                //jeśli znajdziesz, to 
+            }
+        }
     //przejdź do danej funkcji (potocznie)
+    }
+
+    static std::string GetFunctionName(ifstream &File){
+        std::string functionName;
+        std::string linePosition;
+        while(!File.std::ios::eof()){
+            getline(File,linePosition);
+            std::string LookFor="(";
+            size_t location=linePosition.find(LookFor);            
+            if(location!=std::string::npos){            
+                std::string name = StoryTwo::ReverseGetWordFromX(linePosition,location);
+                if((name != "if") && (name != "while") && (name != "for") && (name != "switch") && (name != "") && (name != "\'")&& (name != "\"")){
+                    location = StoryTwo::BracesSkip(linePosition,location);
+                    if(linePosition[location+1] == '{'){
+                        functionName = name;
+                        searchForFunctionNameAndConditionals();                        
+                    }
+                }
+                
+            }
+        }
+        return functionName;
+    } 
+
+    
+    static void searchForFunctionNameAndConditionals(ifstream &File, map<std::string,map<std::string, int> > & connectionsMap, std::string line, int startLineNumber, std::string functionName){
+        int openBrackets = 1; 
+        int closedBrackets = 0; 
+        int counter;
+        size_t where;
+        startLineNumber++;
+        std::string LookFor="(";
+        std::string blabla[6] = { "for(" , "while(" , "if(" , "else(" , "else if" , "case "} ;
+        while(openBrackets != closedBrackets){
+            for(int i=startLineNumber; i<line.size(); i++){
+                startLineNumber=i;
+                if((line[i] == '{')&&(line[i-1] !='\'')){
+                    openBrackets++;
+                }                    
+                else if((line[i] == '}')&&(line[i-1] != '\'')){
+                    closedBrackets++;
+                }
+                getline(File,line);
+                for(int i=0;i<6;++i){
+                    if((line.find(blabla[i]))){
+                        counter++;
+                    }
+                }
+            }
+            getline(File,line);
+            startLineNumber=0;
+        }
+    }
 
     // #funkcja obliczająca złożoność cyklomatyczną ma działać wyłącznie w obrębie danej funkcji
 
@@ -43,7 +110,7 @@ class StoryEight : public StoryOne{
     //Zmiana stanów zmiennych, to inkrementacja krawędzi bądź wierzchołka
 
     //Oblicz CC i zwróć wartość, aby potem GraphViz mógł przedstawić CC na grafie z metodami 
-    }
+    
 
 
 
@@ -51,7 +118,7 @@ class StoryEight : public StoryOne{
     //usuwa elementy innego typu niz zalozone cpp lub header z vectora listy elementow w folderze
     
         vector <string> checked(){
-            vector <string> Files=StoryOne:Files();
+            vector <string> Files=StoryOne::Files();
             for(int i=0;i<Files.size();++i){
                 if(!((Files[i][Files[i].size()-1] == 'h' && Files[i][Files[i].size()-2] == '.' ) || (Files[i][Files[i].size()-1] == 'p' && Files[i][Files[i].size()-2] == 'p' && Files[i][Files[i].size()-3] == 'c' && Files[i][Files[i].size()-4] == '.') )){
                     Files.erase(Files.begin()+i);

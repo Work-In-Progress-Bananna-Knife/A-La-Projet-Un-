@@ -6,7 +6,8 @@
         "ostream": "cpp",
         "*.tcc": "cpp",
         "fstream": "cpp",
-        "map": "cpp"
+        "map": "cpp",
+        "string": "cpp"
     },
     "cmake.configureOnOpen": true
 }
