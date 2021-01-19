@@ -16,21 +16,20 @@ class StoryEight : public StoryOne{
         vector <std::string> FilesInAFolder = StoryOne::Files();
         StoryTwo::RemoveWrongTypeOfFile(FilesInAFolder);
         //stworzyć kontener danych zawierający każdą deklarację funkcji oraz informację ile ta funkcja ma warunków
-        map <std::string, map <std::string, int> >;
+        map <std::string, map <std::string, int> > cyclomaticMap;
         ifstream fileToExamine;
         for(int i=0; i<FilesInAFolder.size(); ++i){        
             fileToExamine.open(FilesInAFolder[i]);
             while(!fileToExamine.std::ios::eof()){
                 //wyszukaj nazwę funkcji i dodaj ją gdzieś
-                GetFunctionName(fileToExamine);
                 //dla danej nazwy funkcji wyszukaj ilość wystąpień komend warunkowych
-                //jeśli znajdziesz, to 
+                GetFunctionName(fileToExamine,cyclomaticMap,FilesInAFolder[i]);
+                
             }
         }
-    //przejdź do danej funkcji (potocznie)
     }
 
-    static std::string GetFunctionName(ifstream &File){
+    static void GetFunctionName(ifstream &File, map<std::string,map<std::string, int> > & connectionsMap, std::string fileName){
         std::string functionName;
         std::string linePosition;
         while(!File.std::ios::eof()){
@@ -43,43 +42,51 @@ class StoryEight : public StoryOne{
                     location = StoryTwo::BracesSkip(linePosition,location);
                     if(linePosition[location+1] == '{'){
                         functionName = name;
-                        searchForFunctionNameAndConditionals();                        
+                        lookForAndAddConditionals(File,connectionsMap,linePosition,fileName,location+1,functionName);                        
                     }
-                }
-                
+                }                
             }
         }
-        return functionName;
     } 
 
     
-    static void searchForFunctionNameAndConditionals(ifstream &File, map<std::string,map<std::string, int> > & connectionsMap, std::string line, int startLineNumber, std::string functionName){
+    // File - plik który przeszukujesz
+    // connectionsMap - mapa do której chcesz wrzucać wyniki
+    // line - linia (z getline) od której szukasz
+    // startLineNumber - miejsce w linii od którego szukasz
+    // functionName - nazwa funkcji którą przeszukujesz
+    static void lookForAndAddConditionals(ifstream &File, map<std::string,map<std::string, int> > & connectionsMap, std::string line, std::string fileName, int startLineNumber, std::string functionName){
         int openBrackets = 1; 
         int closedBrackets = 0; 
-        int counter;
+        int counterOfConditionals = 0;
         size_t where;
         startLineNumber++;
         std::string LookFor="(";
-        std::string blabla[6] = { "for(" , "while(" , "if(" , "else(" , "else if" , "case "} ;
+        std::string conditionalName[8] = { "for(" , "while(" , "if(" , "else(" , "else if" , "case ", "&&" , "||" } ;
         while(openBrackets != closedBrackets){
+            for(int i=0;i<8;++i){
+                size_t comparisonValue = line.find(conditionalName[i]);
+                if((comparisonValue!=std::string::npos)){
+                    if(line[comparisonValue-1] != '\"' && line[comparisonValue-1]!= '\''){
+                            counterOfConditionals++;
+                    }                        
+                }
             for(int i=startLineNumber; i<line.size(); i++){
                 startLineNumber=i;
                 if((line[i] == '{')&&(line[i-1] !='\'')){
                     openBrackets++;
-                }                    
+                    }                    
                 else if((line[i] == '}')&&(line[i-1] != '\'')){
                     closedBrackets++;
-                }
-                getline(File,line);
-                for(int i=0;i<6;++i){
-                    if((line.find(blabla[i]))){
-                        counter++;
                     }
                 }
             }
             getline(File,line);
             startLineNumber=0;
         }
+        map<std::string, int> cyclomaticInfo;
+        cyclomaticInfo.insert({functionName,counterOfConditionals});
+        connectionsMap.insert({fileName,cyclomaticInfo});
     }
 
     // #funkcja obliczająca złożoność cyklomatyczną ma działać wyłącznie w obrębie danej funkcji
@@ -117,7 +124,7 @@ class StoryEight : public StoryOne{
     //Pomysł Bartka
     //usuwa elementy innego typu niz zalozone cpp lub header z vectora listy elementow w folderze
     
-        vector <string> checked(){
+    /*    vector <string> checked(){
             vector <string> Files=StoryOne::Files();
             for(int i=0;i<Files.size();++i){
                 if(!((Files[i][Files[i].size()-1] == 'h' && Files[i][Files[i].size()-2] == '.' ) || (Files[i][Files[i].size()-1] == 'p' && Files[i][Files[i].size()-2] == 'p' && Files[i][Files[i].size()-3] == 'c' && Files[i][Files[i].size()-4] == '.') )){
@@ -127,9 +134,9 @@ class StoryEight : public StoryOne{
             }
             return Files;
         }
-    
+    */
     //na pojedynczych plikach wywoluje analize cyklometrycznej zlozonosci danego pliku oraz funkcji w niej zawartych wynik to mapa funkcja - zlozonosc
-    
+    /*
     static map<string, int> cyclomatic(vector<string> Files){
         ifstream analyze;
         for(int i=0;i<Files.size();++i){
@@ -137,9 +144,9 @@ class StoryEight : public StoryOne{
             mapElement point = FunctionComplexicity(analyze);
         }
     }
-    
+    */
     //do rozbudowania o wykluczanie zakomentowanych obszarow na razie liczy ify w plikach cpp i h tez kozak ale no... jeszcze trzeba funckje ogarnac xd HF <3
-    
+    /*
     static mapElement FunctionComplexicity(ofstream File){
         int counter=0;
         string line;
@@ -160,7 +167,7 @@ class StoryEight : public StoryOne{
     };
     vector <string> Files = checked();
     map <string, int> Complexity = cyclomatic(Files);
-
+    */
     
 
 };

@@ -567,11 +567,6 @@ class StorySix : StoryOne{
     
 };
 
-class StoryEight : StoryOne{
-    public:
-    
-};
-
 
 
 static void Git_ID(){

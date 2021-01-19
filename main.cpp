@@ -152,6 +152,12 @@ int main(){
             StoryOne::draw();
             StoryOne::showgraph();
         }break;
+
+        case 8:{
+            //Jeszcze raz przemyśleć w jaki sposób chcemy wyświetlić złożoność cyklomatyczną
+            //No i pozostaje tylko wywołanie funkcji w mainie
+
+        }
 //          ------------------------------------------------------------------
 //            Historyjka 9:
 //            Dodanie do grafów aktuaną wersję komita  
