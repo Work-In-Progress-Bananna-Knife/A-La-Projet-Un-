@@ -86,8 +86,8 @@ class StoryOne{
     }
 
     //generowanie .gv wykorzystywanego przez graphviz- do zmiany przy zmianie programu do grafow
-    static void Generategv(map<std::string,vector<std::string> > k){
-        GenerateXML(k);
+    static void Generategv(map<std::string,vector<std::string> > k){    //tested
+        //GenerateXML(k);
         ofstream plik;
         plik.open("Data.gv");
         plik<<"digraph foo{\n";

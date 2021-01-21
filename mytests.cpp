@@ -1,5 +1,9 @@
 #include <gtest/gtest.h>
 #include "class.h"
+#include <map>
+#include <vector>
+#include <string>
+#include <fstream>
 
 
 bool FindInFilesVector(vector<std::string> files, string* word){
@@ -24,7 +28,20 @@ bool Checksh(){
     return 1;
 }
 
-
+bool CheckGV(){
+    map <std::string,vector<std::string>> yoyo;
+    yoyo["psiok"]->second->push_back("naaaaah");
+    StoryOne::Generategv(yoyo);
+    ifstream plik (Data.gv);
+    string line;
+    getline(plik,line);
+    if(line!="digraph foo{"){return 0;}
+    getline(plik,line);
+    if(line!="\"psiok\"->\"naaaah\"[label = \"1\"];"){return 0;}
+    getline(plik,line);
+    if(line!="}"){return 0;}
+    return 1;
+}
 
 TEST(StoryOneTests, Files_test){
     vector<std::string> testFiles = StoryOne::Files("./teststuffolder");
