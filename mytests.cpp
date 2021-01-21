@@ -2,15 +2,17 @@
 #include "class.h"
 
 
-bool FindInFilesVector(vector<std::string> files, string word){
-    for(auto i = files.begin(); i != files.end(); ++i){
-        if(*i == word)
-            return true;
-    }
-    return false;
+bool FindInFilesVector(vector<std::string> files, string* word){
+        for(int i =0;i<files.size();++i){
+            if(files[i]!=word[0] && files[i]!=word[1]){
+                return 0;
+            }
+        }
+    return 1;
 }
 
 bool CheckGV(){
+    StoryOne::draw();
     ifstream plik ("Data.gv");
     string line ="";
     while(!plik.eof()){
@@ -23,9 +25,11 @@ bool CheckGV(){
 }
 
 TEST(StoryOneTests, Files_test){
-    vector<std::string> testFiles = StoryOne::Files();
-    EXPECT_TRUE(FindInFilesVector(testFiles,"class.h"));
-    EXPECT_TRUE(FindInFilesVector(testFiles,"main.cpp"));
+    vector<std::string> testFiles = StoryOne::Files("./teststuffolder");
+    string [2] name;
+    name[0]="EBEBE.h";
+    name[1]="XDDDD.cpp";
+    EXPECT_TRUE(FindInFilesVector(testFiles,name[0]));
 
     EXPECT_TRUE(CheckGV());
 }
