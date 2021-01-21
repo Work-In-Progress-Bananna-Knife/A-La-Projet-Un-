@@ -10,11 +10,24 @@ bool FindInFilesVector(vector<std::string> files, string word){
     return false;
 }
 
+bool CheckGV(){
+    ifstream plik ("Data.gv");
+    string line ="";
+    while(!plik.eof()){
+        getline(plik,line);
+        if(!(line == "#/bin/bash" || line == "dot -Tpng Data.gv -o graf.png" || line == "display graf.png" || line == "open graf.png")){
+            return 0;
+        }
+    }
+    return 1;
+}
 
 TEST(StoryOneTests, Files_test){
     vector<std::string> testFiles = StoryOne::Files();
     EXPECT_TRUE(FindInFilesVector(testFiles,"class.h"));
     EXPECT_TRUE(FindInFilesVector(testFiles,"main.cpp"));
+
+    EXPECT_TRUE(CheckGV());
 }
 
 TEST(StoryTwoTests, GetWordFromX_test){
