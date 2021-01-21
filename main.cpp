@@ -3,6 +3,7 @@
 #include "class.h"
 #include <vector>
 #include <map>
+#include "cyclomatix.cpp"
 
 using namespace std;
 // obecnosc 7.01.2021 
@@ -156,8 +157,10 @@ int main(){
         case 8:{
             //Jeszcze raz przemyśleć w jaki sposób chcemy wyświetlić złożoność cyklomatyczną
             //No i pozostaje tylko wywołanie funkcji w mainie
-
-        }
+            map <std::string, map <std::string, int> > cyclomaticMap;
+            StoryEight::CyclomaticComplexityOfAFunction(cyclomaticMap);
+            StoryEight::PrintConnectionMapContents(cyclomaticMap);
+        }break;
 //          ------------------------------------------------------------------
 //            Historyjka 9:
 //            Dodanie do grafów aktuaną wersję komita  

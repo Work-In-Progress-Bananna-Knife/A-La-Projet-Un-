@@ -9,27 +9,25 @@ using namespace std;
 
 class StoryEight : public StoryOne{
     //Cała złożoność cyklomatyczna będzie wydzielona do osobnego pliku
-    private:
+    public:
     
     //Metoda obliczająca złożoność cyklomatyczną - pomysł Michała
-    static int CyclomaticComplexityOfAFunction(){
+    static void CyclomaticComplexityOfAFunction(map <std::string, map <std::string, int> > &cyclomaticMap){
         vector <std::string> FilesInAFolder = StoryOne::Files();
         StoryTwo::RemoveWrongTypeOfFile(FilesInAFolder);
         //stworzyć kontener danych zawierający każdą deklarację funkcji oraz informację ile ta funkcja ma warunków
-        map <std::string, map <std::string, int> > cyclomaticMap;
         ifstream fileToExamine;
         for(int i=0; i<FilesInAFolder.size(); ++i){        
             fileToExamine.open(FilesInAFolder[i]);
             while(!fileToExamine.std::ios::eof()){
                 //wyszukaj nazwę funkcji i dodaj ją gdzieś
                 //dla danej nazwy funkcji wyszukaj ilość wystąpień komend warunkowych
-                GetFunctionName(fileToExamine,cyclomaticMap,FilesInAFolder[i]);
-                
+                GetFunctionNameWithConditionals(fileToExamine,cyclomaticMap,FilesInAFolder[i]);                
             }
         }
     }
 
-    static void GetFunctionName(ifstream &File, map<std::string,map<std::string, int> > & connectionsMap, std::string fileName){
+    static void GetFunctionNameWithConditionals(ifstream &File, map<std::string,map<std::string, int> > & connectionsMap, std::string fileName){
         std::string functionName;
         std::string linePosition;
         while(!File.std::ios::eof()){
@@ -87,6 +85,25 @@ class StoryEight : public StoryOne{
         map<std::string, int> cyclomaticInfo;
         cyclomaticInfo.insert({functionName,counterOfConditionals});
         connectionsMap.insert({fileName,cyclomaticInfo});
+    }
+
+    static void PrintConnectionMapContents(map <std::string, map <std::string, int> > connectionMap){
+        //for(auto iter = connectionMap.begin(); iter != connectionMap.end(); ++iter){
+        //    std::cout << iter->first << " : ";
+        //    map < std::string, int> const &internalMap;
+        //    for(auto iter2 = internalMap.begin(); iter2!= internalMap.end(); ++iter2){
+        //        cout<< iter2->first << " : " << iter2->second;
+        //    }
+        //}
+        
+        for(map<string, map<string, int>>::iterator it = connectionMap.begin(); it != connectionMap.end(); ++it){
+            cout << it-> first << " : ";
+            map<string, int> &internal_map = it->second;
+            for(map<string,int>::iterator it2=internal_map.begin(); it2 != internal_map.end(); ++it){
+                cout << it2->first << ":" << it2->second;
+            }
+            cout << endl;
+        }
     }
 
     // #funkcja obliczająca złożoność cyklomatyczną ma działać wyłącznie w obrębie danej funkcji
