@@ -11,9 +11,9 @@ bool FindInFilesVector(vector<std::string> files, string* word){
     return 1;
 }
 
-bool CheckGV(){
+bool Checksh(){
     StoryOne::draw();
-    ifstream plik ("Data.gv");
+    ifstream plik ("script.sh");
     string line ="";
     while(!plik.eof()){
         getline(plik,line);
@@ -24,6 +24,8 @@ bool CheckGV(){
     return 1;
 }
 
+
+
 TEST(StoryOneTests, Files_test){
     vector<std::string> testFiles = StoryOne::Files("./teststuffolder");
     string [2] name;
@@ -31,7 +33,7 @@ TEST(StoryOneTests, Files_test){
     name[1]="XDDDD.cpp";
     EXPECT_TRUE(FindInFilesVector(testFiles,name[0]));
 
-    EXPECT_TRUE(CheckGV());
+    EXPECT_TRUE(Checksh());
 }
 
 TEST(StoryTwoTests, GetWordFromX_test){
