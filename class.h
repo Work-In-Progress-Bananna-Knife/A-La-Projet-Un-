@@ -12,7 +12,7 @@ class StoryOne{
 
     public:
     //tworzy liste plikow w folderze zawierajacym
-    static vector<std::string> Files(const char * directory = "."){
+    static vector<std::string> Files(const char * directory = "."){     //tested
         DIR *dr;
         vector <std::string> Ours;
         struct dirent *en;
@@ -99,6 +99,7 @@ class StoryOne{
         plik<<"}";
         plik.close();
     }
+    /*
     static void GenerateXML(map<std::string,vector<std::string> > k){
         ofstream plik;
         plik.open("paradigm.xml");
@@ -115,8 +116,9 @@ class StoryOne{
             plik<<"</graph>\n </GraphXML>";
         }
     }
+    */
 
-    static void draw(){
+    static void draw(){     //tested
          ofstream script("script.sh");
 
         script<<"#/bin/bash\ndot -Tpng Data.gv -o graf.png"<<"\ndisplay graf.png"<<"\nopen graf.png";
@@ -254,7 +256,7 @@ struct StoryTwo : public StoryOne{
             }
                 
             getline(File,line);
-            x=0;   
+            x=0;
         }
     }
 
