@@ -124,7 +124,12 @@ class StoryOne{
     }
 
     static void showgraph(){
-        system("bash script.sh");
+        string scriptname = "script.sh";
+        #if !(defined(WIN32) || defined(WIN32) || defined(__WIN32) && !defined(__CYGWIN_))
+        scriptname = "bash "+scriptname;
+        #endif
+        const char* c=scriptname.c_str();
+        system(c);
         system("graf.png");
     }
 
