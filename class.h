@@ -358,7 +358,7 @@ class StoryThree : StoryOne{
                         }
                     }
                 }
-            }       
+            }
         }
         //5# wygeneruj polaczenia na podstawie danych
 //        StoryTwo::Generategv(namespace_connections_map);
@@ -571,5 +571,10 @@ class StorySix : StoryOne{
 
 static void Git_ID(){
 //Funkcja wywyłuje skrypt dodający aktualną wersję repozytorium 
-    system("bash id.sh");
+    string scriptname = "id.sh";
+        #if !(defined(WIN32) || defined(WIN32) || defined(__WIN32) && !defined(__CYGWIN_))
+        scriptname = "bash "+scriptname;
+        #endif
+        const char* c=scriptname.c_str();
+        system(c);
 }
