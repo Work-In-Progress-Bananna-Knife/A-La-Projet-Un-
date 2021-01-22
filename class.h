@@ -144,6 +144,7 @@ struct StoryTwo : public StoryOne{
         for(int i=0;i<f.size();++i){
             if((f[i][f[i].size()-1]=='p' && f[i][f[i].size()-2]=='p' && f[i][f[i].size()-3]=='c' && f[i][f[i].size()-4]=='.') || (f[i][f[i].size()-1]=='h' && f[i][f[i].size()-2]=='.'))
                 F.push_back(f[i]);
+                cout << f[i] <<endl;                
         } 
         f=F;
     }
@@ -268,8 +269,7 @@ struct StoryTwo : public StoryOne{
             //File> >word;
             getline(File,line);
             std::string LookFor="(";
-            size_t where=line.find(LookFor);
-            
+            size_t where=line.find(LookFor);            
             if(where!=std::string::npos){            
                 std::string name = ReverseGetWordFromX(line,where);
                 if((name != "if") && (name != "while") && (name != "for") && (name != "switch") && (name != "") && (name != "\'")&& (name != "\"")){

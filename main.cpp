@@ -157,9 +157,13 @@ int main(){
         case 8:{
             //Jeszcze raz przemyśleć w jaki sposób chcemy wyświetlić złożoność cyklomatyczną
             //No i pozostaje tylko wywołanie funkcji w mainie
+            cout << "Test 1." << endl;
             map <std::string, map <std::string, int> > cyclomaticMap;
+            cout << "Test 2." << endl;
             StoryEight::CyclomaticComplexityOfAFunction(cyclomaticMap);
+            cout << "Test 3." << endl;
             StoryEight::PrintConnectionMapContents(cyclomaticMap);
+            cout << "Test 4." << endl;
         }break;
 //          ------------------------------------------------------------------
 //            Historyjka 9:
@@ -167,7 +171,7 @@ int main(){
             
             
         default:{
-            cout<<"Cos poszlo nie tak. Sprobuj ponownie c:\n";
+            cout<<"Cos poszlo nie tak. Sp8robuj ponownie c:\n";
         }break;
     }
         

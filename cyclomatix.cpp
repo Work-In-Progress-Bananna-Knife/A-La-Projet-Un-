@@ -13,33 +13,58 @@ class StoryEight : public StoryOne{
     
     //Metoda obliczająca złożoność cyklomatyczną - pomysł Michała
     static void CyclomaticComplexityOfAFunction(map <std::string, map <std::string, int> > &cyclomaticMap){
-        vector <std::string> FilesInAFolder = StoryOne::Files();
-        StoryTwo::RemoveWrongTypeOfFile(FilesInAFolder);
+        vector <std::string> FilesInAFolder = StoryEight::AddFilesWithSourceCode("E:\\GitHub\\A-La-Projet-Un-");
+        cout << "Test funkcji po wrzuceniu plikow." << endl << endl;
+        for(int i=0; i<FilesInAFolder.size();++i){
+            cout << FilesInAFolder[i] <<endl;
+            //FilesInAFolder.size == 0
+        }
+
+        cout << "Test funkcji po usunieciu zlych typow plikow." << endl << endl;
+        StoryTwo::RemoveWrongTypeOfFile(FilesInAFolder); //Właściwie, to może bez tej funkcji się obejdzie
         //stworzyć kontener danych zawierający każdą deklarację funkcji oraz informację ile ta funkcja ma warunków
-        ifstream fileToExamine;
-        for(int i=0; i<FilesInAFolder.size(); ++i){        
-            fileToExamine.open(FilesInAFolder[i]);
+        cout << "Test 1" <<endl;
+        
+        for(int i=0; i<FilesInAFolder.size(); ++i){   
+            //ifstream fileToExamine;     
+            //fileToExamine.open(FilesInAFolder[i]);
+            ifstream fileToExamine(FilesInAFolder[i]); 
+            if(fileToExamine.is_open()){
+                cout << "plik otwarty" << endl;
+            }
+            else{
+                cout <<" plik nie jest otwarty" << endl;
+            }
+            cout << FilesInAFolder[i] << endl;
             while(!fileToExamine.std::ios::eof()){
                 //wyszukaj nazwę funkcji i dodaj ją gdzieś
                 //dla danej nazwy funkcji wyszukaj ilość wystąpień komend warunkowych
-                GetFunctionNameWithConditionals(fileToExamine,cyclomaticMap,FilesInAFolder[i]);                
-            }
+                cout << "Test 3.1" <<endl;  
+                GetFunctionNameWithConditionals(fileToExamine,cyclomaticMap,FilesInAFolder[i]);   
+                cout << "Test 3.2" <<endl;          
+            }            
         }
     }
 
     static void GetFunctionNameWithConditionals(ifstream &File, map<std::string,map<std::string, int> > & connectionsMap, std::string fileName){
         std::string functionName;
         std::string linePosition;
-        while(!File.std::ios::eof()){
-            getline(File,linePosition);
-            std::string LookFor="(";
-            size_t location=linePosition.find(LookFor);            
-            if(location!=std::string::npos){            
+        
+        while(!File.std::ios::eof()){            
+            std::getline(File,linePosition);            
+            std::string LookFor="(";            
+            size_t location=linePosition.find(LookFor);
+            //cout << location << endl;
+            //cout << linePosition<< endl;
+            if(location!=std::string::npos){
+                cout << "Test 4" <<endl;         
                 std::string name = StoryTwo::ReverseGetWordFromX(linePosition,location);
                 if((name != "if") && (name != "while") && (name != "for") && (name != "switch") && (name != "") && (name != "\'")&& (name != "\"")){
                     location = StoryTwo::BracesSkip(linePosition,location);
+                    cout << "Test 5" <<endl;
                     if(linePosition[location+1] == '{'){
                         functionName = name;
+                        cout << "Test 6" <<endl;
                         lookForAndAddConditionals(File,connectionsMap,linePosition,fileName,location+1,functionName);                        
                     }
                 }                
@@ -61,11 +86,16 @@ class StoryEight : public StoryOne{
         startLineNumber++;
         std::string LookFor="(";
         std::string conditionalName[8] = { "for(" , "while(" , "if(" , "else(" , "else if" , "case ", "&&" , "||" } ;
+        cout << "Test 7" <<endl;
         while(openBrackets != closedBrackets){
+            cout << "Test 8" <<endl;
             for(int i=0;i<8;++i){
+                cout << "Test 9" <<endl;
                 size_t comparisonValue = line.find(conditionalName[i]);
                 if((comparisonValue!=std::string::npos)){
+                    cout << "Test 10" <<endl;
                     if(line[comparisonValue-1] != '\"' && line[comparisonValue-1]!= '\''){
+                            cout << "Test 11" <<endl;
                             counterOfConditionals++;
                     }                        
                 }
@@ -106,6 +136,33 @@ class StoryEight : public StoryOne{
         }
     }
 
+    static vector<std::string> AddFilesWithSourceCode(const char * directory = "."){
+        DIR *workingDirectory;
+        vector <std::string> listOfFiles;
+        struct dirent *file;
+        if(workingDirectory = opendir(directory)){
+            while(file = readdir(workingDirectory)){
+                if(CheckIfValidExtension(file->d_name) == true){
+                    listOfFiles.push_back(file->d_name);
+                    cout<< "working"<< endl;
+                }
+            }
+        }
+        closedir(workingDirectory);
+        return listOfFiles;
+    }
+
+    static bool CheckIfValidExtension(const string& fileName){
+        size_t extensionPosition = fileName.rfind('.');
+        if(extensionPosition == string::npos){
+            return false;
+        }
+        string extension = fileName.substr(extensionPosition+1);
+        if(extension == "cpp" || extension == "h"){
+            return true;
+        }
+        return false; //jesli wszystko szlak trafi 
+    }
     // #funkcja obliczająca złożoność cyklomatyczną ma działać wyłącznie w obrębie danej funkcji
 
     //Każda funkcja ma być prosta w swoim działaniu. Ma wykonywać tylko jedną rzecz, do której została stworzona (by zmniejszyć złożonośc cyklomatyczną)
