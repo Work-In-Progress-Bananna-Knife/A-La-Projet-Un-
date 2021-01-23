@@ -4,6 +4,9 @@ git show HEAD Data.gv | tee Graph10.gv
 sed -i -e '1,/@@/d' Graph10.gv
 
 #usuwanie ostatniej linii razy 4 w ramach usunięcia Git Id
+
+sed -i -e '$d' Graph10.gv
+
 sed -i -e '$d' Graph10.gv
 
 sed -i -e '$d' Graph10.gv
@@ -36,4 +39,4 @@ sed -i -e 's/^.//' Graph10.gv
 sed -i -e 's/}//' Graph10.gv
 echo "}" >> Graph10.gv
 
-
+sed -i -e '1d' Graph10.gv
