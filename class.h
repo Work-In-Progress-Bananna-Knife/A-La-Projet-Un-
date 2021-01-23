@@ -90,7 +90,7 @@ class StoryOne{
         //GenerateXML(k);
         ofstream plik;
         plik.open("Data.gv");
-        plik<<"digraph foo{\n";
+        plik<<"\ndigraph foo{\n";
         for( auto it=k.begin();it!=k.end();++it){
             for(int i=0;i<it->second.size();++i){
                 plik<<"\""<<it->first<<"\""<<"->"<<"\""<<it->second[i]<<"\""<<"[label = \"1\"];\n";
@@ -300,7 +300,7 @@ struct StoryTwo : public StoryOne{
     static void Generategv(map<std::string,map<std::string, int> > connectionMap){
         ofstream plik;
         plik.open("Data.gv");
-        plik<<"digraph foo{\n";
+        plik<<"\ndigraph foo{\n";
         map<std::string,map<std::string, int> >::iterator itr;
         for(itr = connectionMap.begin(); itr != connectionMap.end(); ++itr){
             map<std::string, int >::iterator itr2;
@@ -430,7 +430,7 @@ class StoryFive : StoryOne{
     static void OneGraphToShowThemAll(map<std::string,vector<std::string> > k,map<std::string,map<std::string, int> > connectionMap,map<std::string,std::string> Connections){
         ofstream plik;
         plik.open("Data.gv");
-        plik<<"digraph foo{\n";
+        plik<<"\ndigraph foo{\n";
         //3 for elven kings
         for( auto it=k.begin();it!=k.end();++it){
             for(int i=0;i<it->second.size();++i){
@@ -470,7 +470,7 @@ class StorySix : StoryOne{
     static void GenerateGraph(map<std::string,std::string> Connections){
         ofstream file;
         file.open("Data.gv");
-        file<<"digraph foo{\n";
+        file<<"\ndigraph foo{\n";
         map<std::string,std::string>::iterator itr;
         for(itr = Connections.begin(); itr != Connections.end(); ++itr){
             file<<"\""<<itr->second<<"\""<<"->"<<"\""<<itr->first<<"\""<<"[label = \"1\"];\n";
