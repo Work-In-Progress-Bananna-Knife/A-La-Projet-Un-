@@ -17,8 +17,8 @@ class StoryOne{
         vector <std::string> Ours;
         struct dirent *en;
         dr = opendir(directory); //open all directory
-        if (dr) {
-        while ((en = readdir(dr)) != NULL) {  
+        if(dr) {
+        while((en = readdir(dr)) != NULL) {  
             Ours.push_back(en->d_name);   
         }
         closedir(dr); //close all directory
@@ -119,8 +119,7 @@ class StoryOne{
     */
 
     static void draw(){     //tested
-         ofstream script("script.sh");
-
+        ofstream script("script.sh");
         script<<"#/bin/bash\ndot -Tpng Data.gv -o graf.png"<<"\ndisplay graf.png"<<"\nopen graf.png";
         script.close();
     }
@@ -289,7 +288,7 @@ struct StoryTwo : public StoryOne{
         //tworzenie listy plików w folderze
         vector<std::string> files = Files(directory);
         RemoveWrongTypeOfFile(files);
-        for (auto i = files.begin(); i != files.end(); ++i){
+        for(auto i = files.begin(); i != files.end(); ++i){
             ifstream File(*i);
             GetFunctionConnections(File,connectionsMap);
             
@@ -425,51 +424,7 @@ class StoryFour{
 
 class StoryFive : StoryOne{
 
-    public:
-    //Story 1
-    static void Generategv(map<std::string,vector<std::string> > k){
-        ofstream plik;
-        plik.open("Data.gv");
-        plik<<"digraph foo{\n";
-        for( auto it=k.begin();it!=k.end();++it){
-            for(int i=0;i<it->second.size();++i){
-                plik<<"\""<<it->first<<"\""<<"->"<<"\""<<it->second[i]<<"\""<<"[label = \"1\"];\n";
-            }
-        }
-        plik<<"}";
-        plik.close();
-    }
-//    Story 2 i 3
-    static void Generategv(map<std::string,map<std::string, int> > connectionMap){
-        ofstream plik;
-        plik.open("Data.gv");
-        plik<<"digraph foo{\n";
-        map<std::string,map<std::string, int> >::iterator itr;
-        for(itr = connectionMap.begin(); itr != connectionMap.end(); ++itr){
-            map<std::string, int >::iterator itr2;
-            for(itr2 = itr->second.begin(); itr2 != itr->second.end(); ++itr2){
-                plik<<"\""<<itr->first<<"\""<<"->"<<"\""<<itr2->first<<"\""<<"[label = \""<<itr2->second<<"\"];\n";
-            }
-        }
-
-        plik<<"}";
-        plik.close();
-    }
-    
-//    Story 6
-    static void GenerateGraph(map<std::string,std::string> Connections){
-        ofstream plik;
-        plik.open("Data.gv");
-        plik<<"digraph foo{\n";
-        map<std::string,std::string>::iterator itr;
-        for(itr = Connections.begin(); itr != Connections.end(); ++itr){
-            plik<<"\""<<itr->second<<"\""<<"->"<<"\""<<itr->first<<"\""<<"[label = \"1\"];\n";
-        }
-       
-        plik<<"}";
-        plik.close();
-    }
-    
+    public:    
 //    One Graph to rule them all, one Hraph to find them,
 //    One Graph to bring them all, and in the darkness bind them;
     static void OneGraphToShowThemAll(map<std::string,vector<std::string> > k,map<std::string,map<std::string, int> > connectionMap,map<std::string,std::string> Connections){
@@ -505,8 +460,8 @@ class StorySix : StoryOne{
 
     public:
     
-    static void draw(){ //Draw graph with circo instead of Dot
-         ofstream script("script.sh");
+    static void drawCirco(){ //Draw graph with circo instead of Dot
+        ofstream script("script.sh");
         script<<"#/bin/bash\ncirco -Tpng Data.gv -o graf.png"<<"\ndisplay graf.png"<<"\nopen graf.png";
         script.close();
     }
