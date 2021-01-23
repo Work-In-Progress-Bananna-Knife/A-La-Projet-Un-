@@ -160,11 +160,12 @@ int main(){
             map <std::string, map <std::string, int> > cyclomaticMap;
             StoryEight::CyclomaticComplexityOfAFunction(cyclomaticMap);
             StoryEight::PrintConnectionMapContents(cyclomaticMap);
-            StoryEight::GenerateCycloGraph(cyclomaticMap);
-            Git_ID();
+            StoryEight::GenerateCycloGraph(cyclomaticMap);            
             StoryEight::draw();
             StoryEight::showgraph();
-
+            Git_ID();
+            //To wszystko bylo robione na windowsie, dlatego pamietajcie o zmianie argumentow dla file.open w cyclomatix.cpp
+            //ehhhhh... chyba sie na linuxa będę przenosił przy kodowaniu
         }break;
 //          ------------------------------------------------------------------
 //            Historyjka 9:

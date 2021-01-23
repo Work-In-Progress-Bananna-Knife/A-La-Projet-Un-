@@ -187,15 +187,16 @@ static void ehhhhAdd( map<std::string,map<std::string, int> > & connectionMap, s
     static void GenerateCycloGraph(map <std::string, map <std::string, int> > connectionMap)
     {
         ofstream file;
-        file.open("Data.gv");
-        file<<"digraph CyclomaticComplexity{\n";
+        std::string path = "E:\\GitHub\\A-La-Projet-Un-\\";
+        file.open("E:\\GitHub\\A-La-Projet-Un-\\Data.gv");
+        file<<"digraph foo{\n";
         map<std::string,map <std::string, int> >::iterator itr;
         for(itr = connectionMap.begin(); itr != connectionMap.end(); ++itr)
         {
             map<std::string, int >::iterator itr2;
             for(itr2 = itr->second.begin(); itr2 != itr->second.end(); ++itr2)
             {
-                file<<"""<<itr->first<<"""<<"->"<<"""<<itr2->first<<"""<<"[label = ""<<itr2->second<<""];\n";
+                file<<"\""<<itr->first<<"\""<<"->"<<"\""<<itr2->first<<"\""<<"[label = \""<<itr2->second<<"\"];\n";
 
             }
         }
