@@ -161,9 +161,10 @@ int main(){
             StoryEight::CyclomaticComplexityOfAFunction(cyclomaticMap);
             StoryEight::PrintConnectionMapContents(cyclomaticMap);
             StoryEight::GenerateCycloGraph(cyclomaticMap);            
+            Git_ID();
             StoryEight::draw();
             StoryEight::showgraph();
-            Git_ID();
+           
             //To wszystko bylo robione na windowsie, dlatego pamietajcie o zmianie argumentow dla file.open w cyclomatix.cpp
             //ehhhhh... chyba sie na linuxa będę przenosił przy kodowaniu
         }break;
