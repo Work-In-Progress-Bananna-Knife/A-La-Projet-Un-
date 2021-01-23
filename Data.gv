@@ -1,41 +1,8 @@
 digraph foo{
-"cyclomatix.cpp"->"AddFilesWithSourceCode"[label = "1"];
-"class.h"->"BracesSkip"[label = "1"];
-"class.h"->"BuckleSkip"[label = "1"];
-"class.h"->"CheckAdd"[label = "1"];
-"mytests.cpp"->"CheckGV"[label = "1"];
-"class.h"->"CheckIfClassOrStruct"[label = "1"];
-"class.h"->"CheckIfInVector"[label = "1"];
-"cyclomatix.cpp"->"CheckIfValidExtension"[label = "1"];
-"mytests.cpp"->"Checksh"[label = "1"];
-"class.h"->"Contains"[label = "1"];
-"class.h"->"CreateConnectionsBetweenFilesAndMethods"[label = "1"];
-"class.h"->"CreateConnectionsBetweenNamespaces"[label = "1"];
-"cyclomatix.cpp"->"CyclomaticComplexityOfAFunction"[label = "1"];
-"class.h"->"Files"[label = "1"];
-"class.h"->"FindFunctionCallsInDefinitions"[label = "1"];
-"mytests.cpp"->"FindInFilesVector"[label = "1"];
-"class.h"->"GenerateGraph"[label = "1"];
-"class.h"->"GenerateXML"[label = "1"];
-"class.h"->"Generategv"[label = "1"];
-"class.h"->"GetFunctionConnections"[label = "1"];
-"cyclomatix.cpp"->"GetFunctionNameWithConditionals"[label = "1"];
-"class.h"->"GetWordFromX"[label = "1"];
-"class.h"->"ID"[label = "1"];
-"class.h"->"OneGraphToShowThemAll"[label = "1"];
-"cyclomatix.cpp"->"PrintConnectionMapContents"[label = "1"];
-"class.h"->"RemoveWrongTypeOfFile"[label = "1"];
-"class.h"->"ReverseGetWordFromX"[label = "1"];
-"class.h"->"ST"[label = "1"];
-"mytests.cpp"->"TEST"[label = "1"];
-"class.h"->"connections"[label = "1"];
-"class.h"->"draw"[label = "1"];
-"class.h"->"drawCirco"[label = "1"];
-"cyclomatix.cpp"->"ehhhhAdd"[label = "1"];
-"class.h"->"includes"[label = "1"];
-"cyclomatix.cpp"->"lookForAndAddConditionals"[label = "1"];
-"mytests.cpp"->"main"[label = "1"];
-"class.h"->"showgraph"[label = "1"];
+"cyclomatix.cpp"->"class.h"[label = "1"];
+"main.cpp"->"class.h"[label = "1"];
+"main.cpp"->"cyclomatix.cpp"[label = "1"];
+"mytests.cpp"->"class.h"[label = "1"];
 label = "#Commit nr.
-bee4705"
+7abd62a"
 }

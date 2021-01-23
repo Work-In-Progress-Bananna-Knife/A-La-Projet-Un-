@@ -173,7 +173,10 @@ int main(){
 //            Dodanie do grafów aktuaną wersję komita  
 //            Historyjka została zrealizowana poprzez wywołanie funkcji Git_ID przy każdej historyjce
             
-            
+        case 10:{
+            StoryTen::CheckChanges();
+            StoryTen::GenerateChangeGraph();
+        }
         default:{
             cout<<"Cos poszlo nie tak. Sp8robuj ponownie c:\n";
         }break;

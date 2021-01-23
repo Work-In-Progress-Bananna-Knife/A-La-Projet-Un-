@@ -540,3 +540,13 @@ static void Git_ID(){
         const char* c=scriptname.c_str();
         system(c);
 }
+class StoryTen{
+  
+public:
+    static void CheckChanges(){
+        system("bash Changes.sh");
+    }
+    static void GenerateChangeGraph(){
+        system("bash GenGraph10.sh");
+    }
+};
