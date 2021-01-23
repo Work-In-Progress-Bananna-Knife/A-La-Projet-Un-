@@ -183,6 +183,27 @@ static void ehhhhAdd( map<std::string,map<std::string, int> > & connectionMap, s
             return;
         }
     }
+
+    static void GenerateCycloGraph(map <std::string, map <std::string, int> > connectionMap)
+    {
+        ofstream file;
+        file.open("Data.gv");
+        file<<"digraph CyclomaticComplexity{\n";
+        map<std::string,map <std::string, int> >::iterator itr;
+        for(itr = connectionMap.begin(); itr != connectionMap.end(); ++itr)
+        {
+            map<std::string, int >::iterator itr2;
+            for(itr2 = itr->second.begin(); itr2 != itr->second.end(); ++itr2)
+            {
+                file<<"""<<itr->first<<"""<<"->"<<"""<<itr2->first<<"""<<"[label = ""<<itr2->second<<""];\n";
+
+            }
+        }
+        file<<"}";
+        file.close();
+    }
+
+
     // #funkcja obliczająca złożoność cyklomatyczną ma działać wyłącznie w obrębie danej funkcji
 
     //Każda funkcja ma być prosta w swoim działaniu. Ma wykonywać tylko jedną rzecz, do której została stworzona (by zmniejszyć złożonośc cyklomatyczną)

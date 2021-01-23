@@ -160,6 +160,11 @@ int main(){
             map <std::string, map <std::string, int> > cyclomaticMap;
             StoryEight::CyclomaticComplexityOfAFunction(cyclomaticMap);
             StoryEight::PrintConnectionMapContents(cyclomaticMap);
+            StoryEight::GenerateCycloGraph(cyclomaticMap);
+            Git_ID();
+            StoryEight::draw();
+            StoryEight::showgraph();
+
         }break;
 //          ------------------------------------------------------------------
 //            Historyjka 9:
