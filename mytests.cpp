@@ -46,10 +46,11 @@ bool CheckGV(){
 TEST(StoryOneTests, Files_test){
     vector<std::string> testFiles = StoryOne::Files("./teststuffolder");
     string [2] name;
-    name[0]="EBEBE.h";
+    name[0]="EBEEBE.h";
     name[1]="XDDDD.cpp";
     EXPECT_TRUE(FindInFilesVector(testFiles,name[0]));
 
+    EXPECT_TRUE(CheckGV());
     EXPECT_TRUE(Checksh());
 }
 

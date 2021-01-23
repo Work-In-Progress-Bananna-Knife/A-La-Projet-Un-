@@ -45,7 +45,7 @@ int main(){
         cout<<"haaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\n";
         //stworzenie danych do grafu
         StoryOne::Generategv(Hi);
-        Git_ID();
+        StoryNine::Git_ID();
         //utworzenie grafu plikow            
         StoryOne::draw();
         StoryOne::showgraph();  
@@ -59,7 +59,7 @@ int main(){
         */
         StoryTwo::ST(FunctionsConnectionsMap);
         StoryTwo::Generategv(FunctionsConnectionsMap);
-        Git_ID();
+        StoryNine::Git_ID();
         StoryTwo::draw();
         StoryTwo::showgraph();
         }break;
@@ -75,7 +75,7 @@ int main(){
         vector <string> Files = StoryOne::Files(); //Pobranie nazw plikow z folderu.
         StoryThree::CreateConnectionsBetweenNamespaces(Files,namespace_connections_map);//Wywolanie funkcji tworzacej polaczenia modulow
         StoryTwo::Generategv(namespace_connections_map);
-        Git_ID();
+        StoryNine::Git_ID();
         StoryOne::draw();//Utworzenie grafu
         StoryOne::showgraph();//Wyswietlenie grafu
     }break;
@@ -127,7 +127,7 @@ int main(){
             }
             
             StoryFive::OneGraphToShowThemAll(Hi, FunctionsConnectionsMap, Connections);
-            Git_ID();
+            StoryNine::Git_ID();
             //Option between Circo(6) And Dot(1)
 //            StorySix::draw();
             StoryOne::draw();
@@ -147,7 +147,7 @@ int main(){
             StoryTwo::RemoveWrongTypeOfFile(Files);
             StorySix::CreateConnectionsBetweenFilesAndMethods(Files,Connections);
             StorySix::GenerateGraph(Connections);
-            Git_ID();
+            StoryNine::Git_ID();
             //Option between Circo(6) And Dot(1)
 //            StorySix::draw();
             StoryOne::draw();
@@ -161,7 +161,7 @@ int main(){
             StoryEight::CyclomaticComplexityOfAFunction(cyclomaticMap);
             StoryEight::PrintConnectionMapContents(cyclomaticMap);
             StoryEight::GenerateCycloGraph(cyclomaticMap);            
-            Git_ID();
+            StoryNine::Git_ID();
             StoryEight::draw();
             StoryEight::showgraph();
            
@@ -173,7 +173,11 @@ int main(){
 //            Dodanie do grafów aktuaną wersję komita  
 //            Historyjka została zrealizowana poprzez wywołanie funkcji Git_ID przy każdej historyjce
             
-            
+        case 10:{
+            StoryTen::CheckChanges();
+            StoryTen::Id_compare();
+            StoryTen::GenerateAndShowChangeGraph();
+        }
         default:{
             cout<<"Cos poszlo nie tak. Sp8robuj ponownie c:\n";
         }break;
