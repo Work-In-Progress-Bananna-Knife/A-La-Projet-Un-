@@ -530,7 +530,8 @@ class StorySix : StoryOne{
 };
 
 
-
+class StoryNine{
+    public:
 static void Git_ID(){
 //Funkcja wywyłuje skrypt dodający aktualną wersję repozytorium 
     string scriptname = "id.sh";
@@ -540,13 +541,17 @@ static void Git_ID(){
         const char* c=scriptname.c_str();
         system(c);
 }
+};
 class StoryTen{
   
 public:
     static void CheckChanges(){
         system("bash Changes.sh");
     }
-    static void GenerateChangeGraph(){
+    static void GenerateAndShowChangeGraph(){
         system("bash GenGraph10.sh");
+    }
+    static void Id_compare(){
+        system("bash Id_compare.sh");
     }
 };
