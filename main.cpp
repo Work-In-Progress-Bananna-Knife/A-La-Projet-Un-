@@ -18,6 +18,9 @@ int main(){
     cout<<"grafy tworzone przy uzyciu Graphviz\n";
 
     // wybor dzialania programu - wybiera uzytkownik
+    cout<<"Wpisz sciezke do folderu\n";
+    string path;
+    cin>>path;
     cout<<"Wybierz historyjke\n";
     int historyjka;
     cin>>historyjka;
@@ -39,7 +42,7 @@ int main(){
 
         //wywolanie metod historyjki pierwszej
         //lista plikow w folderze zapisana do vectora Files   
-        vector <string> Files = StoryOne::Files();
+        vector <string> Files = StoryOne::Files(path.string::c_str());
         //ustalenie plikow zawierajacych sie w include pomijajac biblioteki systemowe           
         StoryOne::includes(Files,Hi);
         cout<<"haaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\n";
@@ -57,7 +60,7 @@ int main(){
         Jako programista chcę zobaczyć graf relacji między funkcjami/metodami w podanym
         kodzie źródłowym, w celu analizy zależności w kodzie źródłowym.
         */
-        StoryTwo::ST(FunctionsConnectionsMap);
+        StoryTwo::ST(FunctionsConnectionsMap,path.string::c_str());
         StoryTwo::Generategv(FunctionsConnectionsMap);
         StoryNine::Git_ID();
         StoryTwo::draw();
@@ -158,7 +161,7 @@ int main(){
             //Jeszcze raz przemyśleć w jaki sposób chcemy wyświetlić złożoność cyklomatyczną
             //No i pozostaje tylko wywołanie funkcji w mainie
             map <std::string, map <std::string, int> > cyclomaticMap;
-            StoryEight::CyclomaticComplexityOfAFunction(cyclomaticMap);
+            StoryEight::CyclomaticComplexityOfAFunction(cyclomaticMap,path.string::c_str());
             StoryEight::PrintConnectionMapContents(cyclomaticMap);
             StoryEight::GenerateCycloGraph(cyclomaticMap);            
             StoryNine::Git_ID();

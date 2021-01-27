@@ -12,28 +12,27 @@ class StoryEight : public StoryOne{
     public:
     
     //Metoda obliczająca złożoność cyklomatyczną - pomysł Michała
-    static void CyclomaticComplexityOfAFunction(map <std::string, map <std::string, int> > &cyclomaticMap){
-        vector <std::string> FilesInAFolder = StoryEight::AddFilesWithSourceCode("E:\\GitHub\\A-La-Projet-Un-\\"); //dla linuxa usunąć argument
-        cout << "W kontenerze danych znadują się następujące pliki:" << endl << endl;
+    static void CyclomaticComplexityOfAFunction(map <std::string, map <std::string, int> > &cyclomaticMap, string path="."){
+        vector <std::string> FilesInAFolder = StoryEight::AddFilesWithSourceCode(path.c_str()); //dla linuxa usunąć argument
+        // cout << "W kontenerze danych znadują się następujące pliki:" << endl << endl;
         for(int i=0; i<FilesInAFolder.size();++i){
-            cout << FilesInAFolder[i] <<endl;
+
         }
         //StoryTwo::RemoveWrongTypeOfFile(FilesInAFolder); //Właściwie, to może bez tej funkcji się obejdzie
         //stworzyć kontener danych zawierający każdą deklarację funkcji oraz informację ile ta funkcja ma warunków
-        cout << "Test 1. Wypisywanie wyszukanych funkcji " <<endl;
-        std::string path = "E:\\GitHub\\A-La-Projet-Un-\\";
+        // cout << "Test 1. Wypisywanie wyszukanych funkcji " <<endl;
         for(int i=0; i<FilesInAFolder.size(); ++i){   
             //ifstream fileToExamine;     
             //fileToExamine.open(FilesInAFolder[i]);
             ifstream fileToExamine;
-            FilesInAFolder[i]=path+FilesInAFolder[i];
+            FilesInAFolder[i]=path+"/"+FilesInAFolder[i];
             fileToExamine.open(FilesInAFolder[i]); 
-            cout << FilesInAFolder[i] << endl;
+            // cout << FilesInAFolder[i] << endl;
             while(!fileToExamine.std::ios::eof()){
                 //wyszukaj nazwę funkcji i dodaj ją gdzieś
                 //dla danej nazwy funkcji wyszukaj ilość wystąpień komend warunkowych
                 GetFunctionNameWithConditionals(fileToExamine,cyclomaticMap,FilesInAFolder[i]);   
-                cout << endl;          
+                // cout << endl;          
             }          
         }
     }
@@ -116,13 +115,13 @@ class StoryEight : public StoryOne{
 
     static void PrintConnectionMapContents(map <std::string, map <std::string, int> > connectionMap){
         for(map<string, map<string, int>>::iterator it = connectionMap.begin(); it != connectionMap.end(); ++it){
-            cout << it-> first << " : ";
+            // cout << it-> first << " : ";
             map<string, int> internal_map = it->second;
             for(map<string,int>::iterator it2=internal_map.begin(); it2 != internal_map.end(); ++it2){
-                cout << it2->first << ":" << it2->second;
-                cout<< endl;
+                // cout << it2->first << ":" << it2->second;
+                // cout<< endl;
             }
-            cout << endl;
+            // cout << endl;
         }
     }
 
@@ -184,11 +183,11 @@ static void ehhhhAdd( map<std::string,map<std::string, int> > & connectionMap, s
         }
     }
 
-    static void GenerateCycloGraph(map <std::string, map <std::string, int> > connectionMap)
+    static void GenerateCycloGraph(map <std::string, map <std::string, int> > connectionMap, std::string path = "./")
     {
         ofstream file;
-        std::string path = "E:\\GitHub\\A-La-Projet-Un-\\";
-        file.open("E:\\GitHub\\A-La-Projet-Un-\\Data.gv");
+        path+="Data.gv";
+        file.open(path);
         file<<"digraph foo{\n";
         map<std::string,map <std::string, int> >::iterator itr;
         for(itr = connectionMap.begin(); itr != connectionMap.end(); ++itr)
