@@ -146,7 +146,7 @@ int main(){
 //            funkcjami/metodami w podanym kodzie źródłowym,
 //            w celu analizy zależności w kodzie źródłowym.
             map<string, string> Connections;
-            vector <string> Files = StoryOne::Files();
+            vector <string> Files = StoryOne::Files(path.string::c_str());
             StoryTwo::RemoveWrongTypeOfFile(Files);
             StorySix::CreateConnectionsBetweenFilesAndMethods(Files,Connections);
             StorySix::GenerateGraph(Connections);

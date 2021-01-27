@@ -31,6 +31,7 @@ class StoryOne{
         for(int i=0;i<f.size();++i){
             if( (f[i][f[i].size()-1]=='p' && f[i][f[i].size()-2]=='p' && f[i][f[i].size()-3]=='c' && f[i][f[i].size()-4]=='.') || (f[i][f[i].size()-1]=='h' && f[i][f[i].size()-2]=='.')){
                 connections(f[i],k,f);
+                cout<<"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n";
             }
         }
     }

@@ -1,45 +1,17 @@
 digraph foo{
-"./class.h"->"BracesSkip"[label = "6"];
-"./class.h"->"BuckleSkip"[label = "8"];
-"./class.h"->"CheckAdd"[label = "7"];
-"./class.h"->"CheckChanges"[label = "1"];
-"./class.h"->"CheckIfClassOrStruct"[label = "5"];
-"./class.h"->"CheckIfInVector"[label = "3"];
-"./class.h"->"Contains"[label = "8"];
-"./class.h"->"CreateConnectionsBetweenFilesAndMethods"[label = "7"];
-"./class.h"->"CreateConnectionsBetweenNamespaces"[label = "13"];
-"./class.h"->"Files"[label = "3"];
-"./class.h"->"FindFunctionCallsInDefinitions"[label = "12"];
-"./class.h"->"GenerateGraph"[label = "2"];
-"./class.h"->"GenerateXML"[label = "4"];
-"./class.h"->"Generategv"[label = "3"];
-"./class.h"->"GetFunctionConnections"[label = "6"];
-"./class.h"->"GetWordFromX"[label = "5"];
-"./class.h"->"ID"[label = "3"];
-"./class.h"->"OneGraphToShowThemAll"[label = "6"];
-"./class.h"->"RemoveWrongTypeOfFile"[label = "5"];
-"./class.h"->"ReverseGetWordFromX"[label = "5"];
-"./class.h"->"ST"[label = "2"];
-"./class.h"->"compare"[label = "1"];
-"./class.h"->"connections"[label = "2"];
-"./class.h"->"draw"[label = "1"];
-"./class.h"->"drawCirco"[label = "1"];
-"./class.h"->"includes"[label = "5"];
-"./class.h"->"showgraph"[label = "3"];
-"./cyclomatix.cpp"->"AddFilesWithSourceCode"[label = "4"];
-"./cyclomatix.cpp"->"CheckIfValidExtension"[label = "4"];
-"./cyclomatix.cpp"->"CyclomaticComplexityOfAFunction"[label = "4"];
-"./cyclomatix.cpp"->"GetFunctionNameWithConditionals"[label = "6"];
-"./cyclomatix.cpp"->"PrintConnectionMapContents"[label = "3"];
-"./cyclomatix.cpp"->"ehhhhAdd"[label = "7"];
-"./cyclomatix.cpp"->"lookForAndAddConditionals"[label = "12"];
-"./main.cpp"->"main"[label = "16"];
-"./mytests.cpp"->"CheckGV"[label = "4"];
-"./mytests.cpp"->"Checksh"[label = "4"];
-"./mytests.cpp"->"FindInFilesVector"[label = "4"];
-"./mytests.cpp"->"TEST"[label = "1"];
-"./mytests.cpp"->"main"[label = "1"];
+"../../../aisd/listy/listy.cpp"->"Add"[label = "1"];
+"../../../aisd/listy/listy.cpp"->"BubbleSort"[label = "7"];
+"../../../aisd/listy/listy.cpp"->"CombSort"[label = "6"];
+"../../../aisd/listy/listy.cpp"->"DeletX"[label = "5"];
+"../../../aisd/listy/listy.cpp"->"Delete"[label = "2"];
+"../../../aisd/listy/listy.cpp"->"Heapify"[label = "6"];
+"../../../aisd/listy/listy.cpp"->"Heapsort"[label = "3"];
+"../../../aisd/listy/listy.cpp"->"Show"[label = "2"];
+"../../../aisd/listy/listy.cpp"->"Swap"[label = "3"];
+"../../../aisd/listy/listy.cpp"->"SwapX"[label = "4"];
+"../../../aisd/listy/listy.cpp"->"SwapXWitchWatchdog"[label = "4"];
+"../../../aisd/listy/listy.cpp"->"main"[label = "2"];
 label = "#Commit nr.
-9acc078
+7f8276b
 "
 }
