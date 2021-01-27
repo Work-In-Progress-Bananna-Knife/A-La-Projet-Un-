@@ -27,18 +27,19 @@ class StoryOne{
     }
 
     //jesli plik jest typu cpp lub .h otwieramy go i sprawdzamy jego zawartosc
-    static void includes(vector<std::string> f, map<std::string, vector<std::string> > & k){
+    static void includes(vector<std::string> f, map<std::string, vector<std::string> > & k,const char * path){
         for(int i=0;i<f.size();++i){
             if( (f[i][f[i].size()-1]=='p' && f[i][f[i].size()-2]=='p' && f[i][f[i].size()-3]=='c' && f[i][f[i].size()-4]=='.') || (f[i][f[i].size()-1]=='h' && f[i][f[i].size()-2]=='.')){
-                connections(f[i],k,f);
-                cout<<"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n";
+                connections(f[i],k,f,path);
             }
         }
     }
 
     //po otwarciu pliku przechodzimy linijka po linijce
-    static void connections(std::string name, map<std::string,vector<std::string> > & list,vector<std::string>h){
-        ifstream File(name);
+    static void connections(std::string name, map<std::string,vector<std::string> > & list,vector<std::string>h,const char * path){
+        std::string directory = path;
+        directory +=("/"+name);
+        ifstream File(directory);
         std::string line;
         while(!File.eof()){
             getline(File,line);
@@ -266,7 +267,6 @@ struct StoryTwo : public StoryOne{
         std::string word;
         std::string line;
         while(!File.std::ios::eof()){
-            //File> >word;
             getline(File,line);
             std::string LookFor="(";
             size_t where=line.find(LookFor);            
@@ -285,16 +285,17 @@ struct StoryTwo : public StoryOne{
     }
 
 //wywoływanie funkcji do historyjki druiej
-    static void ST(map<std::string,map<std::string, int> > & connectionsMap, const char * directory = "."){
+    static void ST(map<std::string,map<std::string, int> > & connectionsMap, const char * path = "."){
         //tworzenie listy plików w folderze
-        vector<std::string> files = Files(directory);
+        vector<std::string> files = Files(path);
         RemoveWrongTypeOfFile(files);
         for(auto i = files.begin(); i != files.end(); ++i){
-            ifstream File(*i);
+            string directory = path;
+            directory +=("/"+ *i);
+            ifstream File(directory);
             GetFunctionConnections(File,connectionsMap);
             
         }
-//        Generategv(connectionsMap);
 
     }
 //tworzenie grafu połączeń między funkcjami
@@ -319,7 +320,7 @@ struct StoryTwo : public StoryOne{
 class StoryThree : StoryOne{
     public:
     //Głowna funkcja do historyjki nr. 3. Tworzy polaczenia polaczenia pomiedzy plikami i zapisuje
-    static void CreateConnectionsBetweenNamespaces(vector <std::string> H, map<std::string,map<std::string,int> > &namespace_connections_map){
+    static void CreateConnectionsBetweenNamespaces(vector <std::string> H, map<std::string,map<std::string,int> > &namespace_connections_map,const char * path){
         //2# z tych plikow odrzucic wszystkie pliki ktore nie maja koncowki .h lub .cpp       
         vector<std::string>Files;
         for(int i=0;i<H.size();++i){
@@ -329,9 +330,11 @@ class StoryThree : StoryOne{
         }
         //3# przeszukac pliki pod katem namespace
 //        map<std::string,map<std::string,int> > namespace_connections_map;
-        vector<std::string> class_list = CheckIfClassOrStruct(Files);
+        vector<std::string> class_list = CheckIfClassOrStruct(Files,path);
         for( int i=0;i<Files.size();++i){
-            ifstream Input(Files[i]);
+            std::string directory = path;
+            directory += ("/" + Files[i]);
+            ifstream Input(directory);
             std::string namespace_name;
             std::string namespace_contains;
             std::string line;            
@@ -371,11 +374,13 @@ class StoryThree : StoryOne{
 //        StoryTwo::Generategv(namespace_connections_map);
     }
 
-    static vector<string> CheckIfClassOrStruct(vector <std::string> H){
+    static vector<string> CheckIfClassOrStruct(vector <std::string> H,const char * path){
         //wczytaj kontener z plikami
         vector<string> class_container;
         for(int i=0;i<H.size();++i){
-            ifstream Input(H[i]);
+            std::string directory = path;
+            directory += ("/" + H[i]);
+            ifstream Input(directory);
             std::string class_name;
             std::string line;
             while(!Input.eof()){
@@ -501,11 +506,13 @@ class StorySix : StoryOne{
             }
 //metoda znajduje w podanych plikach metody/funkcje
 //zapisuje je w mapie i tworzy graf
-    static void CreateConnectionsBetweenFilesAndMethods(vector<string> Files, map<string, string> &Connections){
+    static void CreateConnectionsBetweenFilesAndMethods(vector<string> Files, map<string, string> &Connections,const char *path){
         std::string line;
 //        map<string, string> Connections;
         for(int i=0;i<Files.size();++i){
-            ifstream inFiles(Files[i]);
+            std::string directory = path;
+            directory += ("/" + Files[i]);
+            ifstream inFiles(directory);
             
             while(!inFiles.std::ios::eof()){
                 std::getline(inFiles,line);

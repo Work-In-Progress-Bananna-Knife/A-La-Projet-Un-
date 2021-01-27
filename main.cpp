@@ -44,7 +44,7 @@ int main(){
         //lista plikow w folderze zapisana do vectora Files   
         vector <string> Files = StoryOne::Files(path.string::c_str());
         //ustalenie plikow zawierajacych sie w include pomijajac biblioteki systemowe           
-        StoryOne::includes(Files,Hi);
+        StoryOne::includes(Files,Hi,path.string::c_str());
         cout<<"haaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\n";
         //stworzenie danych do grafu
         StoryOne::Generategv(Hi);
@@ -76,7 +76,7 @@ int main(){
         map<string,map<string, int>> namespace_connections_map;//mapa pomocnicza 
         
         vector <string> Files = StoryOne::Files(); //Pobranie nazw plikow z folderu.
-        StoryThree::CreateConnectionsBetweenNamespaces(Files,namespace_connections_map);//Wywolanie funkcji tworzacej polaczenia modulow
+        StoryThree::CreateConnectionsBetweenNamespaces(Files,namespace_connections_map,path.string::c_str());//Wywolanie funkcji tworzacej polaczenia modulow
         StoryTwo::Generategv(namespace_connections_map);
         StoryNine::Git_ID();
         StoryOne::draw();//Utworzenie grafu
@@ -103,7 +103,7 @@ int main(){
             cout<<"Chcesz zobazczyc historyjke  1\n"<<endl;
             cin>>a;
             if(a=='y'){
-                StoryOne::includes(Files,Hi);
+                StoryOne::includes(Files,Hi,path.string::c_str());
                 a='n';
             }
 
@@ -117,7 +117,7 @@ int main(){
             cout<<"Chcesz zobazczyc historyjke  3\n"<<endl;
             cin>>a;
             if(a=='y'){
-                StoryThree::CreateConnectionsBetweenNamespaces(Files2,FunctionsConnectionsMap);
+                StoryThree::CreateConnectionsBetweenNamespaces(Files2,FunctionsConnectionsMap,path.string::c_str());
                 a='n';
             }
 
@@ -125,7 +125,7 @@ int main(){
             cin>>a;
             if(a=='y'){
                 StoryTwo::RemoveWrongTypeOfFile(Files3);
-                StorySix::CreateConnectionsBetweenFilesAndMethods(Files3,Connections);
+                StorySix::CreateConnectionsBetweenFilesAndMethods(Files3,Connections,path.string::c_str());
                 a='n';
             }
             
@@ -148,7 +148,7 @@ int main(){
             map<string, string> Connections;
             vector <string> Files = StoryOne::Files(path.string::c_str());
             StoryTwo::RemoveWrongTypeOfFile(Files);
-            StorySix::CreateConnectionsBetweenFilesAndMethods(Files,Connections);
+            StorySix::CreateConnectionsBetweenFilesAndMethods(Files,Connections,path.string::c_str());
             StorySix::GenerateGraph(Connections);
             StoryNine::Git_ID();
             //Option between Circo(6) And Dot(1)
