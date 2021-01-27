@@ -153,7 +153,19 @@ digraph foo{
 "main"->"showgraph"[label = "6"];
 "showgraph"->"str"[label = "1"];
 "showgraph"->"system"[label = "2"];
+"listy.cpp"->"Add"[label = "1"];
+"listy.cpp"->"BubbleSort"[label = "1"];
+"listy.cpp"->"CombSort"[label = "1"];
+"listy.cpp"->"DeletX"[label = "1"];
+"listy.cpp"->"Delete"[label = "1"];
+"listy.cpp"->"Heapify"[label = "1"];
+"listy.cpp"->"Heapsort"[label = "1"];
+"listy.cpp"->"Show"[label = "1"];
+"listy.cpp"->"Swap"[label = "1"];
+"listy.cpp"->"SwapX"[label = "1"];
+"listy.cpp"->"SwapXWitchWatchdog"[label = "1"];
+"listy.cpp"->"main"[label = "1"];
 label = "#Commit nr.
-4afc4bf
+cf21b5f
 "
 }

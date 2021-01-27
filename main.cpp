@@ -4,6 +4,7 @@
 #include <vector>
 #include <map>
 #include "cyclomatix.cpp"
+#include <string>
 
 using namespace std;
 // obecnosc 7.01.2021 
@@ -94,34 +95,35 @@ int main(){
         //Przejście przez wszystkie wcześniejsze historyjki i zapytanie go które mają zostać wyświetlone
         //Zrobić różne wywołania dla różnych kombinacji. Przykładowo dla h1,h2,h3 lub h1,h3 lub h2,h3
         
-            vector <string> Files = StoryOne::Files();
-            vector <string> Files2 = StoryOne::Files();
+            vector <string> Files = StoryOne::Files(path.string::c_str());
+            vector <string> Files2 = StoryOne::Files(path.string::c_str());
             map<string, string> Connections;
-            vector <string> Files3 = StoryOne::Files();
+            vector <string> Files3 = StoryOne::Files(path.string::c_str());
 
             char a = 'n';
-            cout<<"Chcesz zobazczyc historyjke  1\n"<<endl;
+            cout<<"Chcesz zobazczyc historyjke  1\n";
             cin>>a;
             if(a=='y'){
+                cout<<"aaaaaaaaaaaaaaaaaaaaaaaa";
                 StoryOne::includes(Files,Hi,path.string::c_str());
                 a='n';
             }
 
-            cout<<"Chcesz zobazczyc historyjke  2\n"<<endl;
+            cout<<"Chcesz zobazczyc historyjke  2\n";
             cin>>a;
             if(a=='y'){
                 StoryTwo::ST(FunctionsConnectionsMap);
                 a='n';
             }
 
-            cout<<"Chcesz zobazczyc historyjke  3\n"<<endl;
+            cout<<"Chcesz zobazczyc historyjke  3\n";
             cin>>a;
             if(a=='y'){
                 StoryThree::CreateConnectionsBetweenNamespaces(Files2,FunctionsConnectionsMap,path.string::c_str());
                 a='n';
             }
 
-            cout<<"Chcesz zobazczyc historyjke  6\n"<<endl;
+            cout<<"Chcesz zobazczyc historyjke  6\n";
             cin>>a;
             if(a=='y'){
                 StoryTwo::RemoveWrongTypeOfFile(Files3);
